@@ -1,22 +1,37 @@
 import { IOffer } from '../../mocks/offers';
 
-/* const widthByRating = {
+//Так себе название, потому что же там второй пропс есть - ключ
+type offerCardPropType = {
+	item: IOffer;
+}
+
+type keyPropType = {
+	key: string;
+}
+
+//Тупое название, тупая ситуация. Если я не задам здесь тип, то ниже не даёт обратиться к полю по [item.rating]
+type widthType = {
+	[key: number]: string;
+}
+
+const widthByRating: widthType = {
 	0: '0',
 	1: '20%',
 	2: '40%',
 	3: '60%',
 	4: '80%',
 	5: '100%'
-} as const; */
+} as const;
 
-function OfferCard({ item }, { key }): JSX.Element {
-	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button';
+//Здесь запутался с фигурными скобками. Почему их нужно ставить?
+function OfferCard({ item }: offerCardPropType, { key }: keyPropType): JSX.Element {
+	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
+
+	const starsCount = `width: ${widthByRating[item.rating]}`;
 
 	return (
 		<article key={key} className="cities__card place-card">
-			<div className="place-card__mark">
-				{item.isPremium ? <span>Premium</span> : ''}
-			</div>
+			{item.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<a href="#">
 					<img
@@ -50,7 +65,7 @@ function OfferCard({ item }, { key }): JSX.Element {
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={{ width: '80%' }} />
+						<span style={{ starsCount } } />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
