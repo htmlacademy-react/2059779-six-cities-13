@@ -1,5 +1,10 @@
 import OfferCard from '../components/offer-card/offer-card';
 import { offers } from '../mocks/offers';
+import { IOffer } from '../mocks/offers';
+
+type offerProps = {
+	item: IOffer;
+}
 
 type MainPageProps = {
 	placesCount: number;

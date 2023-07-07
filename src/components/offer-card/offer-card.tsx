@@ -9,11 +9,11 @@ import { IOffer } from '../../mocks/offers';
 	5: '100%'
 } as const; */
 
-function OfferCard(item: IOffer): JSX.Element {
+function OfferCard({ item }, { key }): JSX.Element {
 	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button';
 
 	return (
-		<article className="cities__card place-card">
+		<article key={key} className="cities__card place-card">
 			<div className="place-card__mark">
 				{item.isPremium ? <span>Premium</span> : ''}
 			</div>
