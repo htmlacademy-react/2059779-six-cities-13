@@ -14,7 +14,7 @@ type widthType = {
 	[key: number]: string;
 }
 
-const widthByRating: widthType = {
+const WidthByRating: widthType = {
 	0: '0',
 	1: '20%',
 	2: '40%',
@@ -28,7 +28,7 @@ function OfferCard({ item }: offerCardPropType, { key }: keyPropType): JSX.Eleme
 	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
 
 	const starsCount = {
-		width: widthByRating[item.rating]
+		width: WidthByRating[item.rating]
 	};
 
 	return (
