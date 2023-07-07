@@ -117,7 +117,7 @@ function MainPage({ placesCount }: MainPageProps): JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((offer) => <OfferCard item={offer} key={crypto.randomUUID()} />)}
+								{offers.map((offer) => <OfferCard item={offer} key={offer.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">

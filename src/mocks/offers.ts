@@ -1,6 +1,7 @@
 //import { faker } from '@faker-js/faker'; не находит
 
 export interface IOffer {
+	id: number;
 	title: string;
 	type: string;
 	price: number;
@@ -14,6 +15,7 @@ export interface IOffer {
 //Может города и типы сделать литеральными типами тоже?
 const offers: IOffer[] = [
 	{
+		id: 1,
 		title: 'Beautiful & luxurious apartment at great location',
 		type: 'Apartment',
 		price: 120,
@@ -24,6 +26,7 @@ const offers: IOffer[] = [
 		rating: 4,
 	},
 	{
+		id: 2,
 		title: 'Wood and stone place',
 		type: 'Private room',
 		price: 80,
@@ -34,6 +37,7 @@ const offers: IOffer[] = [
 		rating: 4,
 	},
 	{
+		id: 3,
 		title: 'Canal View Prinsengracht',
 		type: 'Apartment',
 		price: 132,
@@ -44,6 +48,7 @@ const offers: IOffer[] = [
 		rating: 4,
 	},
 	{
+		id: 4,
 		title: 'Nice, cozy, warm big bed apartment',
 		type: 'Apartment',
 		price: 180,
@@ -54,6 +59,7 @@ const offers: IOffer[] = [
 		rating: 5,
 	},
 	{
+		id: 5,
 		title: 'Wood and stone place',
 		type: 'Private room',
 		price: 80,
