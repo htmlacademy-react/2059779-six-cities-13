@@ -1,20 +1,12 @@
+import { CSSProperties } from 'react';
 import { IOffer } from '../../mocks/offers';
+//import { classNames } from 'classNames';
 
-//Так себе название, потому что же там второй пропс есть - ключ
 type offerCardPropType = {
 	item: IOffer;
 }
 
-type keyPropType = {
-	key: string;
-}
-
-//Тупое название, тупая ситуация. Если я не задам здесь тип, то ниже не даёт обратиться к полю по [item.rating]
-type widthByRatingType = {
-	[key: number]: string;
-}
-
-const WidthByRating: widthByRatingType = {
+const WidthByRating: Record<number, `${number}%` | `${number}`> = {
 	0: '0',
 	1: '20%',
 	2: '40%',
@@ -24,16 +16,21 @@ const WidthByRating: widthByRatingType = {
 } as const;
 
 //Здесь запутался с фигурными скобками. Почему их нужно ставить?
-function OfferCard({ item }: offerCardPropType, { key }: keyPropType): JSX.Element {
+function OfferCard({ item }: offerCardPropType): JSX.Element {
 	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
 
-	const starsCount = {
+	//Не могу понять, как импортировать пакет. Но немного смущает на такие операции ставить пакеты.
+	/* 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
+		'place-card__bookmark-button--active': item.isFavorite
+	}, 'button'); */
+
+	const starsCount: CSSProperties = {
 		width: WidthByRating[item.rating]
 	};
 
 	return (
-		<article key={key} className="cities__card place-card">
-			{item.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
+		<article className="cities__card place-card">
+			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<a href="#">
 					<img

@@ -1,3 +1,5 @@
+//import { faker } from '@faker-js/faker'; не находит
+
 export interface IOffer {
 	title: string;
 	type: string;
