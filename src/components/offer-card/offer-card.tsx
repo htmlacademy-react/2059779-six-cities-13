@@ -27,7 +27,9 @@ const widthByRating: widthType = {
 function OfferCard({ item }: offerCardPropType, { key }: keyPropType): JSX.Element {
 	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
 
-	const starsCount = `width: ${widthByRating[item.rating]}`;
+	const starsCount = {
+		width: widthByRating[item.rating]
+	};
 
 	return (
 		<article key={key} className="cities__card place-card">
@@ -65,7 +67,7 @@ function OfferCard({ item }: offerCardPropType, { key }: keyPropType): JSX.Eleme
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={{ starsCount } } />
+						<span style={ starsCount } />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
