@@ -10,11 +10,11 @@ type keyPropType = {
 }
 
 //Тупое название, тупая ситуация. Если я не задам здесь тип, то ниже не даёт обратиться к полю по [item.rating]
-type widthType = {
+type widthByRatingType = {
 	[key: number]: string;
 }
 
-const WidthByRating: widthType = {
+const WidthByRating: widthByRatingType = {
 	0: '0',
 	1: '20%',
 	2: '40%',
