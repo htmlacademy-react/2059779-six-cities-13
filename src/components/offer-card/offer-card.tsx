@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { IOffer } from '../../mocks/offers';
-//import { classNames } from 'classNames';
+import classNames from 'classnames';
 
 type offerCardPropType = {
 	item: IOffer;
@@ -17,12 +17,10 @@ const WidthByRating: Record<number, `${number}%` | `${number}`> = {
 
 //Здесь запутался с фигурными скобками. Почему их нужно ставить?
 function OfferCard({ item }: offerCardPropType): JSX.Element {
-	const favoriteButtonClass = item.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
 
-	//Не могу понять, как импортировать пакет. Но немного смущает на такие операции ставить пакеты.
-	/* 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
+	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
-	}, 'button'); */
+	}, 'button');
 
 	const starsCount: CSSProperties = {
 		width: WidthByRating[item.rating]

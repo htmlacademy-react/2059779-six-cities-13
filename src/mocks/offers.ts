@@ -1,4 +1,9 @@
-//import { faker } from '@faker-js/faker'; не находит
+/*
+import { faker } from '../../node_modules/faker/';
+
+//console.log(faker.person.firstName());
+const randomName: string = faker.person.fullName() as string;
+console.log(randomName); */
 
 export interface IOffer {
 	id: number;
