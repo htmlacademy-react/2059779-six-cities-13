@@ -1,9 +1,6 @@
-/*
-import { faker } from '../../node_modules/faker/';
+/* import { faker } from '@faker-js/faker';
 
-//console.log(faker.person.firstName());
-const randomName: string = faker.person.fullName() as string;
-console.log(randomName); */
+const randomName = faker.person.fullName(); */
 
 export interface IOffer {
 	id: number;
