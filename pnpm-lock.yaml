@@ -41,7 +41,7 @@ dependencies:
 
 devDependencies:
   '@faker-js/faker':
-    specifier: ^8.0.2
+    specifier: 8.0.2
     version: 8.0.2
   '@jedmao/redux-mock-store':
     specifier: 3.0.5
