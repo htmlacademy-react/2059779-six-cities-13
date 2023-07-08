@@ -1,6 +1,7 @@
-/* import { faker } from '@faker-js/faker';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { faker } from '@faker-js/faker';
 
-const randomName = faker.person.fullName(); */
+const randomName = faker.person.fullName();
 
 export interface IOffer {
 	id: number;
