@@ -1,6 +1,7 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
 import Favorites from '../../pages/favorites';
 import Login from '../../pages/login';
@@ -22,7 +23,13 @@ function App({ placesCount }: AppProps): JSX.Element {
 					/>
 					<Route
 						path={AppRoute.Favorites}
-						element={<Favorites />}
+						element={
+							<PrivateRoute
+								authorizationStatus={AuthorizationStatus.NoAuth}
+							>
+								<Favorites />
+							</PrivateRoute>
+						}
 					/>
 					<Route
 						path={AppRoute.Login}

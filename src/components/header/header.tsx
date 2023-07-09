@@ -1,4 +1,5 @@
 function Header(): JSX.Element {
+	//В вёрстке ссылка на логотипе никуда не ведёт. Не могу понять, это так странно задумано, или просто навесить Link на главную?
 	return (
 		<header className="header">
 			<div className="container">
