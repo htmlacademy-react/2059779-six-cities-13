@@ -1,9 +1,10 @@
 import { CSSProperties } from 'react';
-import { IOffer } from '../../mocks/offers';
 import classNames from 'classnames';
+import { offer } from '../../mocks/offers';
+import { capitalizeFirstLetter } from '../../utils';
 
 type offerCardPropType = {
-	item: IOffer;
+	item: offer;
 }
 
 const WidthByRating: Record<number, `${number}%` | `${number}`> = {
@@ -15,7 +16,6 @@ const WidthByRating: Record<number, `${number}%` | `${number}`> = {
 	5: '100%'
 } as const;
 
-//Здесь запутался с фигурными скобками. Почему их нужно ставить?
 function OfferCard({ item }: offerCardPropType): JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
@@ -23,7 +23,7 @@ function OfferCard({ item }: offerCardPropType): JSX.Element {
 	}, 'button');
 
 	const starsCount: CSSProperties = {
-		width: WidthByRating[item.rating]
+		width: WidthByRating[Math.round(item.rating)]
 	};
 
 	return (
@@ -71,7 +71,7 @@ function OfferCard({ item }: offerCardPropType): JSX.Element {
 						{item.title}
 					</a>
 				</h2>
-				<p className="place-card__type">{item.type}</p>
+				<p className="place-card__type">{capitalizeFirstLetter(item.type)}</p>
 			</div>
 		</article>
 	);

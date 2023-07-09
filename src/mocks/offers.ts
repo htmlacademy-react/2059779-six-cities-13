@@ -1,77 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { faker } from '@faker-js/faker';
+import { CITIES, OFFER_TYPES } from '../const';
 
-const randomName = faker.person.fullName();
+type location = {
+	latitude: number;
+	longitude: number;
+	zoom: number;
+}
 
-export interface IOffer {
-	id: number;
+type city = {
+	name: string;
+	location: location;
+}
+
+export interface offer {
+	id: string;
 	title: string;
 	type: string;
 	price: number;
 	previewImage: string;
-	city?: string;
+	city: city;
 	isFavorite: boolean;
 	isPremium: boolean;
 	rating: number;
 }
 
-//Может города и типы сделать литеральными типами тоже?
-const offers: IOffer[] = [
-	{
-		id: 1,
-		title: 'Beautiful & luxurious apartment at great location',
-		type: 'Apartment',
-		price: 120,
-		previewImage: 'img/apartment-01.jpg',
-		city: 'Amsterdam',
-		isFavorite: false,
-		isPremium: true,
-		rating: 4,
-	},
-	{
-		id: 2,
-		title: 'Wood and stone place',
-		type: 'Private room',
-		price: 80,
-		previewImage: 'img/room.jpg',
-		city: 'Amsterdam',
-		isFavorite: true,
-		isPremium: false,
-		rating: 4,
-	},
-	{
-		id: 3,
-		title: 'Canal View Prinsengracht',
-		type: 'Apartment',
-		price: 132,
-		previewImage: 'img/apartment-02.jpg',
-		city: 'Amsterdam',
-		isFavorite: false,
-		isPremium: false,
-		rating: 4,
-	},
-	{
-		id: 4,
-		title: 'Nice, cozy, warm big bed apartment',
-		type: 'Apartment',
-		price: 180,
-		previewImage: 'img/apartment-03.jpg',
-		city: 'Amsterdam',
-		isFavorite: false,
-		isPremium: true,
-		rating: 5,
-	},
-	{
-		id: 5,
-		title: 'Wood and stone place',
-		type: 'Private room',
-		price: 80,
-		previewImage: 'img/room.jpg',
-		city: 'Amsterdam',
-		isFavorite: true,
-		isPremium: false,
-		rating: 4,
-	}
-];
+function getOffer() {
+	const location: location = {
+		latitude: faker.location.latitude({ precision: 17 }),
+		longitude: faker.location.longitude({ precision: 17 }),
+		zoom: faker.number.int({ min: 1, max: 16 })
+	};
+
+	const city: city = {
+		name: faker.helpers.arrayElement((CITIES)),
+		location: location,
+	};
+
+	return {
+		id: faker.string.uuid(),
+		title: faker.word.words({ count: { min: 5, max: 10 } }),
+		type: faker.helpers.arrayElement((OFFER_TYPES)),
+		price: faker.number.int({ min: 20, max: 300 }),
+		previewImage: faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }), //Почему-то всегда одна и та же фотка с котом
+		city: city,
+		location: location,
+		isFavorite: faker.datatype.boolean(),
+		isPremium: faker.datatype.boolean(),
+		rating: faker.number.float({ min: 1, max: 5, precision: 0.1 }),
+	};
+}
+
+const offers: offer[] = faker.helpers.multiple(getOffer, { count: 5 });
 
 export { offers };
