@@ -15,7 +15,7 @@ const OFFER_TYPES = [
 ];
 
 const AppRoute = {
-	Root: '/',
+	Main: '/',
 	Login: '/login',
 	Favorites: '/favorites',
 	Offer: '/offer',

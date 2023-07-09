@@ -15,7 +15,7 @@ function App({ placesCount }: AppProps): JSX.Element {
 		<BrowserRouter>
 			<Routes>
 				<Route
-					path={AppRoute.Root}
+					path={AppRoute.Main}
 					element={<MainPage placesCount={placesCount} />}
 				/>
 				<Route
