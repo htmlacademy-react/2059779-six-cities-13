@@ -14,4 +14,11 @@ const OFFER_TYPES = [
 	'cursed old house',
 ];
 
-export { CITIES, OFFER_TYPES };
+const AppRoute = {
+	Root: '/',
+	Login: '/login',
+	Favorites: '/favorites',
+	Offer: '/offer',
+} as const;
+
+export { CITIES, OFFER_TYPES, AppRoute };

@@ -19,4 +19,4 @@ function Error404Screen(): JSX.Element {
 	);
 }
 
-export { Error404Screen };
+export default Error404Screen;
