@@ -46,7 +46,6 @@ function App({ placesCount }: AppProps): JSX.Element {
 				</Routes>
 			</BrowserRouter>
 		</HelmetProvider>
-
 	);
 }
 
