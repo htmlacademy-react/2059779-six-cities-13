@@ -27,4 +27,9 @@ const AuthorizationStatus = {
 	Unknown: 'UNKNOWN',
 } as const;
 
+type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
+type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
+
+export type { AuthorizationStatusValue };
+
 export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus };
