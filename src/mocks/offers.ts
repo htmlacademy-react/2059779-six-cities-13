@@ -42,7 +42,7 @@ function getOffer() {
 		title: faker.word.words({ count: { min: 5, max: 10 } }),
 		type: faker.helpers.arrayElement((OFFER_TYPES)),
 		price: faker.number.int({ min: 20, max: 300 }),
-		previewImage: faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }), //Почему-то всегда одна и та же фотка с котом
+		previewImage: faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }),
 		city: city,
 		location: location,
 		isFavorite: faker.datatype.boolean(),
