@@ -14,4 +14,22 @@ const OFFER_TYPES = [
 	'cursed old house',
 ];
 
-export { CITIES, OFFER_TYPES };
+const AppRoute = {
+	Main: '/',
+	Login: '/login',
+	Favorites: '/favorites',
+	Offer: '/offer',
+} as const;
+
+const AuthorizationStatus = {
+	Auth: 'AUTH',
+	NoAuth: 'NO_AUTH',
+	Unknown: 'UNKNOWN',
+} as const;
+
+type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
+type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
+
+export type { AuthorizationStatusValue };
+
+export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus };

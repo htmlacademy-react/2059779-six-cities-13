@@ -68,7 +68,7 @@ function OfferCard({ item }: offerCardPropType): JSX.Element {
 				</div>
 				<h2 className="place-card__name">
 					<a href="#">
-						{item.title}
+						{capitalizeFirstLetter(item.title)}
 					</a>
 				</h2>
 				<p className="place-card__type">{capitalizeFirstLetter(item.type)}</p>
