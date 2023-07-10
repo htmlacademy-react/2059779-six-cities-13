@@ -21,13 +21,7 @@ const AppRoute = {
 	Offer: '/offer',
 } as const;
 
-type AuthorizationStatus = {
-	Auth: string;
-	NoAuth: string;
-	Unknown: string;
-}
-
-const AuthorizationStatus: AuthorizationStatus = {
+const AuthorizationStatus = {
 	Auth: 'AUTH',
 	NoAuth: 'NO_AUTH',
 	Unknown: 'UNKNOWN',
