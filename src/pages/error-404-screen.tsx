@@ -11,13 +11,12 @@ function Error404Screen(): JSX.Element {
 			</Helmet>
 			<Header />
 			<main className="page__main">
-				<section className="favorites favorites--empty">
-					<h1>Page Not Found</h1>
-					<div className="favorites__status-wrapper">
-						<p className="favorites__status-description">
-							<Link to="/">To main page</Link>
-						</p>
-					</div>
+				<section className="error404 container">
+					<h1 className="error404__title">Page Not Found</h1>
+					<img className="error404__image" src="/img/404.webp" alt="Foundation without a house." width={720} height={480} />
+					<p className="error404__text">
+						<Link className="error404__link" to="/">To main page &#x1F3E0; </Link>
+					</p>
 				</section>
 			</main>
 			<Footer />
