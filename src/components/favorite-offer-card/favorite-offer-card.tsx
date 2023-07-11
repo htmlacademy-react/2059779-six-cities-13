@@ -23,9 +23,7 @@ function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Eleme
 
 	return (
 		<article className="favorites__card place-card">
-			<div className="place-card__mark">
-				{item.isPremium && <span>Premium</span>}
-			</div>
+			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="favorites__image-wrapper place-card__image-wrapper">
 				<a href="#">
 					<img

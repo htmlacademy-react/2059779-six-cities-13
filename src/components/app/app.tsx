@@ -31,7 +31,7 @@ function App({ placesCount, offers, reviews }: AppProps): React.JSX.Element {
 							<PrivateRoute
 								authorizationStatus={AuthorizationStatus.NoAuth}
 							>
-								<Favorites />
+								<Favorites offers={offers} />
 							</PrivateRoute>
 						}
 					/>
