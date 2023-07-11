@@ -6,15 +6,15 @@ const enum OffersCount {
 	count = 5,
 }
 
-type location = {
+type Location = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
 }
 
-type city = {
+type City = {
 	name: string;
-	location: location;
+	location: Location;
 }
 
 export interface offer {
@@ -23,20 +23,20 @@ export interface offer {
 	type: string;
 	price: number;
 	previewImage: string;
-	city: city;
+	city: City;
 	isFavorite: boolean;
 	isPremium: boolean;
 	rating: number;
 }
 
 function getOffer() {
-	const location: location = {
+	const location: Location = {
 		latitude: faker.location.latitude({ precision: 17 }),
 		longitude: faker.location.longitude({ precision: 17 }),
 		zoom: faker.number.int({ min: 1, max: 16 })
 	};
 
-	const city: city = {
+	const city: City = {
 		name: faker.helpers.arrayElement((CITIES)),
 		location: location,
 	};

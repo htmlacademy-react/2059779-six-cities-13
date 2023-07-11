@@ -4,7 +4,7 @@ const enum ReviewsCount {
 	count = 5,
 }
 
-type user = {
+type User = {
 	name: string;
 	avatarUrl: string;
 	isPro: boolean;
@@ -13,13 +13,13 @@ type user = {
 export interface review {
 	id: string;
 	date: string;
-	user: user;
+	user: User;
 	comment: string;
 	rating: number;
 }
 
 function getReview() {
-	const user: user = {
+	const user: User = {
 		name: faker.person.fullName(),
 		avatarUrl: faker.image.avatar(),
 		isPro: faker.datatype.boolean()

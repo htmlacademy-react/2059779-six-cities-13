@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 
-type offerCardPropType = {
+type OfferCardPropType = {
 	item: offer;
 }
 
@@ -16,7 +16,7 @@ const WidthByRating: Record<number, `${number}%` | `${number}`> = {
 	5: '100%'
 } as const;
 
-function OfferCard({ item }: offerCardPropType): React.JSX.Element {
+function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
