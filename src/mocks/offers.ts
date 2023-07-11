@@ -17,19 +17,20 @@ type City = {
 	location: Location;
 }
 
-export interface offer {
+export interface Offer {
 	id: string;
 	title: string;
 	type: string;
 	price: number;
 	previewImage: string;
 	city: City;
+	location: Location;
 	isFavorite?: boolean;
 	isPremium?: boolean;
 	rating: number;
 }
 
-function getOffer() {
+function getOffer(): Offer {
 	const location: Location = {
 		latitude: faker.location.latitude({ precision: 17 }),
 		longitude: faker.location.longitude({ precision: 17 }),
@@ -55,6 +56,6 @@ function getOffer() {
 	};
 }
 
-const offers: offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
+const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
 export { offers };

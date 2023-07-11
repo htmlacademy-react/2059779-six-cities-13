@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { offer } from '../../mocks/offers';
+import { Offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 
 type OfferCardPropType = {
-	item: offer;
+	item: Offer;
 }
 
 function OfferCard({ item }: OfferCardPropType): React.JSX.Element {

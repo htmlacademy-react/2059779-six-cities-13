@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import OfferCard from '../components/offer-card/offer-card';
-import { offer } from '../mocks/offers';
+import { Offer } from '../mocks/offers';
 
 type MainPageProps = {
 	placesCount: number;
-	offers: offer[];
+	offers: Offer[];
 }
 
 function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
