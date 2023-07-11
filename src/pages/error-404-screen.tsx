@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 
-function Error404Screen(): JSX.Element {
+function Error404Screen(): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>

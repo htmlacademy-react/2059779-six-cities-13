@@ -16,7 +16,7 @@ const WidthByRating: Record<number, `${number}%` | `${number}`> = {
 	5: '100%'
 } as const;
 
-function OfferCard({ item }: offerCardPropType): JSX.Element {
+function OfferCard({ item }: offerCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite

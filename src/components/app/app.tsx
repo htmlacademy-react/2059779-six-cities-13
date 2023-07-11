@@ -16,7 +16,7 @@ type AppProps = {
 	reviews: review[];
 }
 
-function App({ placesCount, offers, reviews }: AppProps): JSX.Element {
+function App({ placesCount, offers, reviews }: AppProps): React.JSX.Element {
 	return (
 		<HelmetProvider>
 			<BrowserRouter>

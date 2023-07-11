@@ -8,7 +8,7 @@ type MainPageProps = {
 	offers: offer[];
 }
 
-function MainPage({ placesCount, offers }: MainPageProps): JSX.Element {
+function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 
 	return (
 		<div className="page page--gray page--main">
@@ -86,7 +86,7 @@ function MainPage({ placesCount, offers }: MainPageProps): JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((offer) => <OfferCard item={offer} key={offer.id} />)}
+								{offers.map((item) => <OfferCard item={item} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">
