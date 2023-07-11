@@ -1,8 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
+import { offer } from '../mocks/offers';
 
-function Favorites(): React.JSX.Element {
+type FavoritesProps = {
+	offers: offer[];
+}
+
+function Favorites({ offers }: FavoritesProps): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>
