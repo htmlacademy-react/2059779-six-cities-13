@@ -1,13 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import OfferCard from '../components/offer-card/offer-card';
-import { offers } from '../mocks/offers';
+import { offer } from '../mocks/offers';
 
 type MainPageProps = {
 	placesCount: number;
+	offers: offer[];
 }
 
-function MainPage({ placesCount }: MainPageProps): JSX.Element {
+function MainPage({ placesCount, offers }: MainPageProps): JSX.Element {
 
 	return (
 		<div className="page page--gray page--main">

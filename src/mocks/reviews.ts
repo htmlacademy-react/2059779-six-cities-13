@@ -8,7 +8,7 @@ type user = {
 	isPro: boolean;
 }
 
-type review = {
+export interface review {
 	id: string;
 	date: string;
 	user: user;

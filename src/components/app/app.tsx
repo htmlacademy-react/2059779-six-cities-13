@@ -1,6 +1,8 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { offer } from '../../mocks/offers';
+import { review } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
 import Favorites from '../../pages/favorites';
@@ -10,16 +12,18 @@ import Error404Screen from '../../pages/error-404-screen';
 
 type AppProps = {
 	placesCount: number;
+	offers: offer[];
+	reviews: review[];
 }
 
-function App({ placesCount }: AppProps): JSX.Element {
+function App({ placesCount, offers, reviews }: AppProps): JSX.Element {
 	return (
 		<HelmetProvider>
 			<BrowserRouter>
 				<Routes>
 					<Route
 						path={AppRoute.Main}
-						element={<MainPage placesCount={placesCount} />}
+						element={<MainPage placesCount={placesCount} offers={offers} />}
 					/>
 					<Route
 						path={AppRoute.Favorites}
