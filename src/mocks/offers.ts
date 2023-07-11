@@ -24,8 +24,8 @@ export interface offer {
 	price: number;
 	previewImage: string;
 	city: City;
-	isFavorite: boolean;
-	isPremium: boolean;
+	isFavorite?: boolean;
+	isPremium?: boolean;
 	rating: number;
 }
 

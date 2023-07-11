@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react';
 import classNames from 'classnames';
 import { offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
@@ -7,24 +6,11 @@ type OfferCardPropType = {
 	item: offer;
 }
 
-const WidthByRating: Record<number, `${number}%` | `${number}`> = {
-	0: '0',
-	1: '20%',
-	2: '40%',
-	3: '60%',
-	4: '80%',
-	5: '100%'
-} as const;
-
 function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
 	}, 'button');
-
-	const starsCount: CSSProperties = {
-		width: WidthByRating[Math.round(item.rating)]
-	};
 
 	return (
 		<article className="cities__card place-card">
@@ -62,7 +48,7 @@ function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={ starsCount } />
+						<span style={{ width: `${item.rating * 20}%` } } />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
