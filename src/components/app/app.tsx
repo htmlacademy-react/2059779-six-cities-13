@@ -1,8 +1,8 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { offer } from '../../mocks/offers';
-import { review } from '../../mocks/reviews';
+import type { offer } from '../../mocks/offers';
+import type { review } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
 import Favorites from '../../pages/favorites';

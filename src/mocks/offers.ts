@@ -2,7 +2,9 @@
 import { faker } from '@faker-js/faker';
 import { CITIES, OFFER_TYPES } from '../const';
 
-const OFFERS_COUNT = 5;
+const enum OffersCount {
+	count = 5,
+}
 
 type location = {
 	latitude: number;
@@ -53,6 +55,6 @@ function getOffer() {
 	};
 }
 
-const offers: offer[] = faker.helpers.multiple(getOffer, { count: OFFERS_COUNT });
+const offers: offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
 export { offers };

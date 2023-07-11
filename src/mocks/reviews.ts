@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-const REVIEWS_COUNT = 5;
+const enum ReviewsCount {
+	count = 5,
+}
 
 type user = {
 	name: string;
@@ -32,6 +34,6 @@ function getReview() {
 	};
 }
 
-const reviews: review[] = faker.helpers.multiple(getReview, { count: REVIEWS_COUNT });
+const reviews: review[] = faker.helpers.multiple(getReview, { count: ReviewsCount.count });
 
 export { reviews };
