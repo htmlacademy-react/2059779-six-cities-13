@@ -31,7 +31,7 @@ export interface Offer {
 }
 
 //Нет ли здесь некосистентности в связи с тем, что выше у меня интерфейс, а здесь тип?
-type FullOffer = Omit<Offer, 'previewImage'> & {
+type OfferDetails = {
 	bedrooms: number;
 	description: string;
 	goods: string[];
@@ -43,6 +43,9 @@ type FullOffer = Omit<Offer, 'previewImage'> & {
 	images: string[];
 	maxAdults: number;
 }
+
+//По идее нужно выкинуть previewImage.
+type FullOffer = Offer & OfferDetails;
 
 function getOffer(): Offer {
 	const location: Location = {
@@ -70,9 +73,8 @@ function getOffer(): Offer {
 	};
 }
 
-function getFullOffer(): FullOffer {
+function getOfferDetails(): OfferDetails {
 	return {
-		...getOffer(),
 		bedrooms: faker.number.int({ min: 1, max: 4 }),
 		description: faker.commerce.productDescription(),
 		goods: faker.helpers.arrayElements(OFFER_FEATURES),
@@ -88,6 +90,6 @@ function getFullOffer(): FullOffer {
 
 const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
-const fullOffers: FullOffer[] = faker.helpers.multiple(getFullOffer, { count: OffersCount.count });
+const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
 
 export { offers, fullOffers };
