@@ -6,6 +6,7 @@ import ReviewForm from '../components/review-form/review-form';
 import type { FullOffer } from '../mocks/offers';
 import type { ReviewType } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
+import { useParams } from 'react-router-dom';
 
 type OfferPagePros = {
 	fullOffer: FullOffer;
@@ -15,6 +16,9 @@ type OfferPagePros = {
 function OfferPage({ fullOffer, reviews }: OfferPagePros): React.JSX.Element {
 
 	const detailedImages: string[] = fullOffer.images;
+
+	//Ругается, что не использую id.
+	const { id } = useParams();
 
 	return (
 		<div className="page">

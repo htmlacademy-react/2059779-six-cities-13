@@ -90,6 +90,7 @@ function getOfferDetails(): OfferDetails {
 	};
 }
 
+//Моковые данные связать не получилось. Пока не могу понять, почему
 const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
 const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));

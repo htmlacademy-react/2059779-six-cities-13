@@ -41,7 +41,7 @@ function App({ placesCount, offers, reviews, fullOffers }: AppProps): React.JSX.
 						element={<Login />}
 					/>
 					<Route
-						path={AppRoute.Offer}
+						path={`${AppRoute.Offer}/:id`}
 						element={<OfferPage fullOffer={fullOffers[0]} reviews={reviews} />}
 					/>
 					<Route

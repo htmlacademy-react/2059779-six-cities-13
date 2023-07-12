@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
-import { offer } from '../mocks/offers';
+import { Offer } from '../mocks/offers';
 
 type FavoritesProps = {
-	offers: offer[];
+	offers: Offer[];
 }
 
 function Favorites({ offers }: FavoritesProps): React.JSX.Element {
