@@ -90,7 +90,7 @@ function getOfferDetails(): OfferDetails {
 	};
 }
 
-//Моковые данные связать не получилось. Пока не могу понять, почему
+//Моковые данные при переходе по ссылке обновляются полностью. Не могу пока понять, как их закрепить, чтобы они не перегенерировались.
 const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
 const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
