@@ -1,7 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
+import Review from '../components/review/review';
+import type { FullOffer } from '../mocks/offers';
+import type { ReviewType } from '../mocks/reviews';
 
-function OfferPage(): React.JSX.Element {
+type OfferPagePros = {
+	fullOffer: FullOffer;
+	reviews: ReviewType[];
+}
+
+function OfferPage({ fullOffer, reviews }: OfferPagePros): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>
@@ -58,12 +66,10 @@ function OfferPage(): React.JSX.Element {
 					</div>
 					<div className="offer__container container">
 						<div className="offer__wrapper">
-							<div className="offer__mark">
-								<span>Premium</span>
-							</div>
+							{fullOffer.isPremium && <div className="offer__mark"><span>Premium</span></div>}
 							<div className="offer__name-wrapper">
 								<h1 className="offer__name">
-									Beautiful &amp; luxurious studio at great location
+									{fullOffer.title}
 								</h1>
 								<button className="offer__bookmark-button button" type="button">
 									<svg className="offer__bookmark-icon" width={31} height={33}>
@@ -77,7 +83,7 @@ function OfferPage(): React.JSX.Element {
 									<span style={{ width: '80%' }} />
 									<span className="visually-hidden">Rating</span>
 								</div>
-								<span className="offer__rating-value rating__value">4.8</span>
+								<span className="offer__rating-value rating__value">{fullOffer.rating}</span>
 							</div>
 							<ul className="offer__features">
 								<li className="offer__feature offer__feature--entire">Apartment</li>
@@ -89,7 +95,7 @@ function OfferPage(): React.JSX.Element {
 								</li>
 							</ul>
 							<div className="offer__price">
-								<b className="offer__price-value">€120</b>
+								<b className="offer__price-value">€{fullOffer.price}</b>
 								<span className="offer__price-text">&nbsp;night</span>
 							</div>
 							<div className="offer__inside">
@@ -140,36 +146,7 @@ function OfferPage(): React.JSX.Element {
 									Reviews · <span className="reviews__amount">1</span>
 								</h2>
 								<ul className="reviews__list">
-									<li className="reviews__item">
-										<div className="reviews__user user">
-											<div className="reviews__avatar-wrapper user__avatar-wrapper">
-												<img
-													className="reviews__avatar user__avatar"
-													src="img/avatar-max.jpg"
-													alt="Reviews avatar"
-													width={54}
-													height={54}
-												/>
-											</div>
-											<span className="reviews__user-name">Max</span>
-										</div>
-										<div className="reviews__info">
-											<div className="reviews__rating rating">
-												<div className="reviews__stars rating__stars">
-													<span style={{ width: '80%' }} />
-													<span className="visually-hidden">Rating</span>
-												</div>
-											</div>
-											<p className="reviews__text">
-												A quiet cozy and picturesque that hides behind a a river by
-												the unique lightness of Amsterdam. The building is green and
-												from 18th century.
-											</p>
-											<time className="reviews__time" dateTime="2019-04-24">
-												April 2019
-											</time>
-										</div>
-									</li>
+									{reviews.map((item) => <Review review={item} key={item.id} />)}
 								</ul>
 								<form className="reviews__form form" action="#" method="post">
 									<label className="reviews__label form__label" htmlFor="review">

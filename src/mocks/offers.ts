@@ -45,7 +45,7 @@ type OfferDetails = {
 }
 
 //По идее нужно выкинуть previewImage.
-type FullOffer = Offer & OfferDetails;
+export type FullOffer = Offer & OfferDetails;
 
 function getOffer(): Offer {
 	const location: Location = {

@@ -10,7 +10,7 @@ type User = {
 	isPro: boolean;
 }
 
-export interface Review {
+export interface ReviewType {
 	id: string;
 	date: string;
 	user: User;
@@ -18,7 +18,7 @@ export interface Review {
 	rating: number;
 }
 
-function getReview(): Review {
+function getReview(): ReviewType {
 	const user: User = {
 		name: faker.person.fullName(),
 		avatarUrl: faker.image.avatar(),
@@ -34,6 +34,6 @@ function getReview(): Review {
 	};
 }
 
-const reviews: Review[] = faker.helpers.multiple(getReview, { count: ReviewsCount.count });
+const reviews: ReviewType[] = faker.helpers.multiple(getReview, { count: ReviewsCount.count });
 
 export { reviews };
