@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { faker } from '@faker-js/faker';
-import { CITIES, OFFER_TYPES } from '../const';
+import { CITIES, OFFER_TYPES, OFFER_FEATURES } from '../const';
 
 const enum OffersCount {
 	count = 5,
@@ -30,6 +30,20 @@ export interface Offer {
 	rating: number;
 }
 
+//Нет ли здесь некосистентности в связи с тем, что выше у меня интерфейс, а здесь тип?
+type FullOffer = Omit<Offer, 'previewImage'> & {
+	bedrooms: number;
+	description: string;
+	goods: string[];
+	host: {
+		name: string;
+		avatarUrl: string;
+		isPro: boolean;
+	};
+	images: string[];
+	maxAdults: number;
+}
+
 function getOffer(): Offer {
 	const location: Location = {
 		latitude: faker.location.latitude({ precision: 17 }),
@@ -56,6 +70,24 @@ function getOffer(): Offer {
 	};
 }
 
+function getFullOffer(): FullOffer {
+	return {
+		...getOffer(),
+		bedrooms: faker.number.int({ min: 1, max: 4 }),
+		description: faker.commerce.productDescription(),
+		goods: faker.helpers.arrayElements(OFFER_FEATURES),
+		host: {
+			name: faker.person.fullName(),
+			avatarUrl: faker.image.avatar(),
+			isPro: faker.datatype.boolean()
+		},
+		images: [faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' })],
+		maxAdults: faker.number.int({ min: 1, max: 8 }),
+	};
+}
+
 const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
-export { offers };
+const fullOffers: FullOffer[] = faker.helpers.multiple(getFullOffer, { count: OffersCount.count });
+
+export { offers, fullOffers };
