@@ -28,7 +28,7 @@ function Review({ review }: ReviewPropsType): React.JSX.Element {
 					</div>
 				</div>
 				<p className="reviews__text">
-					{review.comment}
+					{review.comment}.
 				</p>
 				<time className="reviews__time" dateTime="2019-04-24">
 					April 2019

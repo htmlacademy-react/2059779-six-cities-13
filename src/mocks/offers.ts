@@ -74,6 +74,8 @@ function getOffer(): Offer {
 }
 
 function getOfferDetails(): OfferDetails {
+	const offerDetailedImages: string[] = Array.from({ length: OffersCount.count }, () => faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }));
+
 	return {
 		bedrooms: faker.number.int({ min: 1, max: 4 }),
 		description: faker.commerce.productDescription(),
@@ -83,7 +85,7 @@ function getOfferDetails(): OfferDetails {
 			avatarUrl: faker.image.avatar(),
 			isPro: faker.datatype.boolean()
 		},
-		images: [faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' })],
+		images: offerDetailedImages,
 		maxAdults: faker.number.int({ min: 1, max: 8 }),
 	};
 }
