@@ -1,25 +1,11 @@
-import { CSSProperties } from 'react';
-import { offer } from '../../mocks/offers';
+import { Offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 
 type FavoriteOfferCardPropType = {
-	item: offer;
+	item: Offer;
 }
 
-//Второй раз использую, может вынести в utils какой-нибудь?
-const WidthByRating: Record<number, `${number}%` | `${number}`> = {
-	0: '0',
-	1: '20%',
-	2: '40%',
-	3: '60%',
-	4: '80%',
-	5: '100%'
-} as const;
-
 function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Element {
-	const starsCount: CSSProperties = {
-		width: WidthByRating[Math.round(item.rating)]
-	};
 
 	return (
 		<article className="favorites__card place-card">
@@ -59,7 +45,7 @@ function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Eleme
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={starsCount} />
+						<span style={{ width: `${item.rating * 20}%` }} />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>

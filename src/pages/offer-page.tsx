@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 
-function Offer(): React.JSX.Element {
+function OfferPage(): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>
@@ -434,4 +434,4 @@ function Offer(): React.JSX.Element {
 	);
 }
 
-export default Offer;
+export default OfferPage;

@@ -1,19 +1,19 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import type { offer } from '../../mocks/offers';
-import type { review } from '../../mocks/reviews';
+import type { Offer } from '../../mocks/offers';
+import type { Review } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
 import Favorites from '../../pages/favorites';
 import Login from '../../pages/login';
-import Offer from '../../pages/offer';
+import OfferPage from '../../pages/offer-page';
 import Error404Screen from '../../pages/error-404-screen';
 
 type AppProps = {
 	placesCount: number;
-	offers: offer[];
-	reviews: review[];
+	offers: Offer[];
+	reviews: Review[];
 }
 
 function App({ placesCount, offers, reviews }: AppProps): React.JSX.Element {
@@ -41,7 +41,7 @@ function App({ placesCount, offers, reviews }: AppProps): React.JSX.Element {
 					/>
 					<Route
 						path={AppRoute.Offer}
-						element={<Offer />}
+						element={<OfferPage />}
 					/>
 					<Route
 						path='*'
