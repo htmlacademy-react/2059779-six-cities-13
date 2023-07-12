@@ -9,6 +9,13 @@ type FavoritesProps = {
 }
 
 function Favorites({ offers }: FavoritesProps): React.JSX.Element {
+
+	//Что-то никак не могу придумать, как бы половчее дать названия полям, чтобы они были при этом ещё или константами или лучше ключами перечисления.
+	const filteredCities = {
+		Amsterdam: offers.filter((offer) => offer.city.name === 'Amsterdam')
+	};
+
+
 	return (
 		<div className="page">
 			<Helmet>
