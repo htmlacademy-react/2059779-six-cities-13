@@ -5,7 +5,7 @@ function Login(): React.JSX.Element {
 	return (
 		<div className="page page--gray page--login">
 			<Helmet>
-				<title>Login</title>
+				<title>6 Cities — Login</title>
 			</Helmet>
 			<Header />
 			<main className="page__main page__main--login">

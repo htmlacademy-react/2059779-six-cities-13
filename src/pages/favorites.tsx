@@ -19,7 +19,7 @@ function Favorites({ offers }: FavoritesProps): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>
-				<title>Favorites</title>
+				<title>6 Cities — Favorites</title>
 			</Helmet>
 			<Header />
 			<main className="page__main page__main--favorites">

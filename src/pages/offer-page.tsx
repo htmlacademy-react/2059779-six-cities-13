@@ -9,21 +9,22 @@ import { capitalizeFirstLetter } from '../utils';
 import { useParams } from 'react-router-dom';
 
 type OfferPagePros = {
-	fullOffer: FullOffer;
+	fullOffers: FullOffer[];
 	reviews: ReviewType[];
 }
 
-function OfferPage({ fullOffer, reviews }: OfferPagePros): React.JSX.Element {
+function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
+	const { id } = useParams();
+
+	const fullOffer = fullOffers.find((item) => item.id === id);
 
 	const detailedImages: string[] = fullOffer.images;
 
-	//Ругается, что не использую id.
-	const { id } = useParams();
 
 	return (
 		<div className="page">
 			<Helmet>
-				<title>Offer</title>
+				<title>6 Cities — Offer</title>
 			</Helmet>
 			<Header />
 			<main className="page__main page__main--offer">

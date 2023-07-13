@@ -7,7 +7,7 @@ function Error404Screen(): React.JSX.Element {
 	return (
 		<div className="page">
 			<Helmet>
-				<title>Page Not Found</title>
+				<title>6 Cities — Page Not Found</title>
 			</Helmet>
 			<Header />
 			<main className="page__main">
