@@ -16,7 +16,8 @@ type OfferPagePros = {
 function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 	const { id } = useParams();
 
-	const fullOffer = fullOffers.find((item) => item.id === id);
+	//Наверное я здесь принуждаю TS к плохому, и нужно обработать вариант, если find ничего не найдёт.
+	const fullOffer = fullOffers.find((item) => item.id === id) as FullOffer;
 
 	const detailedImages: string[] = fullOffer.images;
 
