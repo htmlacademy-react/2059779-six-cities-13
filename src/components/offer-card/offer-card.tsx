@@ -19,7 +19,7 @@ function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
 	const [id, setId] = useState();
 
 	//Не уверен, что это верно.
-	function handlePointerEnter(evt) {
+	function handlePointerEnter() {
 		setId(item.id);
 	}
 

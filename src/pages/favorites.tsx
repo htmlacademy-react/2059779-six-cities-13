@@ -11,9 +11,34 @@ type FavoritesProps = {
 function Favorites({ offers }: FavoritesProps): React.JSX.Element {
 
 	//Что-то никак не могу придумать, как бы половчее дать названия полям, чтобы они были при этом ещё или константами или лучше ключами перечисления.
-	const filteredCities = {
-		Amsterdam: offers.filter((offer) => offer.city.name === 'Amsterdam')
+	const cityFilter = {
+		Amsterdam: offers.filter((offer) => offer.city.name === 'Amsterdam'),
+		Brussels: offers.filter((offer) => offer.city.name === 'Brussels'),
+		Cologne: offers.filter((offer) => offer.city.name === 'Cologne'),
+		Dusseldorf: offers.filter((offer) => offer.city.name === 'Dusseldorf'),
+		Hamburg: offers.filter((offer) => offer.city.name === 'Hamburg'),
+		Paris: offers.filter((offer) => offer.city.name === 'Paris'),
 	};
+
+	//Получилось что-то такое, но здесь итерация в итерации, и я не могу вставить это в JSX. Я подумал, что может собрать массив из получающихся строк, и потом по нему пройтись при помощи map, но во-первых, не получается, а во вторых, ещё один обход. Нужен совет.
+	/* 	for (const city in cityFilter) {
+		if (cityFilter[city].length > 0) {
+			return (
+				<li className="favorites__locations-items">
+					<div className="favorites__locations locations locations--current">
+						<div className="locations__item">
+							<a className="locations__item-link" href="#">
+								<span>{city}</span>
+							</a>
+						</div>
+					</div>
+					<div className="favorites__places">
+						{offers.map((item) => <FavoriteOfferCard item={item} key={item.id} />)}
+					</div>
+				</li>
+			);
+		}
+	} */
 
 
 	return (
