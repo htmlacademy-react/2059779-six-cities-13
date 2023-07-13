@@ -42,6 +42,7 @@ function App({ placesCount, offers, reviews, fullOffers }: AppProps): React.JSX.
 					/>
 					<Route
 						path={`${AppRoute.Offer}/:id`}
+						//Вот здесь пока затуп. Нужно же передавать в проп нужный элемент списка.
 						element={<OfferPage fullOffer={fullOffers[0]} reviews={reviews} />}
 					/>
 					<Route

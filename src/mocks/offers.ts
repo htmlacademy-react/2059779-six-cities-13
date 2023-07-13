@@ -85,12 +85,11 @@ function getOfferDetails(): OfferDetails {
 			avatarUrl: faker.image.avatar(),
 			isPro: faker.datatype.boolean()
 		},
-		images: offerDetailedImages,
+		images: faker.helpers.arrayElements(offerDetailedImages),
 		maxAdults: faker.number.int({ min: 1, max: 8 }),
 	};
 }
 
-//Моковые данные при переходе по ссылке обновляются полностью. Не могу пока понять, как их закрепить, чтобы они не перегенерировались.
 const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
 const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));

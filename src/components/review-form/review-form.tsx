@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChangeEventHandler } from 'react';
 
 function ReviewForm() {
-	//Я надеюсь, что в данном случае false и пустая строка это не магические числа?
+	//Есть сомнения, что пустая строка в первом случае валидное значение для radio-button.
 	const [selectedValue, setSelectedValue] = useState('');
 	const [comment, setComment] = useState('');
 

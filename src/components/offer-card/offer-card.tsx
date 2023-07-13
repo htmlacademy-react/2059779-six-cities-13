@@ -18,13 +18,13 @@ function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
 	//Пункт пятый задания я или не понял, или делаю не так. Там предлагают сделать компонент для карточек, но это кажется избыточным. А вот свойство я получить не могу всё равно.
 	const [id, setId] = useState();
 
+	//Не уверен, что это верно.
 	function handlePointerEnter(evt) {
-		setId(evt.target.id);
-		console.log(setId(evt.target.id));
+		setId(item.id);
 	}
 
 	return (
-		<article id={id} className="cities__card place-card" onPointerEnter={handlePointerEnter}>
+		<article id={item.id} className="cities__card place-card" onPointerEnter={handlePointerEnter}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<Link to={`offer/${item.id}`}>
