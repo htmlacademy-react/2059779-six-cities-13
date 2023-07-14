@@ -17,7 +17,8 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 	const [id, setId] = useState();
 
 	//item вообще нет на этом уровне, что тогда обновлять не понятно.
-	function handlePointerEnter() {
+	function handleMouseEnter(evt) {
+		console.log(evt.target);
 		setId(item.id);
 	}
 
@@ -79,7 +80,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((item) => <OfferCard item={item} onPointerEnter={handlePointerEnter} key={item.id} />)}
+								{offers.map((item) => <OfferCard id={id} item={item} onMouseEnter={handleMouseEnter} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">

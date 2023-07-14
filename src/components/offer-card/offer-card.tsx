@@ -2,20 +2,21 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
+import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
 	item: Offer;
-	handlePointerEnter;
+	onMouseEnter: MouseEventHandler<HTMLElement> | undefined;
 }
 
-function OfferCard({ item, handlePointerEnter }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, onMouseEnter }: OfferCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
 	}, 'button');
 
 	return (
-		<article className="cities__card place-card" onPointerEnter={handlePointerEnter}>
+		<article className="cities__card place-card" onMouseEnter={onMouseEnter}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<Link to={`offer/${item.id}`}>
