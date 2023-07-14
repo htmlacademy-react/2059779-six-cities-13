@@ -1,30 +1,21 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import classNames from 'classnames';
 import { Offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 
 type OfferCardPropType = {
 	item: Offer;
+	handlePointerEnter;
 }
 
-function OfferCard({ item }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, handlePointerEnter }: OfferCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
 	}, 'button');
 
-
-	//Пункт пятый задания я или не понял, или делаю не так. Там предлагают сделать компонент для карточек, но это кажется избыточным. А вот свойство я получить не могу всё равно.
-	const [id, setId] = useState();
-
-	//Не уверен, что это верно.
-	function handlePointerEnter() {
-		setId(item.id);
-	}
-
 	return (
-		<article id={item.id} className="cities__card place-card" onPointerEnter={handlePointerEnter}>
+		<article className="cities__card place-card" onPointerEnter={handlePointerEnter}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<Link to={`offer/${item.id}`}>

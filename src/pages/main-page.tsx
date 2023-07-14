@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 import classNames from 'classnames';
 import Header from '../components/header/header';
 import OfferCard from '../components/offer-card/offer-card';
@@ -11,6 +12,14 @@ type MainPageProps = {
 }
 
 function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
+
+	//Всё равно какая-то ерунда. Не понимаю.
+	const [id, setId] = useState();
+
+	//item вообще нет на этом уровне, что тогда обновлять не понятно.
+	function handlePointerEnter() {
+		setId(item.id);
+	}
 
 	return (
 		<div className="page page--gray page--main">
@@ -70,7 +79,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((item) => <OfferCard item={item} key={item.id} />)}
+								{offers.map((item) => <OfferCard item={item} onPointerEnter={handlePointerEnter} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">
