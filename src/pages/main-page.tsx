@@ -13,13 +13,12 @@ type MainPageProps = {
 
 function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 
-	//Всё равно какая-то ерунда. Не понимаю.
 	const [id, setId] = useState();
 
-	//item вообще нет на этом уровне, что тогда обновлять не понятно.
-	function handleMouseEnter(evt) {
-		console.log(evt.target);
-		setId(item.id);
+	//Наверное как-то так. Только на тип параметра ругается.
+	function handleMouseEnter(id) {
+		console.log(id);
+		setId(id);
 	}
 
 	return (
@@ -80,7 +79,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((item) => <OfferCard id={id} item={item} onMouseEnter={handleMouseEnter} key={item.id} />)}
+								{offers.map((item) => <OfferCard item={item} onMouseEnter={() => handleMouseEnter(item.id)} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">
