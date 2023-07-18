@@ -21,8 +21,6 @@ function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 		offersByCity[city] = [offer];
 	}
 
-	console.log(offersByCity);
-
 	return (
 		<div className="page">
 			<Helmet>
