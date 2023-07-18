@@ -6,7 +6,7 @@ function ReviewForm() {
 	const [selectedValue, setSelectedValue] = useState('');
 	const [comment, setComment] = useState('');
 
-	function handleChange(evt: ChangeEventHandler<HTMLTextAreaElement>) {
+	function handleTextChange(evt: ChangeEventHandler<HTMLTextAreaElement>) {
 		//TS прикопался к типам здесь. Хз, что ему нужно.
 		setComment(evt.target.value);
 	}
@@ -115,7 +115,7 @@ function ReviewForm() {
 				placeholder="Tell how was your stay, what you like and what can be improved"
 				value={comment}
 				//Опять типы.
-				onChange={handleChange}
+				onChange={handleTextChange}
 			/>
 			<div className="reviews__button-wrapper">
 				<p className="reviews__help">

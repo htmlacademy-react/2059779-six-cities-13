@@ -17,7 +17,6 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 
 	//Наверное как-то так. Только на тип параметра ругается.
 	function handleMouseEnter(id) {
-		console.log(id);
 		setId(id);
 	}
 

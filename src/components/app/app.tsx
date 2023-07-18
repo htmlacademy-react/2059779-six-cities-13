@@ -5,10 +5,10 @@ import type { Offer, FullOffer } from '../../mocks/offers';
 import type { ReviewType } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
-import Favorites from '../../pages/favorites';
-import Login from '../../pages/login';
+import FavoritesPage from '../../pages/favorites-page';
+import LoginPage from '../../pages/login-page';
 import OfferPage from '../../pages/offer-page';
-import Error404Screen from '../../pages/error-404-screen';
+import Error404Page from '../../pages/error-404-page';
 
 type AppProps = {
 	placesCount: number;
@@ -32,13 +32,13 @@ function App({ placesCount, offers, reviews, fullOffers }: AppProps): React.JSX.
 							<PrivateRoute
 								authorizationStatus={AuthorizationStatus.NoAuth}
 							>
-								<Favorites offers={offers} />
+								<FavoritesPage offers={offers} />
 							</PrivateRoute>
 						}
 					/>
 					<Route
 						path={AppRoute.Login}
-						element={<Login />}
+						element={<LoginPage />}
 					/>
 					<Route
 						path={`${AppRoute.Offer}/:id`}
@@ -46,7 +46,7 @@ function App({ placesCount, offers, reviews, fullOffers }: AppProps): React.JSX.
 					/>
 					<Route
 						path='*'
-						element={<Error404Screen />}
+						element={<Error404Page />}
 					/>
 				</Routes>
 			</BrowserRouter>
