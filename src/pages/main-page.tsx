@@ -1,13 +1,24 @@
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+import classNames from 'classnames';
 import Header from '../components/header/header';
 import OfferCard from '../components/offer-card/offer-card';
-import { offers } from '../mocks/offers';
+import type { Offer } from '../mocks/offers';
+import { CITIES } from '../const';
 
 type MainPageProps = {
 	placesCount: number;
+	offers: Offer[];
 }
 
-function MainPage({ placesCount }: MainPageProps): JSX.Element {
+function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
+
+	const [id, setId] = useState();
+
+	//Наверное как-то так. Только на тип параметра ругается.
+	function handleMouseEnter(id) {
+		setId(id);
+	}
 
 	return (
 		<div className="page page--gray page--main">
@@ -20,36 +31,17 @@ function MainPage({ placesCount }: MainPageProps): JSX.Element {
 				<div className="tabs">
 					<section className="locations container">
 						<ul className="locations__list tabs__list">
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item" href="#">
-									<span>Paris</span>
-								</a>
-							</li>
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item" href="#">
-									<span>Cologne</span>
-								</a>
-							</li>
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item" href="#">
-									<span>Brussels</span>
-								</a>
-							</li>
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item tabs__item--active">
-									<span>Amsterdam</span>
-								</a>
-							</li>
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item" href="#">
-									<span>Hamburg</span>
-								</a>
-							</li>
-							<li className="locations__item">
-								<a className="locations__item-link tabs__item" href="#">
-									<span>Dusseldorf</span>
-								</a>
-							</li>
+							{CITIES.map((city) => (
+								<li className="locations__item" key={city}>
+									<a
+										className={classNames(
+											'locations__item-link tabs__item', { 'tabs__item--active': city === 'Amsterdam' })}
+										href="#"
+									>
+										<span>{city}</span>
+									</a>
+								</li>
+							))}
 						</ul>
 					</section>
 				</div>
@@ -60,6 +52,7 @@ function MainPage({ placesCount }: MainPageProps): JSX.Element {
 							<b className="places__found">{placesCount} places to stay in Amsterdam</b>
 							<form className="places__sorting" action="#" method="get">
 								<span className="places__sorting-caption">Sort by</span>
+								{' '}
 								<span className="places__sorting-type" tabIndex={0}>
 									Popular
 									<svg className="places__sorting-arrow" width={7} height={4}>
@@ -85,7 +78,7 @@ function MainPage({ placesCount }: MainPageProps): JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((offer) => <OfferCard item={offer} key={offer.id} />)}
+								{offers.map((item) => <OfferCard item={item} onMouseEnter={() => handleMouseEnter(item.id)} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">

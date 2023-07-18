@@ -1,38 +1,60 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { faker } from '@faker-js/faker';
-import { CITIES, OFFER_TYPES } from '../const';
+import { CITIES, OFFER_TYPES, OFFER_FEATURES } from '../const';
 
-type location = {
+const enum OffersCount {
+	count = 5,
+}
+
+type Location = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
 }
 
-type city = {
+type City = {
 	name: string;
-	location: location;
+	location: Location;
 }
 
-export interface offer {
+export interface Offer {
 	id: string;
 	title: string;
 	type: string;
 	price: number;
 	previewImage: string;
-	city: city;
-	isFavorite: boolean;
-	isPremium: boolean;
+	city: City;
+	location: Location;
+	isFavorite?: boolean;
+	isPremium?: boolean;
 	rating: number;
 }
 
-function getOffer() {
-	const location: location = {
+//Нет ли здесь некосистентности в связи с тем, что выше у меня интерфейс, а здесь тип?
+type OfferDetails = {
+	bedrooms: number;
+	description: string;
+	goods: string[];
+	host: {
+		name: string;
+		avatarUrl: string;
+		isPro: boolean;
+	};
+	images: string[];
+	maxAdults: number;
+}
+
+//По идее нужно выкинуть previewImage.
+export type FullOffer = Offer & OfferDetails;
+
+function getOffer(): Offer {
+	const location: Location = {
 		latitude: faker.location.latitude({ precision: 17 }),
 		longitude: faker.location.longitude({ precision: 17 }),
 		zoom: faker.number.int({ min: 1, max: 16 })
 	};
 
-	const city: city = {
+	const city: City = {
 		name: faker.helpers.arrayElement((CITIES)),
 		location: location,
 	};
@@ -51,6 +73,25 @@ function getOffer() {
 	};
 }
 
-const offers: offer[] = faker.helpers.multiple(getOffer, { count: 5 });
+function getOfferDetails(): OfferDetails {
+	const offerDetailedImages: string[] = Array.from({ length: OffersCount.count }, () => faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }));
 
-export { offers };
+	return {
+		bedrooms: faker.number.int({ min: 1, max: 4 }),
+		description: faker.commerce.productDescription(),
+		goods: faker.helpers.arrayElements(OFFER_FEATURES),
+		host: {
+			name: faker.person.fullName(),
+			avatarUrl: faker.image.avatar(),
+			isPro: faker.datatype.boolean()
+		},
+		images: faker.helpers.arrayElements(offerDetailedImages),
+		maxAdults: faker.number.int({ min: 1, max: 8 }),
+	};
+}
+
+const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
+
+const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
+
+export { offers, fullOffers };

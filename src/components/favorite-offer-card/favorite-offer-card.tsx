@@ -1,42 +1,37 @@
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 import { Offer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
-import { MouseEventHandler } from 'react';
 
-type OfferCardPropType = {
+type FavoriteOfferCardPropType = {
 	item: Offer;
-	onMouseEnter: MouseEventHandler<HTMLElement> | undefined;
 }
 
-function OfferCard({ item, onMouseEnter }: OfferCardPropType): React.JSX.Element {
-
-	const favoriteButtonClass = classNames('place-card__bookmark-button', {
-		'place-card__bookmark-button--active': item.isFavorite
-	}, 'button');
+function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Element {
 
 	return (
-		<article className="cities__card place-card" onMouseEnter={onMouseEnter}>
+		<article className="favorites__card place-card">
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-			<div className="cities__image-wrapper place-card__image-wrapper">
-				<Link to={`offer/${item.id}`}>
+			<div className="favorites__image-wrapper place-card__image-wrapper">
+				<Link to={`../offer/${item.id}`}>
 					<img
 						className="place-card__image"
 						src={item.previewImage}
 						alt="Place image"
-						width={260}
-						height={200}
+						width={150}
+						height={110}
 					/>
 				</Link>
 			</div>
-			<div className="place-card__info">
+			<div className="favorites__card-info place-card__info">
 				<div className="place-card__price-wrapper">
 					<div className="place-card__price">
 						<b className="place-card__price-value">€{item.price}</b>
-						<span className="place-card__price-text">/&nbsp;night</span>
+						<span className="place-card__price-text">
+							/&nbsp;night
+						</span>
 					</div>
 					<button
-						className={favoriteButtonClass}
+						className="place-card__bookmark-button place-card__bookmark-button--active button"
 						type="button"
 					>
 						<svg
@@ -46,19 +41,17 @@ function OfferCard({ item, onMouseEnter }: OfferCardPropType): React.JSX.Element
 						>
 							<use xlinkHref="#icon-bookmark" />
 						</svg>
-						<span className="visually-hidden">To bookmarks</span>
+						<span className="visually-hidden">In bookmarks</span>
 					</button>
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={{ width: `${item.rating * 20}%`}} />
+						<span style={{ width: `${item.rating * 20}%` }} />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<Link to={`offer/${item.id}`}>
-						{capitalizeFirstLetter(item.title)}
-					</Link>
+					<Link to={`../offer/${item.id}`}>{capitalizeFirstLetter(item.title)}</Link>
 				</h2>
 				<p className="place-card__type">{capitalizeFirstLetter(item.type)}</p>
 			</div>
@@ -66,4 +59,4 @@ function OfferCard({ item, onMouseEnter }: OfferCardPropType): React.JSX.Element
 	);
 }
 
-export default OfferCard;
+export default FavoriteOfferCard;

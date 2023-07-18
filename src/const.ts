@@ -5,14 +5,28 @@ const CITIES = [
 	'Amsterdam',
 	'Hamburg',
 	'Dusseldorf',
-];
+] as const;
 
 const OFFER_TYPES = [
 	'hotel',
 	'apartment',
 	'room',
 	'cursed old house',
-];
+] as const;
+
+const OFFER_FEATURES = [
+	'Wi-Fi',
+	'Heating',
+	'Kitchen',
+	'Fridge',
+	'Washing machine',
+	'Coffee machine',
+	'Dishwasher',
+	'Towels',
+	'Baby seat',
+	'Cabel TV',
+	'Friendly Ghost'
+] as const;
 
 const AppRoute = {
 	Main: '/',
@@ -32,4 +46,4 @@ type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKe
 
 export type { AuthorizationStatusValue };
 
-export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus };
+export { CITIES, OFFER_TYPES, OFFER_FEATURES, AppRoute, AuthorizationStatus };
