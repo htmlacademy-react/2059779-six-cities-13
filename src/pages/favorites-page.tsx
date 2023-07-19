@@ -3,6 +3,7 @@ import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
 import { Offer } from '../mocks/offers';
+import { getOffersByCity } from '../utils';
 
 type FavoritesProps = {
 	offers: Offer[];
@@ -10,18 +11,7 @@ type FavoritesProps = {
 
 function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 
-	const offersByCity: Record<string, Offer[]> = {};
-
-	for (const offer of offers) {
-		const city = offer.city.name;
-
-		if (city in offersByCity) {
-			offersByCity[city].push(offer);
-			continue;
-		}
-		offersByCity[city] = [offer];
-		continue;
-	}
+	const offersByCity: Record<string, Offer[]> = getOffersByCity(offers);
 
 	return (
 		<div className="page">

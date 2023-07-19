@@ -21,7 +21,6 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 
 	const detailedImages: string[] = fullOffer.images;
 
-
 	return (
 		<div className="page">
 			<Helmet>
