@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { ChangeEventHandler } from 'react';
+import { ChangeEvent } from 'react';
 
 function ReviewForm() {
 	//Есть сомнения, что пустая строка в первом случае валидное значение для radio-button.
 	const [selectedValue, setSelectedValue] = useState('');
 	const [comment, setComment] = useState('');
 
-	function handleTextChange({evt}: ChangeEventHandler<HTMLTextAreaElement>) {
-		//TS прикопался к типам здесь. Хз, что ему нужно.
-		setComment(evt.target.value);
+	function handleTextChange({ target }: ChangeEvent<HTMLTextAreaElement>) {
+		setComment(target.value);
 	}
 
 	return (
