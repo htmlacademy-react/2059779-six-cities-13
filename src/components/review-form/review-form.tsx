@@ -6,7 +6,7 @@ function ReviewForm() {
 	const [selectedValue, setSelectedValue] = useState('');
 	const [comment, setComment] = useState('');
 
-	function handleTextChange(evt: ChangeEventHandler<HTMLTextAreaElement>) {
+	function handleTextChange({evt}: ChangeEventHandler<HTMLTextAreaElement>) {
 		//TS прикопался к типам здесь. Хз, что ему нужно.
 		setComment(evt.target.value);
 	}

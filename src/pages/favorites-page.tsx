@@ -10,15 +10,17 @@ type FavoritesProps = {
 
 function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 
-	const offersByCity: Record<string, Offer> = {};
+	const offersByCity: Record<string, Offer[]> = {};
 
 	for (const offer of offers) {
 		const city = offer.city.name;
 
 		if (city in offersByCity) {
 			offersByCity[city].push(offer);
+			continue;
 		}
 		offersByCity[city] = [offer];
+		continue;
 	}
 
 	return (
@@ -32,7 +34,7 @@ function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 					<section className="favorites">
 						<h1 className="favorites__title">Saved listing</h1>
 						<ul className="favorites__list">
-							{Object.entries(offersByCity).map(([city, offers]) => (
+							{Object.entries(offersByCity).map(([city, housings]) => (
 								<li key={city} className="favorites__locations-items">
 									<div className="favorites__locations locations locations--current">
 										<div className="locations__item">
@@ -42,7 +44,7 @@ function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 										</div>
 									</div>
 									<div className="favorites__places">
-										{offers.map((item) => <FavoriteOfferCard item={item} key={item.id} />)}
+										{housings.map((item) => <FavoriteOfferCard item={item} key={item.id} />)}
 									</div>
 								</li>
 							))}

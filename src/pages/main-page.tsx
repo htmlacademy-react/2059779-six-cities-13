@@ -13,11 +13,17 @@ type MainPageProps = {
 
 function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 
-	const [id, setId] = useState();
+	const [id, setId] = useState<null | string>(null);
 
-	//Наверное как-то так. Только на тип параметра ругается.
-	function handleMouseEnter(id) {
-		setId(id);
+	// eslint-disable-next-line no-console
+	console.log(id);
+
+	function handleMouseEnter(offerId: string): void {
+		setId(offerId);
+	}
+
+	function handleMouseLeave(): void {
+		setId(null);
 	}
 
 	return (
@@ -78,7 +84,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((item) => <OfferCard item={item} onMouseEnter={() => handleMouseEnter(item.id)} key={item.id} />)}
+								{offers.map((item) => <OfferCard item={item} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} key={item.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">
