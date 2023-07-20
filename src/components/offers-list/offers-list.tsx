@@ -5,8 +5,8 @@ import { Offer } from '../../mocks/offers';
 type OfferListProps = {
 	offers: Offer[];
 	selectedCity: string;
-	handleMouseEnter: void;
-	handleMouseLeave: void;
+	handleMouseEnter: (offerId: string) => void;
+	handleMouseLeave: () => void;
 }
 
 function OffersList({ offers, selectedCity, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
