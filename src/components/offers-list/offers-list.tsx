@@ -1,17 +1,14 @@
 import OfferCard from '../offer-card/offer-card';
-import { getOffersByCity } from '../../utils';
 import { Offer } from '../../mocks/offers';
 
 type OfferListProps = {
-	offers: Offer[];
+	offersByCity: Record<string, Offer[]>;
 	selectedCity: string;
 	handleMouseEnter: (offerId: string) => void;
 	handleMouseLeave: () => void;
 }
 
-function OffersList({ offers, selectedCity, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
-
-	const offersByCity = getOffersByCity(offers);
+function OffersList({ offersByCity, selectedCity, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
 
 	return (
 		<div className="cities__places-container container">

@@ -3,7 +3,9 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import Header from '../components/header/header';
 import OffersList from '../components/offers-list/offers-list';
+import EmptyOffers from '../components/empty-offers/empty-offers';
 import type { Offer } from '../mocks/offers';
+import { getOffersByCity } from '../utils';
 import { CITIES } from '../const';
 
 
@@ -15,6 +17,7 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 
 	const [id, setId] = useState<null | string>(null);
 	const [selectedCity, setCity] = useState<string>(CITIES[0]);
+	const offersByCity = getOffersByCity(offers);
 
 	// eslint-disable-next-line no-console
 	console.log(id);
@@ -54,7 +57,7 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 					</section>
 				</div>
 				<div className="cities">
-					<OffersList offers={offers} selectedCity={selectedCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+					{offersByCity[selectedCity] && offersByCity[selectedCity].length > 0 ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : <EmptyOffers />}
 				</div>
 			</main>
 		</div>
