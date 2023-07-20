@@ -23,6 +23,9 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 	console.log(id);
 
 	function handleMouseEnter(offerId: string): void {
+		const currentOffer = offersByCity[selectedCity].find((offer) =>
+			offer.id === offerId,
+		);
 		setId(offerId);
 	}
 

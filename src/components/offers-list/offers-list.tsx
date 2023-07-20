@@ -1,4 +1,5 @@
 import OfferCard from '../offer-card/offer-card';
+import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import { Offer } from '../../mocks/offers';
 
 type OfferListProps = {
@@ -47,7 +48,7 @@ function OffersList({ offersByCity, selectedCity, handleMouseEnter, handleMouseL
 				</div>
 			</section>
 			<div className="cities__right-section">
-				<section className="cities__map map" />
+				<LeafletMap city={offersByCity[selectedCity][0]} offers={offersByCity[selectedCity]} selectedOfferId={offersByCity[selectedCity][1]} />
 			</div>
 		</div>
 	);

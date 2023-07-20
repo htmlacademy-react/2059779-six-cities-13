@@ -41,9 +41,20 @@ const AuthorizationStatus = {
 	Unknown: 'UNKNOWN',
 } as const;
 
+const URL_MARKER_DEFAULT = './img/pin.svg';
+const URL_MARKER_CURRENT = './img/pin-active.svg';
+
 type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
 type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
 
 export type { AuthorizationStatusValue };
 
-export { CITIES, OFFER_TYPES, OFFER_FEATURES, AppRoute, AuthorizationStatus };
+export {
+	CITIES,
+	OFFER_TYPES,
+	OFFER_FEATURES,
+	AppRoute,
+	AuthorizationStatus,
+	URL_MARKER_CURRENT,
+	URL_MARKER_DEFAULT
+};
