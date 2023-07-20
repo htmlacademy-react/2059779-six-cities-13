@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { CITIES, OFFER_TYPES, OFFER_FEATURES } from '../const';
 
 const enum OffersCount {
-	count = 5,
+	count = 50,
 }
 
 type Location = {

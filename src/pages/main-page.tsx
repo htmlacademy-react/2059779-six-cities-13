@@ -5,15 +5,18 @@ import Header from '../components/header/header';
 import OfferCard from '../components/offer-card/offer-card';
 import type { Offer } from '../mocks/offers';
 import { CITIES } from '../const';
+import { getOffersByCity } from '../utils';
 
 type MainPageProps = {
-	placesCount: number;
 	offers: Offer[];
 }
 
-function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
+function MainPage({ offers }: MainPageProps): React.JSX.Element {
 
 	const [id, setId] = useState<null | string>(null);
+	const [selectedCity, setCity] = useState<string>(CITIES[0]);
+	//Нужно где-то придумать и поставить условие, что если предложений нет, нужно выводить страницу с пустых оферов. Пока не придумал, как это сделать.
+	const offersByCity = getOffersByCity(offers);
 
 	// eslint-disable-next-line no-console
 	console.log(id);
@@ -41,8 +44,9 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								<li className="locations__item" key={city}>
 									<a
 										className={classNames(
-											'locations__item-link tabs__item', { 'tabs__item--active': city === 'Amsterdam' })}
-										href="#"
+											'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
+										href={`#${city.toLowerCase()}`}
+										onClick={() => setCity(city)}
 									>
 										<span>{city}</span>
 									</a>
@@ -55,7 +59,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 					<div className="cities__places-container container">
 						<section className="cities__places places">
 							<h2 className="visually-hidden">Places</h2>
-							<b className="places__found">{placesCount} places to stay in Amsterdam</b>
+							<b className="places__found">{offersByCity[selectedCity].length} places to stay in {selectedCity}</b>
 							<form className="places__sorting" action="#" method="get">
 								<span className="places__sorting-caption">Sort by</span>
 								{' '}
@@ -84,7 +88,7 @@ function MainPage({ placesCount, offers }: MainPageProps): React.JSX.Element {
 								</ul>
 							</form>
 							<div className="cities__places-list places__list tabs__content">
-								{offers.map((item) => <OfferCard item={item} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} key={item.id} />)}
+								{offersByCity[selectedCity].map((offer) => <OfferCard item={offer} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} key={offer.id} />)}
 							</div>
 						</section>
 						<div className="cities__right-section">

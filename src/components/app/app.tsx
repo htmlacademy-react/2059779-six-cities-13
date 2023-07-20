@@ -11,20 +11,19 @@ import OfferPage from '../../pages/offer-page';
 import Error404Page from '../../pages/error-404-page';
 
 type AppProps = {
-	placesCount: number;
 	offers: Offer[];
 	fullOffers: FullOffer[];
 	reviews: ReviewType[];
 }
 
-function App({ placesCount, offers, reviews, fullOffers }: AppProps): React.JSX.Element {
+function App({ offers, reviews, fullOffers }: AppProps): React.JSX.Element {
 	return (
 		<HelmetProvider>
 			<BrowserRouter>
 				<Routes>
 					<Route
 						path={AppRoute.Main}
-						element={<MainPage placesCount={placesCount} offers={offers} />}
+						element={<MainPage offers={offers} />}
 					/>
 					<Route
 						path={AppRoute.Favorites}
