@@ -45,7 +45,7 @@ function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter
 					</ul>
 				</form>
 				<div className="cities__places-list places__list tabs__content">
-					{offersByCity[selectedCity].map((offer) => <OfferCard item={offer} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} key={offer.id} />)}
+					{offersByCity[selectedCity].map((offer) => <OfferCard item={offer} parentCSSClass='cities' onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} key={offer.id} />)}
 				</div>
 			</section>
 			<div className="cities__right-section">

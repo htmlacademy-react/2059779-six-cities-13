@@ -6,20 +6,32 @@ import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
 	item: Offer;
-	onMouseEnter: MouseEventHandler<HTMLElement> | undefined;
-	onMouseLeave: MouseEventHandler<HTMLElement> | undefined;
+	parentCSSClass?: string | undefined;
+	onMouseEnter?: MouseEventHandler<HTMLElement> | undefined;
+	onMouseLeave?: MouseEventHandler<HTMLElement> | undefined;
 }
 
-function OfferCard({ item, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
 
 	const favoriteButtonClass = classNames('place-card__bookmark-button', {
 		'place-card__bookmark-button--active': item.isFavorite
 	}, 'button');
 
+	//Ругается на тип, не понимаю
+	const articleClass = classNames(
+		{ [`${parentCSSClass}__card`]: parentCSSClass },
+		'place-card'
+	);
+
+	const wrapperClass = classNames(
+		{ [`${parentCSSClass}__image-wrapper`]: parentCSSClass },
+		'place-card__image-wrapper'
+	);
+
 	return (
-		<article className="cities__card place-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-			<div className="cities__image-wrapper place-card__image-wrapper">
+			<div className={wrapperClass}>
 				<Link to={`offer/${item.id}`}>
 					<img
 						className="place-card__image"
