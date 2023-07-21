@@ -6,6 +6,10 @@ const enum OffersCount {
 	count = 50,
 }
 
+const enum ImagesCount {
+	count = 10,
+}
+
 type Location = {
 	latitude: number;
 	longitude: number;
@@ -74,7 +78,7 @@ function getOffer(): Offer {
 }
 
 function getOfferDetails(): OfferDetails {
-	const offerDetailedImages: string[] = Array.from({ length: OffersCount.count }, () => faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }));
+	const offerDetailedImages: string[] = Array.from({ length: ImagesCount.count }, () => faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }));
 
 	return {
 		bedrooms: faker.number.int({ min: 1, max: 4 }),

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Review from '../components/review/review';
 import ReviewForm from '../components/review-form/review-form';
+import Error404Page from './error-404-page';
 import type { FullOffer } from '../mocks/offers';
 import type { ReviewType } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
@@ -18,8 +19,14 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 
 	//Наверное я здесь принуждаю TS к плохому, и нужно обработать вариант, если find ничего не найдёт.
 	const fullOffer = fullOffers.find((item) => item.id === id) as FullOffer;
+	if (fullOffer === undefined) {
+		return <Error404Page />;
+	}
 
-	const detailedImages: string[] = fullOffer.images;
+	let detailedImages: string[] = fullOffer.images;
+	if (fullOffer.images.length > 6) {
+		detailedImages = fullOffer.images.slice(0, 6);
+	}
 
 	return (
 		<div className="page">
