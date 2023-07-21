@@ -44,6 +44,8 @@ const AuthorizationStatus = {
 const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
+const MAX_OFFER_IMAGES = 6;
+
 type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
 type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
 
@@ -56,5 +58,6 @@ export {
 	AppRoute,
 	AuthorizationStatus,
 	URL_MARKER_CURRENT,
-	URL_MARKER_DEFAULT
+	URL_MARKER_DEFAULT,
+	MAX_OFFER_IMAGES
 };

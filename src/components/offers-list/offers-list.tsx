@@ -49,7 +49,7 @@ function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter
 				</div>
 			</section>
 			<div className="cities__right-section">
-				<LeafletMap city={offersByCity[selectedCity][0]} offers={offersByCity[selectedCity]} selectedOfferId={currentOffer} />
+				<LeafletMap city={offersByCity[selectedCity][0]} offers={offersByCity[selectedCity]} selectedOfferId={currentOffer} className={'cities__map map'} />
 			</div>
 		</div>
 	);

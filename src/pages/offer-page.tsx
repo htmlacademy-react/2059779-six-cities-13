@@ -1,13 +1,17 @@
-import classNames from 'classnames';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
+import { faker } from '@faker-js/faker';
+import classNames from 'classnames';
 import Header from '../components/header/header';
-import Review from '../components/review/review';
+import ReviewsList from '../components/review/reviews-list';
 import ReviewForm from '../components/review-form/review-form';
+import LeafletMap from '../components/leaflet-map/leaflet-map';
 import Error404Page from './error-404-page';
 import type { FullOffer } from '../mocks/offers';
 import type { ReviewType } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
-import { useParams } from 'react-router-dom';
+import { MAX_OFFER_IMAGES } from '../const';
 
 type OfferPagePros = {
 	fullOffers: FullOffer[];
@@ -17,16 +21,17 @@ type OfferPagePros = {
 function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 	const { id } = useParams();
 
-	//Наверное я здесь принуждаю TS к плохому, и нужно обработать вариант, если find ничего не найдёт.
-	const fullOffer = fullOffers.find((item) => item.id === id) as FullOffer;
+	const fullOffer: FullOffer | undefined = fullOffers.find((item) => item.id === id);
 	if (fullOffer === undefined) {
 		return <Error404Page />;
 	}
 
 	let detailedImages: string[] = fullOffer.images;
 	if (fullOffer.images.length > 6) {
-		detailedImages = fullOffer.images.slice(0, 6);
+		detailedImages = fullOffer.images.slice(0, MAX_OFFER_IMAGES);
 	}
+
+	const nearbyOffers = faker.helpers.arrayElements(fullOffers, 3);
 
 	return (
 		<div className="page">
@@ -132,13 +137,13 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 									Reviews · <span className="reviews__amount">{reviews.length}</span>
 								</h2>
 								<ul className="reviews__list">
-									{reviews.map((item) => <Review review={item} key={item.id} />)}
+									{reviews.map((item) => <ReviewsList review={item} key={item.id} />)}
 								</ul>
 								<ReviewForm />
 							</section>
 						</div>
 					</div>
-					<section className="offer__map map" />
+					<LeafletMap city={nearbyOffers[0]} offers={nearbyOffers} className={'offer__map map'} />
 				</section>
 				<div className="container">
 					<section className="near-places places">
