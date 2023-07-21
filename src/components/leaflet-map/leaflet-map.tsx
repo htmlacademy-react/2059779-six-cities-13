@@ -8,7 +8,7 @@ import 'leaflet/dist/leaflet.css';
 type LeafletMapProps = {
 	city: Pick<City, 'location'>;
 	offers: Offer[];
-	selectedOffer: Offer;
+	selectedOfferId: string | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,7 +23,7 @@ const currentCustomIcon = new Icon({
 	iconAnchor: [20, 40],
 });
 
-function LeafletMap({ city, offers, selectedOffer }: LeafletMapProps): React.JSX.Element {
+function LeafletMap({ city, offers, selectedOfferId }: LeafletMapProps): React.JSX.Element {
 	const leafletMapRef = useRef(null);
 	//Ругается на тип city. Хочет поле name, хотя я же Pick использую. Не понимаю.
 	const leafletMap = useMap(leafletMapRef, city);
@@ -39,7 +39,7 @@ function LeafletMap({ city, offers, selectedOffer }: LeafletMapProps): React.JSX
 
 				marker
 					.setIcon(
-						selectedOffer !== undefined && offer.id === selectedOffer.id
+						selectedOfferId !== undefined && offer.id === selectedOfferId
 							? currentCustomIcon
 							: defaultCustomIcon
 					)
@@ -50,7 +50,7 @@ function LeafletMap({ city, offers, selectedOffer }: LeafletMapProps): React.JSX
 				leafletMap.removeLayer(markerLayer);
 			};
 		}
-	}, [leafletMap, offers, selectedOffer]);
+	}, [leafletMap, offers, selectedOfferId]);
 
 	return (
 		<section ref={leafletMapRef} className="cities__map map" />

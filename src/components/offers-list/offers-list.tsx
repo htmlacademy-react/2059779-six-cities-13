@@ -5,11 +5,12 @@ import { Offer } from '../../mocks/offers';
 type OfferListProps = {
 	offersByCity: Record<string, Offer[]>;
 	selectedCity: string;
+	currentOffer: string | null;
 	handleMouseEnter: (offerId: string) => void;
 	handleMouseLeave: () => void;
 }
 
-function OffersList({ offersByCity, selectedCity, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
+function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
 
 	return (
 		<div className="cities__places-container container">
@@ -48,7 +49,7 @@ function OffersList({ offersByCity, selectedCity, handleMouseEnter, handleMouseL
 				</div>
 			</section>
 			<div className="cities__right-section">
-				<LeafletMap city={offersByCity[selectedCity][0]} offers={offersByCity[selectedCity]} selectedOfferId={offersByCity[selectedCity][1]} />
+				<LeafletMap city={offersByCity[selectedCity][0]} offers={offersByCity[selectedCity]} selectedOfferId={currentOffer} />
 			</div>
 		</div>
 	);

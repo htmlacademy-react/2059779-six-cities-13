@@ -23,9 +23,6 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 	console.log(id);
 
 	function handleMouseEnter(offerId: string): void {
-		const currentOffer = offersByCity[selectedCity].find((offer) =>
-			offer.id === offerId,
-		);
 		setId(offerId);
 	}
 
@@ -60,7 +57,7 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 					</section>
 				</div>
 				<div className="cities">
-					{offersByCity[selectedCity] && offersByCity[selectedCity].length > 0 ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : <EmptyOffers />}
+					{offersByCity[selectedCity] && offersByCity[selectedCity].length > 0 ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} currentOffer={id} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : <EmptyOffers />}
 				</div>
 			</main>
 		</div>
