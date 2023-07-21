@@ -19,9 +19,6 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 	const [selectedCity, setCity] = useState<string>(CITIES[0]);
 	const offersByCity = getOffersByCity(offers);
 
-	// eslint-disable-next-line no-console
-	console.log(id);
-
 	function handleMouseEnter(offerId: string): void {
 		setId(offerId);
 	}

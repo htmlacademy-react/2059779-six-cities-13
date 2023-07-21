@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
 import { Map as leaflet, TileLayer } from 'leaflet';
-import type { City } from '../mocks/offers';
+import type { Offer } from '../mocks/offers';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): leaflet | null {
-	//const { location } = city;
-	//Иначе useEffect ругается на массив зависимостей.
+function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Offer): leaflet | null {
+	const { location } = city;
 	const [map, setMap] = useState<leaflet | null>(null);
 	const isRenderedRef = useRef<boolean>(false);
 
@@ -12,10 +11,10 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): leafl
 		if (mapRef.current !== null && !isRenderedRef.current) {
 			const instance = new leaflet(mapRef.current, {
 				center: {
-					lat: city.location.latitude,
-					lng: city.location.longitude,
+					lat: location.latitude,
+					lng: location.longitude,
 				},
-				zoom: city.location.zoom,
+				zoom: location.zoom,
 			});
 
 			const layer = new TileLayer(
@@ -29,7 +28,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): leafl
 			setMap(instance);
 			isRenderedRef.current = true;
 		}
-	}, [mapRef, city]);
+	}, [mapRef, location]);
 
 	return map;
 }
