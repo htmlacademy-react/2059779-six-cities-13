@@ -5,6 +5,7 @@ import RatingForm from '../rating-form/rating-form';
 function ReviewForm() {
 	//Есть сомнения, что пустая строка в первом случае валидное значение для radio-button.
 	const [comment, setComment] = useState('');
+	const isValid = comment.length >= 50 && comment.length < 300;
 
 	function handleTextChange({ target }: ChangeEvent<HTMLTextAreaElement>) {
 		setComment(target.value);
@@ -38,7 +39,7 @@ function ReviewForm() {
 				<button
 					className="reviews__submit form__submit button"
 					type="submit"
-					disabled
+					disabled={!isValid}
 				>
 					Submit
 				</button>
