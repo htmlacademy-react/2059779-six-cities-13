@@ -21,6 +21,10 @@ function ReviewForm() {
 				id="review"
 				name="review"
 				placeholder="Tell how was your stay, what you like and what can be improved"
+				required
+				title='Your review must be between 50 and 300 characters.'
+				minLength={50}
+				maxLength={300}
 				value={comment}
 				onChange={handleTextChange}
 			/>

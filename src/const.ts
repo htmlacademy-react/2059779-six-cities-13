@@ -45,6 +45,7 @@ const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const MAX_OFFER_IMAGES = 6;
+const MAX_REVIEW_COUNT = 10;
 
 type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
 type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
@@ -59,5 +60,6 @@ export {
 	AuthorizationStatus,
 	URL_MARKER_CURRENT,
 	URL_MARKER_DEFAULT,
-	MAX_OFFER_IMAGES
+	MAX_OFFER_IMAGES,
+	MAX_REVIEW_COUNT
 };
