@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { faker } from '@faker-js/faker';
 import classNames from 'classnames';
 import Header from '../components/header/header';
-import Review from '../components/review/reviews';
+import Review from '../components/review/review';
 import ReviewForm from '../components/review-form/review-form';
 import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
