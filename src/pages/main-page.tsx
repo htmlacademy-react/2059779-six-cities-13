@@ -6,8 +6,7 @@ import OffersList from '../components/offers-list/offers-list';
 import EmptyOffers from '../components/empty-offers/empty-offers';
 import type { Offer } from '../mocks/offers';
 import { getOffersByCity } from '../utils';
-import { CITIES } from '../const';
-
+import { CITIES, AUTH_STATUS } from '../const';
 
 type MainPageProps = {
 	offers: Offer[];
@@ -32,7 +31,7 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 			<Helmet>
 				<title>6 cities</title>
 			</Helmet>
-			<Header />
+			<Header authStatus={AUTH_STATUS} />
 			<main className="page__main page__main--index">
 				<h1 className="visually-hidden">Cities</h1>
 				<div className="tabs">

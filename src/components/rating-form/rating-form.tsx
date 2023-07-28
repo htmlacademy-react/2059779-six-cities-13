@@ -15,7 +15,7 @@ function RatingOption({ value, label, isChecked }: RatingOptionProps) {
 				defaultValue={value}
 				id={`${value}-stars`}
 				type="radio"
-				checked={isChecked}
+				defaultChecked={isChecked}
 			/>
 			<label
 				htmlFor={`${value}-stars`}
