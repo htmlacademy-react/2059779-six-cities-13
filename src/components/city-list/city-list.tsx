@@ -7,6 +7,8 @@ type CityListProps = {
 }
 
 function CityList({selectedCity, onClick}: CityListProps): React.JSX.Element {
+
+	//Ошибка TS. Не понимаю.
 	return (
 		CITIES.map((city) => (
 			<li className="locations__item" key={city}>
