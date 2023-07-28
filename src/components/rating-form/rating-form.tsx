@@ -6,7 +6,7 @@ type RatingOptionProps = {
 	isChecked?: boolean;
 }
 
-function RatingOption({ value, label, isChecked }: RatingOptionProps) {
+function RatingOption({ value, label, isChecked }: RatingOptionProps): React.JSX.Element {
 	return (
 		<>
 			<input
@@ -31,7 +31,7 @@ function RatingOption({ value, label, isChecked }: RatingOptionProps) {
 	);
 }
 
-function RatingForm() {
+function RatingForm(): React.JSX.Element {
 	//Пока не понятно, зачем здесь стейт.
 	//const [selectedValue, setSelectedValue] = useState(0);
 	// function handleRatingChange(evt: ChangeEvent<HTMLInputElement>) {

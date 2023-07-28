@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import RatingForm from '../rating-form/rating-form';
 
-function ReviewForm() {
+function ReviewForm(): React.JSX.Element {
 	const [comment, setComment] = useState('');
 	const isValid = comment.length >= 50 && comment.length < 300;
 

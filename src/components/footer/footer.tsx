@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function Footer() {
+function Footer(): React.JSX.Element {
 	return (
 		<footer className="footer container">
 			<Link className="footer__logo-link" to="/">

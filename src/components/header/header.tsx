@@ -4,7 +4,7 @@ type HeaderProps = {
 	authStatus: boolean;
 }
 
-function UserMenu({ authStatus }: HeaderProps) {
+function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 	if (authStatus) {
 		return (
 			<>
