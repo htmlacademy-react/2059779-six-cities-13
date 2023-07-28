@@ -6,7 +6,7 @@ import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
 	item: Offer;
-	parentCSSClass?: string | undefined;
+	parentCSSClass?: string;
 	onMouseEnter?: MouseEventHandler<HTMLElement> | undefined;
 	onMouseLeave?: MouseEventHandler<HTMLElement> | undefined;
 }
