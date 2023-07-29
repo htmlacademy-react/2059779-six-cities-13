@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
+import { AUTH_STATUS } from '../const';
 
 function LoginPage(): React.JSX.Element {
 	return (
@@ -7,7 +8,7 @@ function LoginPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Login</title>
 			</Helmet>
-			<Header />
+			<Header authStatus={AUTH_STATUS} />
 			<main className="page__main page__main--login">
 				<div className="page__login-container container">
 					<section className="login">

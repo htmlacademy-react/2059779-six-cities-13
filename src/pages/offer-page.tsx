@@ -12,7 +12,7 @@ import Error404Page from './error-404-page';
 import type { FullOffer } from '../mocks/offers';
 import type { ReviewType } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
-import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT } from '../const';
+import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, AUTH_STATUS } from '../const';
 
 type OfferPagePros = {
 	fullOffers: FullOffer[];
@@ -39,7 +39,7 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Offer</title>
 			</Helmet>
-			<Header />
+			<Header authStatus={AUTH_STATUS} />
 			<main className="page__main page__main--offer">
 				<section className="offer">
 					<div className="offer__gallery-container container">
@@ -140,7 +140,7 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 								<ul className="reviews__list">
 									{reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 								</ul>
-								<ReviewForm />
+								{AUTH_STATUS && <ReviewForm />}
 							</section>
 						</div>
 					</div>

@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import RatingForm from '../rating-form/rating-form';
 
-function ReviewForm() {
-	//Есть сомнения, что пустая строка в первом случае валидное значение для radio-button.
+function ReviewForm(): React.JSX.Element {
 	const [comment, setComment] = useState('');
 	const isValid = comment.length >= 50 && comment.length < 300;
 

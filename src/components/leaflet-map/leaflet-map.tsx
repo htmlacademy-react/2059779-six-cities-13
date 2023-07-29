@@ -26,7 +26,6 @@ const currentCustomIcon = new Icon({
 
 function LeafletMap({ city, offers, selectedOfferId, className }: LeafletMapProps): React.JSX.Element {
 	const leafletMapRef = useRef(null);
-	//Ругается на тип city. Хочет поле name, хотя я же Pick использую. Не понимаю.
 	const leafletMap = useMap(leafletMapRef, city);
 
 	useEffect(() => {

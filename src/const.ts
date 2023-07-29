@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 const CITIES = [
 	'Paris',
 	'Cologne',
@@ -57,6 +59,8 @@ type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKe
 
 export type { AuthorizationStatusValue };
 
+const AUTH_STATUS = faker.datatype.boolean();
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -67,5 +71,6 @@ export {
 	URL_MARKER_DEFAULT,
 	MAX_OFFER_IMAGES,
 	MAX_REVIEW_COUNT,
-	REVIEW_DATE_FORMATE
+	REVIEW_DATE_FORMATE,
+	AUTH_STATUS
 };
