@@ -4,21 +4,15 @@ import Header from '../components/header/header';
 import OffersList from '../components/offers-list/offers-list';
 import EmptyOffers from '../components/empty-offers/empty-offers';
 import CityList from '../components/city-list/city-list';
-import type { Offer } from '../mocks/offers';
 import { getOffersByCity } from '../utils';
-import { CITIES, AUTH_STATUS } from '../const';
+import { AUTH_STATUS } from '../const';
 import { useSelector } from 'react-redux';
 
-type MainPageProps = {
-	offers: Offer[];
-}
-
-function MainPage({ offers }: MainPageProps): React.JSX.Element {
-
-	const [id, setId] = useState<null | string>(null);
-	//const [selectedCity, setCity] = useState<string>(CITIES[0]);
+function MainPage(): React.JSX.Element {
+	const offers = useSelector((state) => state.offers);
 	const offersByCity = getOffersByCity(offers);
 	const selectedCity = useSelector((state) => state.selectedCity);
+	const [id, setId] = useState<null | string>(null);
 
 	function handleMouseEnter(offerId: string): void {
 		setId(offerId);
