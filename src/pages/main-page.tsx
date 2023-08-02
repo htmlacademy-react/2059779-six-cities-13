@@ -18,7 +18,7 @@ function MainPage({ offers }: MainPageProps): React.JSX.Element {
 	const [id, setId] = useState<null | string>(null);
 	//const [selectedCity, setCity] = useState<string>(CITIES[0]);
 	const offersByCity = getOffersByCity(offers);
-	const selectedCity = useSelector((state) => state.selectCity);
+	const selectedCity = useSelector((state) => state.selectedCity);
 
 	function handleMouseEnter(offerId: string): void {
 		setId(offerId);

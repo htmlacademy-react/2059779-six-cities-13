@@ -16,7 +16,7 @@ function CityList(): React.JSX.Element {
 						'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
 					href={`#${city.toLowerCase()}`}
 					onClick={() => {
-						dispatch(selectCity);
+						dispatch(selectCity(city));
 					}}
 				>
 					<span>{city}</span>
