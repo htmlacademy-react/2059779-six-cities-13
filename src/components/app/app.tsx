@@ -1,7 +1,7 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import type { Offer, FullOffer } from '../../mocks/offers';
+import type { FullOffer } from '../../mocks/offers';
 import type { ReviewType } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
@@ -11,19 +11,18 @@ import OfferPage from '../../pages/offer-page';
 import Error404Page from '../../pages/error-404-page';
 
 type AppProps = {
-	offers: Offer[];
 	fullOffers: FullOffer[];
 	reviews: ReviewType[];
 }
 
-function App({ offers, reviews, fullOffers }: AppProps): React.JSX.Element {
+function App({ reviews, fullOffers }: AppProps): React.JSX.Element {
 	return (
 		<HelmetProvider>
 			<BrowserRouter>
 				<Routes>
 					<Route
 						path={AppRoute.Main}
-						element={<MainPage offers={offers} />}
+						element={<MainPage />}
 					/>
 					<Route
 						path={AppRoute.Favorites}
@@ -31,7 +30,7 @@ function App({ offers, reviews, fullOffers }: AppProps): React.JSX.Element {
 							<PrivateRoute
 								authorizationStatus={AuthorizationStatus.NoAuth}
 							>
-								<FavoritesPage offers={offers} />
+								<FavoritesPage />
 							</PrivateRoute>
 						}
 					/>

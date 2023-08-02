@@ -5,12 +5,10 @@ import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-
 import { Offer } from '../mocks/offers';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
+import { useSelector } from 'react-redux';
 
-type FavoritesProps = {
-	offers: Offer[];
-}
-
-function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
+function FavoritesPage(): React.JSX.Element {
+	const offers = useSelector((state) => state.offers);
 
 	const offersByCity: Record<string, Offer[]> = getOffersByCity(offers);
 
