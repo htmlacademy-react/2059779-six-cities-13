@@ -8,6 +8,8 @@ import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
 import { useSelector } from 'react-redux';
 
+
+
 function MainPage(): React.JSX.Element {
 	const offers = useSelector((state) => state.offers);
 	const offersByCity = getOffersByCity(offers);
