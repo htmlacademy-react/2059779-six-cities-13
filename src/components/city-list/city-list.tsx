@@ -4,7 +4,7 @@ import { selectCity } from '../../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function CityList(): React.JSX.Element {
-	const selectedCity = useSelector((state) => state.selectCity);
+	const selectedCity = useSelector((state) => state.selectedCity);
 	const dispatch = useDispatch();
 
 
@@ -16,7 +16,7 @@ function CityList(): React.JSX.Element {
 						'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
 					href={`#${city.toLowerCase()}`}
 					onClick={() => {
-						dispatch(selectCity(city));
+						dispatch(selectCity(city)); console.log(city, selectedCity);
 					}}
 				>
 					<span>{city}</span>
