@@ -1,14 +1,13 @@
 import classNames from 'classnames';
 import { CITIES } from '../../const';
+import { selectCity } from '../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-type CityListProps = {
-	selectedCity: string;
-	onClick: (city: string) => void;
-}
+function CityList(): React.JSX.Element {
+	const selectedCity = useSelector((state) => state.selectCity);
+	const dispatch = useDispatch();
 
-function CityList({selectedCity, onClick}: CityListProps): React.JSX.Element {
 
-	//Ошибка TS. Не понимаю.
 	return (
 		CITIES.map((city) => (
 			<li className="locations__item" key={city}>
@@ -16,7 +15,9 @@ function CityList({selectedCity, onClick}: CityListProps): React.JSX.Element {
 					className={classNames(
 						'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
 					href={`#${city.toLowerCase()}`}
-					onClick={() => onClick(city)}
+					onClick={() => {
+						dispatch(selectCity);
+					}}
 				>
 					<span>{city}</span>
 				</a>
