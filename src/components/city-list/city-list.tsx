@@ -1,28 +1,30 @@
 import classNames from 'classnames';
 import { CITIES } from '../../const';
 import { selectCity } from '../../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 function CityList(): React.JSX.Element {
-	const selectedCity = useSelector((state) => state.selectedCity);
-	const dispatch = useDispatch();
+	const selectedCity = useAppSelector((state) => state.selectedCity);
+	const dispatch = useAppDispatch();
 
 
 	return (
-		CITIES.map((city) => (
-			<li className="locations__item" key={city}>
-				<a
-					className={classNames(
-						'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
-					href={`#${city.toLowerCase()}`}
-					onClick={() => {
-						dispatch(selectCity(city));
-					}}
-				>
-					<span>{city}</span>
-				</a>
-			</li>
-		))
+		<ul className="locations__list tabs__list">
+			{CITIES.map((city) => (
+				<li className="locations__item" key={city}>
+					<a
+						className={classNames(
+							'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
+						href={`#${city.toLowerCase()}`}
+						onClick={() => {
+							dispatch(selectCity(city));
+						}}
+					>
+						<span>{city}</span>
+					</a>
+				</li>
+			))}
+		</ul>
 	);
 }
 

@@ -6,14 +6,12 @@ import EmptyOffers from '../components/empty-offers/empty-offers';
 import CityList from '../components/city-list/city-list';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
-import { useSelector } from 'react-redux';
-
-
+import { useAppSelector } from '../hooks';
 
 function MainPage(): React.JSX.Element {
-	const offers = useSelector((state) => state.offers);
+	const offers = useAppSelector((state) => state.offers);
 	const offersByCity = getOffersByCity(offers);
-	const selectedCity = useSelector((state) => state.selectedCity);
+	const selectedCity = useAppSelector((state) => state.selectedCity);
 	const [id, setId] = useState<null | string>(null);
 
 	function handleMouseEnter(offerId: string): void {
@@ -34,9 +32,7 @@ function MainPage(): React.JSX.Element {
 				<h1 className="visually-hidden">Cities</h1>
 				<div className="tabs">
 					<section className="locations container">
-						<ul className="locations__list tabs__list">
-							<CityList/>
-						</ul>
+						<CityList/>
 					</section>
 				</div>
 				<div className="cities">
