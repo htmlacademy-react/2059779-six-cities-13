@@ -1,10 +1,13 @@
 import { ReviewType } from '../../mocks/reviews';
+import { REVIEW_DATE_FORMATE } from '../../const';
 
 type ReviewPropsType = {
 	review: ReviewType;
 }
 
-function ReviewsList({ review }: ReviewPropsType): React.JSX.Element {
+function Review({ review }: ReviewPropsType): React.JSX.Element {
+	const date = new Date(review.date);
+	const formattedDate = (new Intl.DateTimeFormat('en-US', REVIEW_DATE_FORMATE).format(date));
 	return (
 		<li className="reviews__item">
 			<div className="reviews__user user">
@@ -31,11 +34,11 @@ function ReviewsList({ review }: ReviewPropsType): React.JSX.Element {
 					{review.comment}.
 				</p>
 				<time className="reviews__time" dateTime="2019-04-24">
-					April 2019
+					{formattedDate}
 				</time>
 			</div>
 		</li>
 	);
 }
 
-export default ReviewsList;
+export default Review;

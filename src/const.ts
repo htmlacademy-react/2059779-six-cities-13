@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 const CITIES = [
 	'Paris',
 	'Cologne',
@@ -45,11 +47,19 @@ const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const MAX_OFFER_IMAGES = 6;
+const MAX_REVIEW_COUNT = 10;
+
+const REVIEW_DATE_FORMATE = {
+	year: <'numeric' | '2-digit' | undefined>'numeric',
+	month: <'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined>'long'
+};
 
 type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
 type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
 
 export type { AuthorizationStatusValue };
+
+const AUTH_STATUS = faker.datatype.boolean();
 
 export {
 	CITIES,
@@ -59,5 +69,8 @@ export {
 	AuthorizationStatus,
 	URL_MARKER_CURRENT,
 	URL_MARKER_DEFAULT,
-	MAX_OFFER_IMAGES
+	MAX_OFFER_IMAGES,
+	MAX_REVIEW_COUNT,
+	REVIEW_DATE_FORMATE,
+	AUTH_STATUS
 };

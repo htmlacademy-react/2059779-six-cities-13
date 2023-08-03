@@ -6,9 +6,9 @@ import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
 	item: Offer;
-	parentCSSClass?: string | undefined;
-	onMouseEnter?: MouseEventHandler<HTMLElement> | undefined;
-	onMouseLeave?: MouseEventHandler<HTMLElement> | undefined;
+	parentCSSClass?: string;
+	onMouseEnter?: MouseEventHandler<HTMLElement>;
+	onMouseLeave?: MouseEventHandler<HTMLElement>;
 }
 
 function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
@@ -18,13 +18,11 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 	}, 'button');
 
 	//Ругается на тип, не понимаю
-	const articleClass = classNames(
-		{ [`${parentCSSClass}__card`]: parentCSSClass },
+	const articleClass = classNames(parentCSSClass && `${parentCSSClass}__card`,
 		'place-card'
 	);
 
-	const wrapperClass = classNames(
-		{ [`${parentCSSClass}__image-wrapper`]: parentCSSClass },
+	const wrapperClass = classNames(parentCSSClass && `${parentCSSClass}__image-wrapper`,
 		'place-card__image-wrapper'
 	);
 

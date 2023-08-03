@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { faker } from '@faker-js/faker';
 import classNames from 'classnames';
 import Header from '../components/header/header';
-import ReviewsList from '../components/review/reviews-list';
+import Review from '../components/review/review';
 import ReviewForm from '../components/review-form/review-form';
 import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
@@ -12,7 +12,7 @@ import Error404Page from './error-404-page';
 import type { FullOffer } from '../mocks/offers';
 import type { ReviewType } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
-import { MAX_OFFER_IMAGES } from '../const';
+import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, AUTH_STATUS } from '../const';
 
 type OfferPagePros = {
 	fullOffers: FullOffer[];
@@ -39,7 +39,7 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Offer</title>
 			</Helmet>
-			<Header />
+			<Header authStatus={AUTH_STATUS} />
 			<main className="page__main page__main--offer">
 				<section className="offer">
 					<div className="offer__gallery-container container">
@@ -138,9 +138,9 @@ function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 									Reviews · <span className="reviews__amount">{reviews.length}</span>
 								</h2>
 								<ul className="reviews__list">
-									{reviews.map((item) => <ReviewsList review={item} key={item.id} />)}
+									{reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 								</ul>
-								<ReviewForm />
+								{AUTH_STATUS && <ReviewForm />}
 							</section>
 						</div>
 					</div>

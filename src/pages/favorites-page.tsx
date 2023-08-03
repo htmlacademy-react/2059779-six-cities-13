@@ -4,12 +4,11 @@ import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
 import { Offer } from '../mocks/offers';
 import { getOffersByCity } from '../utils';
+import { AUTH_STATUS } from '../const';
+import { useAppSelector } from '../hooks';
 
-type FavoritesProps = {
-	offers: Offer[];
-}
-
-function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
+function FavoritesPage(): React.JSX.Element {
+	const offers = useAppSelector((state) => state.offers);
 
 	const offersByCity: Record<string, Offer[]> = getOffersByCity(offers);
 
@@ -18,7 +17,7 @@ function FavoritesPage({ offers }: FavoritesProps): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Favorites</title>
 			</Helmet>
-			<Header />
+			<Header authStatus={AUTH_STATUS} />
 			<main className="page__main page__main--favorites">
 				<div className="page__favorites-container container">
 					<section className="favorites">

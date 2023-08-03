@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import RatingForm from '../rating-form/rating-form';
 
-function ReviewForm() {
-	//Есть сомнения, что пустая строка в первом случае валидное значение для radio-button.
+function ReviewForm(): React.JSX.Element {
 	const [comment, setComment] = useState('');
+	const isValid = comment.length >= 50 && comment.length < 300;
 
 	function handleTextChange({ target }: ChangeEvent<HTMLTextAreaElement>) {
 		setComment(target.value);
@@ -21,6 +21,10 @@ function ReviewForm() {
 				id="review"
 				name="review"
 				placeholder="Tell how was your stay, what you like and what can be improved"
+				required
+				title='Your review must be between 50 and 300 characters.'
+				minLength={50}
+				maxLength={300}
 				value={comment}
 				onChange={handleTextChange}
 			/>
@@ -34,7 +38,7 @@ function ReviewForm() {
 				<button
 					className="reviews__submit form__submit button"
 					type="submit"
-					disabled
+					disabled={!isValid}
 				>
 					Submit
 				</button>
