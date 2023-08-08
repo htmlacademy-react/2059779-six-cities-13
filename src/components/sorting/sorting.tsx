@@ -45,32 +45,15 @@ function Sorting({ currentSorting, onChange }: SortingBoxPros): React.JSX.Elemen
 				</svg>
 			</span>
 			<ul className="places__options places__options--custom places__options--opened">
-				{Object.entries(SortingMap)[Symbol].map(([type, label])) => (
+				{Object.entries(SortingMap).map(([type, label])) => (
 				<li
 					key={type}
-					className="places__option" tabIndex={0}
+					className="places__option places__option--active" tabIndex={0}
 					onClick={() => handleSortingItemClick(type)}
 				>
 					{label}
 				</li>
 				)}
-
-
-				<li
-					className="places__option places__option--active"
-					tabIndex={0}
-				>
-					Popular
-				</li>
-				<li className="places__option" tabIndex={0}>
-					Price: low to high
-				</li>
-				<li className="places__option" tabIndex={0}>
-					Price: high to low
-				</li>
-				<li className="places__option" tabIndex={0}>
-					Top rated first
-				</li>
 			</ul>
 		</form>
 	);
