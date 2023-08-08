@@ -1,5 +1,5 @@
 import OfferCard from '../offer-card/offer-card';
-import SortingBox from '../sorting-box/sorting-box';
+import Sorting from '../sorting/sorting';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import { Offer } from '../../mocks/offers';
 
@@ -18,7 +18,7 @@ function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter
 			<section className="cities__places places">
 				<h2 className="visually-hidden">Places</h2>
 				<b className="places__found">{offersByCity[selectedCity].length} places to stay in {selectedCity}</b>
-				<SortingBox />
+				<Sorting />
 				<div className="cities__places-list places__list tabs__content">
 					{offersByCity[selectedCity].map((offer) => <OfferCard item={offer} parentCSSClass='cities' onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} key={offer.id} />)}
 				</div>

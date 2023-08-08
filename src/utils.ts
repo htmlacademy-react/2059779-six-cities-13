@@ -21,4 +21,23 @@ function getOffersByCity(offers: Offer[]) {
 	return offersByCity;
 }
 
-export { capitalizeFirstLetter, getOffersByCity };
+function sortByRating(a: Offer, b: Offer) {
+	return b.rating - a.rating;
+}
+
+function sortPriceLowToHigh(a: Offer, b: Offer) {
+	return a.price - b.price;
+}
+
+function sortPriceHighToLow(a: Offer, b: Offer) {
+	return b.price - a.price;
+}
+
+const sorting = {
+	Popular: (cityOffers: Offer[]) => cityOffers.slice(),
+	HighToLow: (cityOffers: Offer[]) => cityOffers.slice().sort(sortPriceHighToLow),
+	LowToHigh: (cityOffers: Offer[]) => cityOffers.slice().sort(sortPriceLowToHigh),
+	TopRated: (cityOffers: Offer[]) => cityOffers.slice().sort(sortByRating)
+};
+
+export { capitalizeFirstLetter, getOffersByCity, sorting };
