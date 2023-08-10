@@ -61,6 +61,13 @@ export type { AuthorizationStatusValue };
 
 const AUTH_STATUS = faker.datatype.boolean();
 
+const SortingMap = {
+	Popular: 'Popular',
+	LowToHigh: 'Price: low to high',
+	HighToLow: 'Price: high to low',
+	TopRated: 'Top rated first',
+} as const;
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -72,5 +79,6 @@ export {
 	MAX_OFFER_IMAGES,
 	MAX_REVIEW_COUNT,
 	REVIEW_DATE_FORMATE,
-	AUTH_STATUS
+	AUTH_STATUS,
+	SortingMap
 };

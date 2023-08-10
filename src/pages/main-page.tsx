@@ -11,7 +11,8 @@ import { useAppSelector } from '../hooks';
 function MainPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.offers);
 	const offersByCity = getOffersByCity(offers);
-	const selectedCity = useAppSelector((state) => state.selectedCity);
+	//Кастую тип, чтобы ниже не ругалось на undefined, но наверное это всё неправильно.
+	const selectedCity = useAppSelector((state) => state.selectedCity) as string;
 	const [id, setId] = useState<null | string>(null);
 
 	function handleMouseEnter(offerId: string): void {
