@@ -37,6 +37,15 @@ const AppRoute = {
 	Offer: '/offer',
 } as const;
 
+const APIRoute = {
+	Offers: '/offers',
+	NearByOffers: '/nearby',
+	Favorites: '/favorite',
+	Reviews: '/comments',
+	Login: '/login',
+	Logout: '/logout'
+} as const;
+
 const AuthorizationStatus = {
 	Auth: 'AUTH',
 	NoAuth: 'NO_AUTH',
@@ -73,6 +82,7 @@ export {
 	OFFER_TYPES,
 	OFFER_FEATURES,
 	AppRoute,
+	APIRoute,
 	AuthorizationStatus,
 	URL_MARKER_CURRENT,
 	URL_MARKER_DEFAULT,
