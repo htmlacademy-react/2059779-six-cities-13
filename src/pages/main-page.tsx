@@ -4,6 +4,7 @@ import Header from '../components/header/header';
 import OffersList from '../components/offers-list/offers-list';
 import EmptyOffers from '../components/empty-offers/empty-offers';
 import CityList from '../components/city-list/city-list';
+import Spinner from '../components/spinner/spinner';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
 import { useAppSelector } from '../hooks';
@@ -13,6 +14,7 @@ function MainPage(): React.JSX.Element {
 	const offersByCity = getOffersByCity(offers);
 	//Кастую тип, чтобы ниже не ругалось на undefined, но наверное это всё неправильно.
 	const selectedCity = useAppSelector((state) => state.selectedCity) as string;
+	const offersFetchingStatus = useAppSelector((state) => state.offersFetchingStatus);
 	const [id, setId] = useState<null | string>(null);
 
 	function handleMouseEnter(offerId: string): void {
@@ -37,6 +39,7 @@ function MainPage(): React.JSX.Element {
 					</section>
 				</div>
 				<div className="cities">
+					{(offersFetchingStatus === 'Pending') &&	<Spinner />}
 					{offersByCity[selectedCity] && offersByCity[selectedCity].length > 0 ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} currentOffer={id} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : <EmptyOffers />}
 				</div>
 			</main>

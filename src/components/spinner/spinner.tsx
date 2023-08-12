@@ -1,4 +1,4 @@
-import styles from 'style.module.css';
+import styles from './style.module.css';
 
 
 function Spinner(): React.JSX.Element {
