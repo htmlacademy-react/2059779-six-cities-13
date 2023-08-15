@@ -16,6 +16,8 @@ function MainPage(): React.JSX.Element {
 	const selectedCity = useAppSelector((state) => state.selectedCity) as string;
 	const offersFetchingStatus = useAppSelector((state) => state.offersFetchingStatus);
 	const [id, setId] = useState<null | string>(null);
+	const isLoading = offersFetchingStatus === 'Pending';
+	const hasOffers = offersByCity[selectedCity] && offersByCity[selectedCity].length > 0;
 
 	function handleMouseEnter(offerId: string): void {
 		setId(offerId);
@@ -39,8 +41,8 @@ function MainPage(): React.JSX.Element {
 					</section>
 				</div>
 				<div className="cities">
-					{(offersFetchingStatus === 'Pending') &&	<Spinner />}
-					{offersByCity[selectedCity] && offersByCity[selectedCity].length > 0 ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} currentOffer={id} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : <EmptyOffers />}
+					{isLoading && <Spinner />}
+					{hasOffers ? <OffersList offersByCity={offersByCity} selectedCity={selectedCity} currentOffer={id} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} /> : (<EmptyOffers /> && !isLoading)}
 				</div>
 			</main>
 		</div>

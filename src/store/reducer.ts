@@ -12,7 +12,7 @@ type InitialState = {
 
 const initialState: InitialState = {
 	selectedCity: CITIES[0],
-	offers: offers,
+	offers: [],
 	offersFetchingStatus: 'Idle',
 };
 
