@@ -1,8 +1,8 @@
-import { ReviewType } from '../../mocks/reviews';
+import { TReview } from '../../mocks/reviews';
 import { REVIEW_DATE_FORMATE } from '../../const';
 
 type ReviewPropsType = {
-	review: ReviewType;
+	review: TReview;
 }
 
 function Review({ review }: ReviewPropsType): React.JSX.Element {

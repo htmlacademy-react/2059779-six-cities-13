@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Offer } from '../../mocks/offers';
+import { TOffer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
-	item: Offer;
+	item: TOffer;
 	parentCSSClass?: string;
 	onMouseEnter?: MouseEventHandler<HTMLElement>;
 	onMouseLeave?: MouseEventHandler<HTMLElement>;

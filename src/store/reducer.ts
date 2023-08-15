@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCity, getOffers, loadOffers } from './actions';
+import { selectCity, loadOffers } from './actions';
 import { fetchOfferAction } from './api-actions';
 import { CITIES, RequestStatus } from '../const';
-import { offers, Offer } from '../mocks/offers';
+import { TOffer } from '../mocks/offers';
 
 type InitialState = {
 	selectedCity: string | undefined;
-	offers: Offer[];
+	offers: TOffer[];
 	offersFetchingStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
@@ -20,9 +20,6 @@ const reducer = createReducer(initialState, (builder) => {
 	builder
 		.addCase(selectCity, (state, action) => {
 			state.selectedCity = action.payload;
-		})
-		.addCase(getOffers, (state) => {
-			state.offers = offers;
 		}).
 		addCase(loadOffers, (state, action) => {
 			state.offers = action.payload;

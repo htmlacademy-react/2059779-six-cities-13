@@ -10,32 +10,32 @@ const enum ImagesCount {
 	count = 10,
 }
 
-type Location = {
+type TLocation = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
 }
 
-export type City = {
+export type TCity = {
 	name: string;
-	location: Location;
+	location: TLocation;
 }
 
-export interface Offer {
+export type TOffer = {
 	id: string;
 	title: string;
 	type: string;
 	price: number;
 	previewImage: string;
-	city: City;
-	location: Location;
+	city: TCity;
+	location: TLocation;
 	isFavorite?: boolean;
 	isPremium?: boolean;
 	rating: number;
 }
 
 //Нет ли здесь некосистентности в связи с тем, что выше у меня интерфейс, а здесь тип?
-type OfferDetails = {
+type TOfferDetails = {
 	bedrooms: number;
 	description: string;
 	goods: string[];
@@ -49,16 +49,16 @@ type OfferDetails = {
 }
 
 //По идее нужно выкинуть previewImage.
-export type FullOffer = Offer & OfferDetails;
+export type TFullOffer = TOffer & TOfferDetails;
 
-function getOffer(): Offer {
-	const location: Location = {
+function getOffer(): TOffer {
+	const location: TLocation = {
 		latitude: faker.location.latitude({ precision: 17 }),
 		longitude: faker.location.longitude({ precision: 17 }),
 		zoom: faker.number.int({ min: 1, max: 16 })
 	};
 
-	const city: City = {
+	const city: TCity = {
 		name: faker.helpers.arrayElement((CITIES)),
 		location: location,
 	};
@@ -77,7 +77,7 @@ function getOffer(): Offer {
 	};
 }
 
-function getOfferDetails(): OfferDetails {
+function getOfferDetails(): TOfferDetails {
 	const offerDetailedImages: string[] = Array.from({ length: ImagesCount.count }, () => faker.image.urlLoremFlickr({ width: 260, height: 200, category: 'apartment' }));
 
 	return {
@@ -94,8 +94,8 @@ function getOfferDetails(): OfferDetails {
 	};
 }
 
-const offers: Offer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
+const offers: TOffer[] = faker.helpers.multiple(getOffer, { count: OffersCount.count });
 
-const fullOffers: FullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
+const fullOffers: TFullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
 
 export { offers, fullOffers };

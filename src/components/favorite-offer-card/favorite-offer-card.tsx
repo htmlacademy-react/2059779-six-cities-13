@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../mocks/offers';
+import { TOffer } from '../../mocks/offers';
 import { capitalizeFirstLetter } from '../../utils';
 
 type FavoriteOfferCardPropType = {
-	item: Offer;
+	item: TOffer;
 }
 
 function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Element {

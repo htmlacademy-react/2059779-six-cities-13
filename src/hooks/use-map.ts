@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
 import { Map as leaflet, TileLayer } from 'leaflet';
-import type { Offer } from '../mocks/offers';
+import type { TOffer } from '../mocks/offers';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Offer): leaflet | null {
+function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: TOffer): leaflet | null {
 	const { location } = city;
 	const [map, setMap] = useState<leaflet | null>(null);
 	const isRenderedRef = useRef<boolean>(false);

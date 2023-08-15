@@ -63,10 +63,10 @@ const REVIEW_DATE_FORMATE = {
 	month: <'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined>'long'
 };
 
-type AuthorizationStatusKey = keyof typeof AuthorizationStatus;
-type AuthorizationStatusValue = typeof AuthorizationStatus[AuthorizationStatusKey]
+type TAuthorizationStatusKey = keyof typeof AuthorizationStatus;
+type TAuthorizationStatusValue = typeof AuthorizationStatus[TAuthorizationStatusKey]
 
-export type { AuthorizationStatusValue };
+export type { TAuthorizationStatusValue };
 
 const AUTH_STATUS = faker.datatype.boolean();
 

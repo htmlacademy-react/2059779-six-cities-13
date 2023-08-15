@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
-import { Offer } from '../mocks/offers';
+import { TOffer } from '../mocks/offers';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
 import { useAppSelector } from '../hooks';
@@ -10,7 +10,7 @@ import { useAppSelector } from '../hooks';
 function FavoritesPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.offers);
 
-	const offersByCity: Record<string, Offer[]> = getOffersByCity(offers);
+	const offersByCity: Record<string, TOffer[]> = getOffersByCity(offers);
 
 	return (
 		<div className="page">

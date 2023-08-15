@@ -9,20 +9,20 @@ import ReviewForm from '../components/review-form/review-form';
 import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
 import Error404Page from './error-404-page';
-import type { FullOffer } from '../mocks/offers';
-import type { ReviewType } from '../mocks/reviews';
+import type { TFullOffer } from '../mocks/offers';
+import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
 import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, AUTH_STATUS } from '../const';
 
 type OfferPagePros = {
-	fullOffers: FullOffer[];
-	reviews: ReviewType[];
+	fullOffers: TFullOffer[];
+	reviews: TReview[];
 }
 
 function OfferPage({ fullOffers, reviews }: OfferPagePros): React.JSX.Element {
 	const { id } = useParams();
 
-	const fullOffer: FullOffer | undefined = fullOffers.find((item) => item.id === id);
+	const fullOffer: TFullOffer | undefined = fullOffers.find((item) => item.id === id);
 	if (fullOffer === undefined) {
 		return <Error404Page />;
 	}
