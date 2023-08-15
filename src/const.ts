@@ -77,6 +77,22 @@ const SortingMap = {
 	TopRated: 'Top rated first',
 } as const;
 
+const RequestStatus = {
+	Idle: 'idle',
+	Pending: 'pending',
+	Success: 'succeeded',
+	Failed: 'failed'
+} as const;
+
+const enum ActionName {
+	Offer = 'OFFER',
+	Offers = 'OFFERS',
+	NearByOffers = 'NEAR_OFFERS',
+	Favorites = 'Favorites',
+	Reviews = 'REVIEWS',
+	User = 'USER'
+}
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -90,5 +106,7 @@ export {
 	MAX_REVIEW_COUNT,
 	REVIEW_DATE_FORMATE,
 	AUTH_STATUS,
-	SortingMap
+	SortingMap,
+	RequestStatus,
+	ActionName
 };

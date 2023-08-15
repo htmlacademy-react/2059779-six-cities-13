@@ -1,19 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { selectCity, getOffers, loadOffers } from './actions';
 import { fetchOfferAction } from './api-actions';
-import { CITIES } from '../const';
+import { CITIES, RequestStatus } from '../const';
 import { offers, Offer } from '../mocks/offers';
 
 type InitialState = {
 	selectedCity: string | undefined;
 	offers: Offer[];
-	offersFetchingStatus: string;
+	offersFetchingStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: InitialState = {
 	selectedCity: CITIES[0],
 	offers: [],
-	offersFetchingStatus: 'Idle',
+	offersFetchingStatus: RequestStatus.Idle,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -28,10 +28,10 @@ const reducer = createReducer(initialState, (builder) => {
 			state.offers = action.payload;
 		}).
 		addCase(fetchOfferAction.pending, (state) => {
-			state.offersFetchingStatus = 'Pending';
+			state.offersFetchingStatus = RequestStatus.Pending;
 		}).
 		addCase(fetchOfferAction.fulfilled, (state) => {
-			state.offersFetchingStatus = 'Success';
+			state.offersFetchingStatus = RequestStatus.Success;
 		});
 });
 

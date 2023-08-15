@@ -6,7 +6,7 @@ import EmptyOffers from '../components/empty-offers/empty-offers';
 import CityList from '../components/city-list/city-list';
 import Spinner from '../components/spinner/spinner';
 import { getOffersByCity } from '../utils';
-import { AUTH_STATUS } from '../const';
+import { AUTH_STATUS, RequestStatus } from '../const';
 import { useAppSelector } from '../hooks';
 
 function MainPage(): React.JSX.Element {
@@ -16,7 +16,7 @@ function MainPage(): React.JSX.Element {
 	const selectedCity = useAppSelector((state) => state.selectedCity) as string;
 	const offersFetchingStatus = useAppSelector((state) => state.offersFetchingStatus);
 	const [id, setId] = useState<null | string>(null);
-	const isLoading = offersFetchingStatus === 'Pending';
+	const isLoading = offersFetchingStatus === RequestStatus.Pending;
 	const hasOffers = offersByCity[selectedCity] && offersByCity[selectedCity].length > 0;
 
 	function handleMouseEnter(offerId: string): void {
