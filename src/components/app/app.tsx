@@ -37,7 +37,7 @@ function App({ reviews }: AppProps): React.JSX.Element {
 						element={<LoginPage />}
 					/>
 					<Route
-						path={`${AppRoute.Offer}/:id`}
+						path={`${AppRoute.Offer}/:offerId`}
 						element={<OfferPage reviews={reviews} />}
 					/>
 					<Route

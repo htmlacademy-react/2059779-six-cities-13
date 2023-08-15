@@ -46,7 +46,6 @@ const reducer = createReducer(initialState, (builder) => {
 		}).
 		addCase(dropOffer, (state) => {
 			state.offer = null;
-			state.nearByOffers = [];
 		});
 });
 
