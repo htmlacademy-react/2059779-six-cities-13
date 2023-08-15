@@ -8,6 +8,7 @@ import Spinner from '../components/spinner/spinner';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS, RequestStatus } from '../const';
 import { useAppSelector } from '../hooks';
+import classNames from 'classnames';
 
 function MainPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.offers);
@@ -33,7 +34,10 @@ function MainPage(): React.JSX.Element {
 				<title>6 cities</title>
 			</Helmet>
 			<Header authStatus={AUTH_STATUS} />
-			<main className="page__main page__main--index">
+			<main className={classNames('page__main page__main--index', {
+				'page__main--index-empty' : !hasOffers,
+			})}
+			>
 				<h1 className="visually-hidden">Cities</h1>
 				<div className="tabs">
 					<section className="locations container">

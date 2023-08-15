@@ -98,4 +98,4 @@ const offers: TOffer[] = faker.helpers.multiple(getOffer, { count: OffersCount.c
 
 const fullOffers: TFullOffer[] = offers.map((item) => ({ ...item, ...getOfferDetails() }));
 
-export { offers, fullOffers };
+export { fullOffers };

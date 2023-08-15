@@ -1,18 +1,36 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from './state';
-import { TOffer } from '../mocks/offers';
-import { loadOffers } from './actions';
-import { APIRoute } from '../const';
+import { TOffer, TFullOffer } from '../mocks/offers';
+import { APIRoute, ActionName } from '../const';
 
-export const fetchOfferAction = createAsyncThunk<void, undefined, {
-	dispatch: AppDispatch;
-	state: State;
+export const fetchOffers = createAsyncThunk<TOffer[], undefined, {
 	extra: AxiosInstance;
 }>(
-	'data/fetchQuestions',
-	async (_arg, { dispatch, extra: api }) => {
+	`${ActionName.Offers}/fetchOffers`,
+	async (_arg, { extra: api }) => {
 		const { data } = await api.get<TOffer[]>(APIRoute.Offers);
-		dispatch(loadOffers(data));
+
+		return data;
+	},
+);
+
+export const fetchOffer = createAsyncThunk<TFullOffer, TFullOffer['id'], {
+	extra: AxiosInstance;
+}>(
+	`${ActionName.Offers}/fetchOffer`,
+	async (offerId, { extra: api }) => {
+		const { data } = await api.get<TFullOffer>(`${APIRoute.Offers}/${offerId}`);
+
+		return data;
+	},
+);
+
+export const fetchNearByOffers = createAsyncThunk <TOffer[], TOffer['id'], {
+	extra: AxiosInstance;
+}>(
+	`${ActionName.NearByOffers}/fetchNearByOffers`,
+	async (offerId, { extra: api }) => {
+		const { data } = await api.get<TOffer[]>(`${APIRoute.Offers}/${offerId}${APIRoute.NearByOffers}`);
+		return data;
 	},
 );

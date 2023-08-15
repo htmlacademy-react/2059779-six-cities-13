@@ -1,8 +1,7 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import type { FullOffer } from '../../mocks/offers';
-import type { ReviewType } from '../../mocks/reviews';
+import type { TReview } from '../../mocks/reviews';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -11,11 +10,10 @@ import OfferPage from '../../pages/offer-page';
 import Error404Page from '../../pages/error-404-page';
 
 type AppProps = {
-	fullOffers: FullOffer[];
-	reviews: ReviewType[];
+	reviews: TReview[];
 }
 
-function App({ reviews, fullOffers }: AppProps): React.JSX.Element {
+function App({ reviews }: AppProps): React.JSX.Element {
 	return (
 		<HelmetProvider>
 			<BrowserRouter>
@@ -40,7 +38,7 @@ function App({ reviews, fullOffers }: AppProps): React.JSX.Element {
 					/>
 					<Route
 						path={`${AppRoute.Offer}/:id`}
-						element={<OfferPage fullOffers={fullOffers} reviews={reviews} />}
+						element={<OfferPage reviews={reviews} />}
 					/>
 					<Route
 						path='*'
