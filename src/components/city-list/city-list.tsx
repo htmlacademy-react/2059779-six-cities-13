@@ -4,7 +4,7 @@ import { selectCity } from '../../store/actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 function CityList(): React.JSX.Element {
-	const selectedCity = useAppSelector((state) => state.selectedCity);
+	const selectedCity = useAppSelector((state) => state.OFFERS.selectedCity);
 	const dispatch = useAppDispatch();
 
 

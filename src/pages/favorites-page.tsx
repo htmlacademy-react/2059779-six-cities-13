@@ -8,7 +8,7 @@ import { AUTH_STATUS } from '../const';
 import { useAppSelector } from '../hooks';
 
 function FavoritesPage(): React.JSX.Element {
-	const offers = useAppSelector((state) => state.offers);
+	const offers = useAppSelector((state) => state.OFFERS.offers);
 
 	const offersByCity: Record<string, TOffer[]> = getOffersByCity(offers);
 

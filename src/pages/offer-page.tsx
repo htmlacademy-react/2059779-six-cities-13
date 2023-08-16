@@ -7,7 +7,7 @@ import Review from '../components/review/review';
 import ReviewForm from '../components/review-form/review-form';
 import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
-//import Error404Page from './error-404-page';
+import Error404Page from './error-404-page';
 import Spinner from '../components/spinner/spinner';
 import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
@@ -25,7 +25,7 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 	const fullOffer = useAppSelector((state) => state.OFFER.offer);
 	const nearbyOffers = useAppSelector((state) => state.OFFER.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.OFFER.offerStatus);
-	//const isLoading = offerFetchingStatus === RequestStatus.Pending;
+	const isLoading = offerFetchingStatus === RequestStatus.Pending;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
 	useEffect(() => {
@@ -40,9 +40,9 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 
 	}, [offerId, actions]);
 
-
+	//Если убрать это условие, всё ломается.
 	if (fullOffer === null) {
-		return <Spinner />;
+		return <Error404Page />;
 	}
 
 	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
@@ -61,6 +61,7 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 				<title>6 Cities — Offer</title>
 			</Helmet>
 			<Header authStatus={AUTH_STATUS} />
+			{isLoading && <Spinner />}
 			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>
