@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { TOffer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 import { capitalizeFirstLetter } from '../../utils';
 import { MouseEventHandler } from 'react';
 

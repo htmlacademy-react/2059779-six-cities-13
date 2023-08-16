@@ -7,7 +7,7 @@ import Review from '../components/review/review';
 import ReviewForm from '../components/review-form/review-form';
 import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
-import Error404Page from './error-404-page';
+//import Error404Page from './error-404-page';
 import Spinner from '../components/spinner/spinner';
 import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
@@ -27,7 +27,7 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 	const fullOffer = useAppSelector((state) => state.offer);
 	const nearbyOffers = useAppSelector((state) => state.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.offerFetchingStatus);
-	const isLoading = offerFetchingStatus === RequestStatus.Pending;
+	//const isLoading = offerFetchingStatus === RequestStatus.Pending;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 		return <Spinner />;
 	}
 
-	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults, city } = fullOffer;
+	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
 
 	//Надо наверное как-то дженерик для функции использовать, но я так и не научился как.
 	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);

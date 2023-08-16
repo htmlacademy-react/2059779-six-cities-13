@@ -4,7 +4,7 @@ import Sorting from '../sorting/sorting';
 import { SortingMap } from '../../const';
 import { sorting } from '../../utils';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
-import { TOffer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 
 
 type OfferListProps = {

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
-import { TOffer } from '../mocks/offers';
+import { TOffer } from '../types/offer';
 import { getOffersByCity } from '../utils';
 import { AUTH_STATUS } from '../const';
 import { useAppSelector } from '../hooks';

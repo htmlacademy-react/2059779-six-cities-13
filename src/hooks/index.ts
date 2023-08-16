@@ -4,7 +4,7 @@ import type { ActionCreatorsMapObject, AsyncThunk } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
-import type { State, AppDispatch } from '../store/state';
+import type { State, AppDispatch } from '../types/state';
 
 const useAppDispatch = useDispatch<AppDispatch>;
 const useAppSelector: TypedUseSelectorHook<State> = useSelector;

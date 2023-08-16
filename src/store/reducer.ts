@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { selectCity, dropOffer } from './actions';
 import { fetchOffers, fetchOffer, fetchNearByOffers } from './api-actions';
 import { CITIES, RequestStatus } from '../const';
-import { TOffer, TFullOffer } from '../mocks/offers';
+import { TOffer, TFullOffer } from '../types/offer';
 
 type InitialState = {
 	selectedCity: string | undefined;
