@@ -30,7 +30,7 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className={wrapperClass}>
-				<Link to={`offer/${item.id}`}>
+				<Link to={`offers/${item.id}`}>
 					<img
 						className="place-card__image"
 						src={item.previewImage}
@@ -67,7 +67,7 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<Link to={`offer/${item.id}`}>
+					<Link to={`offers/${item.id}`}>
 						{capitalizeFirstLetter(item.title)}
 					</Link>
 				</h2>

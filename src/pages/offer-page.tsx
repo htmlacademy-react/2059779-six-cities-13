@@ -9,7 +9,6 @@ import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
 import Error404Page from './error-404-page';
 import Spinner from '../components/spinner/spinner';
-import type { TFullOffer } from '../mocks/offers';
 import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter } from '../utils';
 import { fetchOffer, fetchNearByOffers } from '../store/api-actions';
@@ -25,7 +24,7 @@ type OfferPagePros = {
 function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 	const { offerId } = useParams();
 	const dispatch = useAppDispatch();
-	const fullOffer: TFullOffer | null = useAppSelector((state) => state.offer);
+	const fullOffer = useAppSelector((state) => state.offer);
 	const nearbyOffers = useAppSelector((state) => state.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.offerFetchingStatus);
 	const isLoading = offerFetchingStatus === RequestStatus.Pending;

@@ -34,7 +34,7 @@ const AppRoute = {
 	Main: '/',
 	Login: '/login',
 	Favorites: '/favorites',
-	Offer: '/offer',
+	Offers: '/offers',
 } as const;
 
 const APIRoute = {
