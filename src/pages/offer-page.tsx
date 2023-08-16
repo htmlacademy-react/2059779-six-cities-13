@@ -9,22 +9,20 @@ import LeafletMap from '../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
 import Error404Page from './error-404-page';
 import Spinner from '../components/spinner/spinner';
-import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
 import { offerActions } from '../store/slices/offer';
+import { reviewsActions } from '../store/slices/reviews';
 import { useAppSelector, useActionCreators } from '../hooks';
 import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, AUTH_STATUS, RequestStatus } from '../const';
 
-type OfferPagePros = {
-	reviews: TReview[];
-}
-
-function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
+function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
 	const actions = useActionCreators(offerActions);
+	const reviewActions = useActionCreators(reviewsActions);
 	const fullOffer = useAppSelector((state) => state.OFFER.offer);
 	const nearbyOffers = useAppSelector((state) => state.OFFER.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.OFFER.offerStatus);
+	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isLoading = offerFetchingStatus === RequestStatus.Pending;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
@@ -32,6 +30,7 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 		if (offerId) {
 			actions.fetchOffer(offerId);
 			actions.fetchNearByOffers(offerId);
+			reviewActions.fetchReviews(offerId);
 		}
 
 		return () => {
