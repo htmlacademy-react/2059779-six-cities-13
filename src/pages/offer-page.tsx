@@ -11,11 +11,9 @@ import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-lis
 import Spinner from '../components/spinner/spinner';
 import type { TReview } from '../mocks/reviews';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
-import { fetchOffer, fetchNearByOffers } from '../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { offerActions } from '../store/slices/offer';
+import { useAppSelector, useActionCreators } from '../hooks';
 import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, AUTH_STATUS, RequestStatus } from '../const';
-import { dropOffer } from '../store/actions';
-
 
 type OfferPagePros = {
 	reviews: TReview[];
@@ -23,26 +21,24 @@ type OfferPagePros = {
 
 function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 	const { offerId } = useParams();
-	const dispatch = useAppDispatch();
-	const fullOffer = useAppSelector((state) => state.offer);
-	const nearbyOffers = useAppSelector((state) => state.nearByOffers);
-	const offerFetchingStatus = useAppSelector((state) => state.offerFetchingStatus);
+	const actions = useActionCreators(offerActions);
+	const fullOffer = useAppSelector((state) => state.OFFER.offer);
+	const nearbyOffers = useAppSelector((state) => state.OFFER.nearByOffers);
+	const offerFetchingStatus = useAppSelector((state) => state.OFFER.offerStatus);
 	//const isLoading = offerFetchingStatus === RequestStatus.Pending;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
 	useEffect(() => {
 		if (offerId) {
-			Promise.allSettled([
-				dispatch(fetchOffer(offerId)),
-				dispatch(fetchNearByOffers(offerId)),
-			]);
+			actions.fetchOffer(offerId);
+			actions.fetchNearByOffers(offerId);
 		}
 
 		return () => {
-			dispatch(dropOffer());
+			actions.clear();
 		};
 
-	}, [offerId, dispatch]);
+	}, [offerId, actions]);
 
 
 	if (fullOffer === null) {
