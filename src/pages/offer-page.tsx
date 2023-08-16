@@ -23,7 +23,7 @@ function OfferPage(): React.JSX.Element {
 	const nearbyOffers = useAppSelector((state) => state.OFFER.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.OFFER.offerStatus);
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
-	const isLoading = offerFetchingStatus === RequestStatus.Pending;
+	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
 	useEffect(() => {
@@ -37,11 +37,11 @@ function OfferPage(): React.JSX.Element {
 			actions.clear();
 		};
 
-	}, [offerId, actions]);
+	}, [offerId, actions, reviewActions]);
 
 	//Если убрать это условие, всё ломается.
 	if (fullOffer === null) {
-		return <Error404Page />;
+		return <Spinner />;
 	}
 
 	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
@@ -60,7 +60,7 @@ function OfferPage(): React.JSX.Element {
 				<title>6 Cities — Offer</title>
 			</Helmet>
 			<Header authStatus={AUTH_STATUS} />
-			{isLoading && <Spinner />}
+			{isFailed && <Error404Page />}
 			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>

@@ -41,7 +41,7 @@ const sorting = {
 };
 
 function getMultipleRandomArrayElements(arr: [], num: number) {
-	const shuffled = [...arr].sort(() => 0.5 - Math.random());
+	const shuffled: TOffer[] = [...arr].sort(() => 0.5 - Math.random());
 
 	return shuffled.slice(0, num);
 }
