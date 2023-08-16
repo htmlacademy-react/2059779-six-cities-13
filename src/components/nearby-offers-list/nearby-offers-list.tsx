@@ -1,8 +1,8 @@
 import OfferCard from '../offer-card/offer-card';
-import { Offer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 
 type NearbyOffersListProps = {
-	nearbyOffers: Offer[];
+	nearbyOffers: TOffer[];
 	parentCSSClass?: string;
 };
 

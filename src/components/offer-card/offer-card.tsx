@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Offer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 import { capitalizeFirstLetter } from '../../utils';
 import { MouseEventHandler } from 'react';
 
 type OfferCardPropType = {
-	item: Offer;
+	item: TOffer;
 	parentCSSClass?: string;
 	onMouseEnter?: MouseEventHandler<HTMLElement>;
 	onMouseLeave?: MouseEventHandler<HTMLElement>;
@@ -30,7 +30,7 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className={wrapperClass}>
-				<Link to={`offer/${item.id}`}>
+				<Link to={`offers/${item.id}`}>
 					<img
 						className="place-card__image"
 						src={item.previewImage}
@@ -62,12 +62,12 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={{ width: `${item.rating * 20}%`}} />
+						<span style={{ width: `${Math.round(item.rating) * 20}%`}} />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<Link to={`offer/${item.id}`}>
+					<Link to={`offers/${item.id}`}>
 						{capitalizeFirstLetter(item.title)}
 					</Link>
 				</h2>

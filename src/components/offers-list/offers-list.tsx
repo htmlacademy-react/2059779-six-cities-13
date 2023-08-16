@@ -4,11 +4,11 @@ import Sorting from '../sorting/sorting';
 import { SortingMap } from '../../const';
 import { sorting } from '../../utils';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
-import { Offer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 
 
 type OfferListProps = {
-	offersByCity: Record<string, Offer[]>;
+	offersByCity: Record<string, TOffer[]>;
 	selectedCity: string;
 	currentOffer: string | null;
 	handleMouseEnter: (offerId: string) => void;

@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
+import { ActionName } from '../const';
 
-export const selectCity = createAction<string>('city/selectCity');
-export const getOffers = createAction('offers/getOffers');
+export const selectCity = createAction<string>('selectCity');
+export const dropOffer = createAction<undefined>(`${ActionName.Offer}/dropOffer`);

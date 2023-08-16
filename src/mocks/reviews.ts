@@ -4,22 +4,22 @@ const enum ReviewsCount {
 	count = 5,
 }
 
-type User = {
+type TUser = {
 	name: string;
 	avatarUrl: string;
 	isPro: boolean;
 }
 
-export interface ReviewType {
+export type TReview = {
 	id: string;
 	date: string;
-	user: User;
+	user: TUser;
 	comment: string;
 	rating: number;
 }
 
-function getReview(): ReviewType {
-	const user: User = {
+function getReview(): TReview {
+	const user: TUser = {
 		name: faker.person.fullName(),
 		avatarUrl: faker.image.avatar(),
 		isPro: faker.datatype.boolean()
@@ -34,6 +34,6 @@ function getReview(): ReviewType {
 	};
 }
 
-const reviews: ReviewType[] = faker.helpers.multiple(getReview, { count: ReviewsCount.count });
+const reviews: TReview[] = faker.helpers.multiple(getReview, { count: ReviewsCount.count });
 
 export { reviews };
