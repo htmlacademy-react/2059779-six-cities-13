@@ -1,5 +1,5 @@
 import { TReview } from '../../mocks/reviews';
-import { REVIEW_DATE_FORMATE } from '../../const';
+import { REVIEW_DATE_FORMATE, REVIEW_DATE_ATTRIBUTE_FORMATE } from '../../const';
 
 type ReviewPropsType = {
 	review: TReview;
@@ -8,6 +8,8 @@ type ReviewPropsType = {
 function Review({ review }: ReviewPropsType): React.JSX.Element {
 	const date = new Date(review.date);
 	const formattedDate = (new Intl.DateTimeFormat('en-US', REVIEW_DATE_FORMATE).format(date));
+	//Здесь получается обратный порядок. То есть сначала день, потом месяц и год. Есть решение разобрать строку и переставить всё, но выглядит как что-то слишком сложное для такой задачи.
+	const formattedAttributeDate = (new Intl.DateTimeFormat('en-US', REVIEW_DATE_ATTRIBUTE_FORMATE).format(date)).replace(/\//g, '-');
 	return (
 		<li className="reviews__item">
 			<div className="reviews__user user">
@@ -33,7 +35,7 @@ function Review({ review }: ReviewPropsType): React.JSX.Element {
 				<p className="reviews__text">
 					{review.comment}.
 				</p>
-				<time className="reviews__time" dateTime={formattedDate}>
+				<time className="reviews__time" dateTime={formattedAttributeDate}>
 					{formattedDate}
 				</time>
 			</div>

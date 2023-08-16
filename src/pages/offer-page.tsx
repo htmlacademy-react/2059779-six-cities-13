@@ -28,12 +28,14 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 	const nearbyOffers = useAppSelector((state) => state.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.offerFetchingStatus);
 	const isLoading = offerFetchingStatus === RequestStatus.Pending;
-	const isLoaded = offerFetchingStatus === RequestStatus.Success;
+	const isSuccess = offerFetchingStatus === RequestStatus.Success;
 
 	useEffect(() => {
 		if (offerId) {
-			dispatch(fetchOffer(offerId));
-			dispatch(fetchNearByOffers(offerId));
+			Promise.allSettled([
+				dispatch(fetchOffer(offerId)),
+				dispatch(fetchNearByOffers(offerId)),
+			]);
 		}
 
 		return () => {
@@ -44,12 +46,14 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 
 
 	if (fullOffer === null) {
-		return <Error404Page />;
+		return <Spinner />;
 	}
 
-	let detailedImages: string[] = fullOffer.images;
-	if (fullOffer.images.length > 6) {
-		detailedImages = fullOffer.images.slice(0, MAX_OFFER_IMAGES);
+	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
+
+	let detailedImages: string[] = images;
+	if (images.length > 6) {
+		detailedImages = images.slice(0, MAX_OFFER_IMAGES);
 	}
 
 	return (
@@ -58,11 +62,10 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 				<title>6 Cities — Offer</title>
 			</Helmet>
 			<Header authStatus={AUTH_STATUS} />
-			{isLoading && <Spinner />}
-			{isLoaded && fullOffer && (
+			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>
-						<title>{`6 Cities — ${fullOffer.title}`}</title>
+						<title>{`6 Cities — ${title}`}</title>
 					</Helmet>
 					<section className="offer">
 						<div className="offer__gallery-container container">
@@ -80,14 +83,14 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 						</div>
 						<div className="offer__container container">
 							<div className="offer__wrapper">
-								{fullOffer.isPremium && <div className="offer__mark"><span>Premium</span></div>}
+								{isPremium && <div className="offer__mark"><span>Premium</span></div>}
 								<div className="offer__name-wrapper">
 									<h1 className="offer__name">
-										{capitalizeFirstLetter(fullOffer.title)}
+										{capitalizeFirstLetter(title)}
 									</h1>
 									<button
 										className={classNames(
-											'offer__bookmark-button', { 'offer__bookmark-button--active': fullOffer.isFavorite }, 'button')}
+											'offer__bookmark-button', { 'offer__bookmark-button--active': isFavorite }, 'button')}
 										type="button"
 									>
 										<svg className="offer__bookmark-icon" width={31} height={33}>
@@ -98,28 +101,28 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 								</div>
 								<div className="offer__rating rating">
 									<div className="offer__stars rating__stars">
-										<span style={{ width: `${fullOffer.rating * 20}%` }} />
+										<span style={{ width: `${Math.round(rating) * 20}%` }} />
 										<span className="visually-hidden">Rating</span>
 									</div>
-									<span className="offer__rating-value rating__value">{fullOffer.rating}</span>
+									<span className="offer__rating-value rating__value">{rating}</span>
 								</div>
 								<ul className="offer__features">
-									<li className="offer__feature offer__feature--entire">{capitalizeFirstLetter(fullOffer.type)}</li>
+									<li className="offer__feature offer__feature--entire">{capitalizeFirstLetter(type)}</li>
 									<li className="offer__feature offer__feature--bedrooms">
-										{fullOffer.bedrooms} Bedrooms
+										{bedrooms} Bedrooms
 									</li>
 									<li className="offer__feature offer__feature--adults">
-										Max {fullOffer.maxAdults} adults
+										Max {maxAdults} adults
 									</li>
 								</ul>
 								<div className="offer__price">
-									<b className="offer__price-value">€{fullOffer.price}</b>
+									<b className="offer__price-value">€{price}</b>
 									<span className="offer__price-text">&nbsp;night</span>
 								</div>
 								<div className="offer__inside">
 									<h2 className="offer__inside-title">What&apos;s inside</h2>
 									<ul className="offer__inside-list">
-										{fullOffer.goods.map((good) => (
+										{goods.map((good) => (
 											<li className="offer__inside-item" key={good}>{good}</li>
 										))}
 									</ul>
@@ -128,23 +131,23 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 									<h2 className="offer__host-title">Meet the host</h2>
 									<div className="offer__host-user user">
 										<div className={classNames(
-											'offer__avatar-wrapper', { 'offer__avatar-wrapper--pro': fullOffer.host.isPro }, 'user__avatar-wrapper'
+											'offer__avatar-wrapper', { 'offer__avatar-wrapper--pro': host.isPro }, 'user__avatar-wrapper'
 										)}
 										>
 											<img
 												className="offer__avatar user__avatar"
-												src={fullOffer.host.avatarUrl}
+												src={host.avatarUrl}
 												alt="Host avatar"
 												width={74}
 												height={74}
 											/>
 										</div>
-										<span className="offer__user-name">{fullOffer.host.name}</span>
-										{fullOffer.host.isPro && <span className="offer__user-status">Pro</span>}
+										<span className="offer__user-name">{host.name}</span>
+										{host.isPro && <span className="offer__user-status">Pro</span>}
 									</div>
 									<div className="offer__description">
 										<p className="offer__text">
-											{fullOffer.description}.
+											{description}.
 											<br />
 											А ниже не совсем понимаю, как быть со вторым параграфом. В примере на сервере вообще одно короткое предложение.
 										</p>

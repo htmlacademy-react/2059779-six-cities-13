@@ -63,6 +63,12 @@ const REVIEW_DATE_FORMATE = {
 	month: <'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined>'long'
 };
 
+const REVIEW_DATE_ATTRIBUTE_FORMATE = {
+	year: <'numeric' | '2-digit' | undefined>'numeric',
+	month: <'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined>'2-digit',
+	day: <'numeric' | '2-digit' | undefined>'2-digit',
+};
+
 type TAuthorizationStatusKey = keyof typeof AuthorizationStatus;
 type TAuthorizationStatusValue = typeof AuthorizationStatus[TAuthorizationStatusKey]
 
@@ -105,6 +111,7 @@ export {
 	MAX_OFFER_IMAGES,
 	MAX_REVIEW_COUNT,
 	REVIEW_DATE_FORMATE,
+	REVIEW_DATE_ATTRIBUTE_FORMATE,
 	AUTH_STATUS,
 	SortingMap,
 	RequestStatus,
