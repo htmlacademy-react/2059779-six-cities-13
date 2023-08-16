@@ -10,10 +10,10 @@ import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-lis
 import Error404Page from './error-404-page';
 import Spinner from '../components/spinner/spinner';
 import type { TReview } from '../mocks/reviews';
-import { capitalizeFirstLetter } from '../utils';
+import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
 import { fetchOffer, fetchNearByOffers } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, AUTH_STATUS, RequestStatus } from '../const';
+import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, AUTH_STATUS, RequestStatus } from '../const';
 import { dropOffer } from '../store/actions';
 
 
@@ -49,7 +49,10 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 		return <Spinner />;
 	}
 
-	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
+	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults, city } = fullOffer;
+
+	//Надо наверное как-то дженерик для функции использовать, но я так и не научился как.
+	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);
 
 	let detailedImages: string[] = images;
 	if (images.length > 6) {
@@ -169,9 +172,9 @@ function OfferPage({ reviews }: OfferPagePros): React.JSX.Element {
 								</section>
 							</div>
 						</div>
-						<LeafletMap city={nearbyOffers[0]} offers={nearbyOffers} className={'offer__map map'} />
+						<LeafletMap city={fullOffer} offers={randomNearByOffers} className={'offer__map map'} />
 					</section>
-					<NearbyOffersList nearbyOffers={nearbyOffers} parentCSSClass='near-places' />
+					<NearbyOffersList nearbyOffers={randomNearByOffers} parentCSSClass='near-places' />
 				</main>
 			)}
 

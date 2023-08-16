@@ -57,6 +57,7 @@ const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const MAX_OFFER_IMAGES = 6;
 const MAX_REVIEW_COUNT = 10;
+const MAX_NEARBY_OFFERS = 3;
 
 const REVIEW_DATE_FORMATE = {
 	year: <'numeric' | '2-digit' | undefined>'numeric',
@@ -110,6 +111,7 @@ export {
 	URL_MARKER_DEFAULT,
 	MAX_OFFER_IMAGES,
 	MAX_REVIEW_COUNT,
+	MAX_NEARBY_OFFERS,
 	REVIEW_DATE_FORMATE,
 	REVIEW_DATE_ATTRIBUTE_FORMATE,
 	AUTH_STATUS,
