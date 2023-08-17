@@ -1,18 +1,16 @@
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useState } from 'react';
-import { useAppSelector, useActionCreators } from '../hooks';
+import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
 import classNames from 'classnames';
-import Header from '../components/header/header';
-import OffersList from '../components/offers-list/offers-list';
-import EmptyOffers from '../components/empty-offers/empty-offers';
-import CityList from '../components/city-list/city-list';
-import Spinner from '../components/spinner/spinner';
-import { getOffersByCity } from '../utils';
-import { AUTH_STATUS, RequestStatus } from '../const';
-import { offersActions } from '../store/slices/offers';
+import Header from '../../components/header/header';
+import OffersList from '../../components/offers-list/offers-list';
+import EmptyOffers from '../../components/empty-offers/empty-offers';
+import CityList from '../../components/city-list/city-list';
+import Spinner from '../../components/spinner/spinner';
+import { getOffersByCity } from '../../utils';
+import { AUTH_STATUS, RequestStatus } from '../../const';
 
 function MainPage(): React.JSX.Element {
-	const actions = useActionCreators(offersActions);
 	const offers = useAppSelector((state) => state.OFFERS.offers);
 	const offersByCity = getOffersByCity(offers);
 	const selectedCity = useAppSelector((state) => state.OFFERS.selectedCity);
@@ -20,12 +18,6 @@ function MainPage(): React.JSX.Element {
 	const [id, setId] = useState<null | string>(null);
 	const isLoading = offersFetchingStatus === RequestStatus.Pending;
 	const hasOffers = offersByCity[selectedCity] && offersByCity[selectedCity].length > 0;
-
-	useEffect(() => {
-		if (offersFetchingStatus === RequestStatus.Idle) {
-			actions.fetchOffers();
-		}
-	}, [offersFetchingStatus, actions]);
 
 	function handleMouseEnter(offerId: string): void {
 		setId(offerId);
