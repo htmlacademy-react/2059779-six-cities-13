@@ -4,12 +4,12 @@ import { TReview } from '../../types/review';
 import { fetchReviews } from '../thunks/reviews';
 
 type TInitialState = {
-	reviews: TReview | null;
+	reviews: TReview[];
 	reviewsStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: TInitialState = {
-	reviews: null,
+	reviews: [],
 	reviewsStatus: RequestStatus.Idle,
 };
 
@@ -31,7 +31,8 @@ export const reviewsSlice = createSlice({
 	name: ActionName.Reviews,
 	reducers: {
 		clear(state) {
-			state.reviews = null;
+			state.reviews = [];
+			state.reviewsStatus = RequestStatus.Idle;
 		}
 	}
 });

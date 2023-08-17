@@ -39,14 +39,16 @@ function OfferPage(): React.JSX.Element {
 
 	}, [offerId, actions, reviewActions]);
 
-	//Если убрать это условие, всё ломается.
-	if (fullOffer === null && reviews === null) {
+	if (fullOffer === null) {
 		return <Spinner />;
+	}
+
+	if (isFailed) {
+		return <Error404Page />;
 	}
 
 	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
 
-	//Надо наверное как-то дженерик для функции использовать, но я так и не научился как.
 	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);
 
 	let detailedImages: string[] = images;
@@ -60,7 +62,6 @@ function OfferPage(): React.JSX.Element {
 				<title>6 Cities — Offer</title>
 			</Helmet>
 			<Header authStatus={AUTH_STATUS} />
-			{isFailed && <Error404Page />}
 			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>
@@ -159,7 +160,7 @@ function OfferPage(): React.JSX.Element {
 								</div>
 								<section className="offer__reviews reviews">
 									<h2 className="reviews__title">
-										Reviews · <span className="reviews__amount">{reviews && reviews.length}</span>
+										Reviews · <span className="reviews__amount">{reviews.length}</span>
 									</h2>
 									<ul className="reviews__list">
 										{reviews && reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}

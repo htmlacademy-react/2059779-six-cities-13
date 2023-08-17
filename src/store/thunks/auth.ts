@@ -4,7 +4,7 @@ import { TThunkAPI } from '../../types/state';
 import { APIRoute, ActionName } from '../../const';
 import { saveToken, dropToken } from '../../services/token';
 
-export const checkAuth = createAsyncThunk<TUser['token'], TUser, TThunkAPI>(
+export const checkAuth = createAsyncThunk<TUser, undefined, TThunkAPI>(
 	`${ActionName.Offers}/checkAuth`,
 	async (_arg, { extra: api }) => {
 		const { data } = await api.get<TUser>(APIRoute.Login);
@@ -15,8 +15,8 @@ export const checkAuth = createAsyncThunk<TUser['token'], TUser, TThunkAPI>(
 
 export const login = createAsyncThunk<TUser, TLoginData, TThunkAPI>(
 	`${ActionName.User}/login`,
-	async ({email, password}, { extra: api }) => {
-		const { data } = await api.post<TUser>(APIRoute.Login, { email, password });
+	async (body, { extra: api }) => {
+		const { data } = await api.post<TUser>(APIRoute.Login, body);
 		saveToken(data.token);
 		return data;
 	},

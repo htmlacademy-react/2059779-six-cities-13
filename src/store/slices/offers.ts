@@ -1,9 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RequestStatus, ActionName } from '../../const';
 import { TOffer } from '../../types/offer';
 import { fetchOffers } from '../thunks/offers';
 import { CITIES } from '../../const';
-import { selectCity } from '../actions';
 
 type TInitialState = {
 	selectedCity: string;
@@ -29,9 +28,6 @@ export const offersSlice = createSlice({
 			}).
 			addCase(fetchOffers.rejected, (state) => {
 				state.status = RequestStatus.Failed;
-			}).
-			addCase(selectCity, (state, action) => {
-				state.selectedCity = action.payload;
 			});
 	},
 	initialState,
@@ -39,6 +35,9 @@ export const offersSlice = createSlice({
 	reducers: {
 		clear(state) {
 			state.offers = [];
+		},
+		selectCity(state, action: PayloadAction<string>) {
+			state.selectedCity = action.payload;
 		}
 	}
 });

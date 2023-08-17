@@ -1,6 +1,5 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { getToken } from './token';
-import { AppRoute } from '../const';
 
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
@@ -12,8 +11,7 @@ export const createAPI = (): AxiosInstance => {
 	});
 
 	api.interceptors.request.use(
-	//Что за фигня? В демо не ругается.
-		(config: AxiosRequestConfig) => {
+		(config) => {
 			const token = getToken();
 
 			if (token && config.headers) {

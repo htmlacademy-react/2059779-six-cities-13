@@ -1,4 +1,4 @@
-import { TReview } from '../../mocks/reviews';
+import { TReview } from '../../types/review';
 import { REVIEW_DATE_FORMATE, REVIEW_DATE_ATTRIBUTE_FORMATE } from '../../const';
 
 type ReviewPropsType = {
