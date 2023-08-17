@@ -40,7 +40,7 @@ function OfferPage(): React.JSX.Element {
 	}, [offerId, actions, reviewActions]);
 
 	//Если убрать это условие, всё ломается.
-	if (fullOffer === null) {
+	if (fullOffer === null && reviews === null) {
 		return <Spinner />;
 	}
 
@@ -159,10 +159,10 @@ function OfferPage(): React.JSX.Element {
 								</div>
 								<section className="offer__reviews reviews">
 									<h2 className="reviews__title">
-										Reviews · <span className="reviews__amount">{reviews.length}</span>
+										Reviews · <span className="reviews__amount">{reviews && reviews.length}</span>
 									</h2>
 									<ul className="reviews__list">
-										{reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
+										{reviews && reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 									</ul>
 									{AUTH_STATUS && <ReviewForm />}
 								</section>
