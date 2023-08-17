@@ -169,7 +169,7 @@ function OfferPage(): React.JSX.Element {
 								</section>
 							</div>
 						</div>
-						<LeafletMap city={fullOffer} offers={randomNearByOffers} className={'offer__map map'} />
+						<LeafletMap city={fullOffer.city} offers={randomNearByOffers} className={'offer__map map'} />
 					</section>
 					<NearbyOffersList nearbyOffers={randomNearByOffers} parentCSSClass='near-places' />
 				</main>

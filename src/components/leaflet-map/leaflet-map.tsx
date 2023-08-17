@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
-import { TOffer } from '../../types/offer';
+import { TCity, TOffer } from '../../types/offer';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type LeafletMapProps = {
-	city: TOffer;
+	city: TCity;
 	offers: TOffer[];
 	selectedOfferId?: string | null;
 	className: string;
