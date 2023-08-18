@@ -4,7 +4,6 @@ import Footer from '../components/footer/footer';
 import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
 import { TOffer } from '../types/offer';
 import { getOffersByCity } from '../utils';
-import { AUTH_STATUS } from '../const';
 import { useAppSelector } from '../hooks';
 
 function FavoritesPage(): React.JSX.Element {
@@ -17,7 +16,7 @@ function FavoritesPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Favorites</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
+			<Header />
 			<main className="page__main page__main--favorites">
 				<div className="page__favorites-container container">
 					<section className="favorites">

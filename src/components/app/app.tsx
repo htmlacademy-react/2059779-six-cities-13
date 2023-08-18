@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: AppRoute.Favorites,
-		element: <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><FavoritesPage /></PrivateRoute>
+		element: <PrivateRoute > <FavoritesPage /> </PrivateRoute>
 	}
 ]);
 

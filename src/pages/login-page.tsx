@@ -1,12 +1,16 @@
 import { FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { TLoginData } from '../types/user';
-import { useActionCreators } from '../hooks';
+import { useActionCreators, useAppSelector } from '../hooks';
 import { userActions } from '../store/slices/user';
+import { AuthorizationStatus } from '../const';
 
 function LoginPage(): React.JSX.Element {
 	const actions = useActionCreators(userActions);
+
+	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
+	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
 
 	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
@@ -23,6 +27,7 @@ function LoginPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Login</title>
 			</Helmet>
+			{isAuthorized && <Navigate to='/' />}
 			<header className="header">
 				<div className="container">
 					<div className="header__wrapper">

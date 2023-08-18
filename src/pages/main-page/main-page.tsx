@@ -8,7 +8,7 @@ import EmptyOffers from '../../components/empty-offers/empty-offers';
 import CityList from '../../components/city-list/city-list';
 import Spinner from '../../components/spinner/spinner';
 import { getOffersByCity } from '../../utils';
-import { AUTH_STATUS, RequestStatus } from '../../const';
+import { RequestStatus } from '../../const';
 
 function MainPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.OFFERS.offers);
@@ -32,7 +32,7 @@ function MainPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 cities</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
+			<Header />
 			<main className={classNames('page__main page__main--index', {
 				'page__main--index-empty' : !hasOffers,
 			})}

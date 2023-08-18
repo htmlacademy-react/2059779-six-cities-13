@@ -25,6 +25,7 @@ export const login = createAsyncThunk<TUser, TLoginData, TThunkAPI>(
 export const logout = createAsyncThunk<unknown, undefined, TThunkAPI>(
 	`${ActionName.User}/logout`,
 	async (_arg, { extra: api }) => {
-		await api.delete<string>(APIRoute.Logout).then(dropToken);
+		await api.delete<string>(APIRoute.Logout);
+		dropToken();
 	},
 );

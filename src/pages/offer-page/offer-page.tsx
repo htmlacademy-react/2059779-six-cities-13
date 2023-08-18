@@ -13,7 +13,7 @@ import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../../uti
 import { offerActions } from '../../store/slices/offer';
 import { reviewsActions } from '../../store/slices/reviews';
 import { useAppSelector, useActionCreators } from '../../hooks';
-import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, AUTH_STATUS, RequestStatus } from '../../const';
+import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, RequestStatus, AuthorizationStatus } from '../../const';
 
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
@@ -25,6 +25,9 @@ function OfferPage(): React.JSX.Element {
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
+
+	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
+	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
 
 	useEffect(() => {
 		if (offerId) {
@@ -61,7 +64,7 @@ function OfferPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Offer</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
+			<Header />
 			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>
@@ -165,7 +168,7 @@ function OfferPage(): React.JSX.Element {
 									<ul className="reviews__list">
 										{reviews && reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 									</ul>
-									{AUTH_STATUS && <ReviewForm />}
+									{isAuthorized && <ReviewForm />}
 								</section>
 							</div>
 						</div>
