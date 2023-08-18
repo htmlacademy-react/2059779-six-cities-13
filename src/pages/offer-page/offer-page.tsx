@@ -2,18 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import classNames from 'classnames';
-import Header from '../components/header/header';
-import Review from '../components/review/review';
-import ReviewForm from '../components/review-form/review-form';
-import LeafletMap from '../components/leaflet-map/leaflet-map';
-import NearbyOffersList from '../components/nearby-offers-list/nearby-offers-list';
-import Error404Page from './error-404-page';
-import Spinner from '../components/spinner/spinner';
-import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../utils';
-import { offerActions } from '../store/slices/offer';
-import { reviewsActions } from '../store/slices/reviews';
-import { useAppSelector, useActionCreators } from '../hooks';
-import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, AUTH_STATUS, RequestStatus } from '../const';
+import Header from '../../components/header/header';
+import Review from '../../components/review/review';
+import ReviewForm from '../../components/review-form/review-form';
+import LeafletMap from '../../components/leaflet-map/leaflet-map';
+import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
+import Error404Page from '../error-404-page';
+import Spinner from '../../components/spinner/spinner';
+import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../../utils';
+import { offerActions } from '../../store/slices/offer';
+import { reviewsActions } from '../../store/slices/reviews';
+import { useAppSelector, useActionCreators } from '../../hooks';
+import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, RequestStatus, AuthorizationStatus } from '../../const';
 
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
@@ -25,6 +25,9 @@ function OfferPage(): React.JSX.Element {
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
+
+	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
+	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
 
 	useEffect(() => {
 		if (offerId) {
@@ -39,14 +42,16 @@ function OfferPage(): React.JSX.Element {
 
 	}, [offerId, actions, reviewActions]);
 
-	//Если убрать это условие, всё ломается.
 	if (fullOffer === null) {
 		return <Spinner />;
 	}
 
+	if (isFailed) {
+		return <Error404Page />;
+	}
+
 	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
 
-	//Надо наверное как-то дженерик для функции использовать, но я так и не научился как.
 	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);
 
 	let detailedImages: string[] = images;
@@ -59,8 +64,7 @@ function OfferPage(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Offer</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
-			{isFailed && <Error404Page />}
+			<Header />
 			{isSuccess && fullOffer && (
 				<main className="page__main page__main--offer">
 					<Helmet>
@@ -162,13 +166,13 @@ function OfferPage(): React.JSX.Element {
 										Reviews · <span className="reviews__amount">{reviews.length}</span>
 									</h2>
 									<ul className="reviews__list">
-										{reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
+										{reviews && reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 									</ul>
-									{AUTH_STATUS && <ReviewForm />}
+									{isAuthorized && <ReviewForm />}
 								</section>
 							</div>
 						</div>
-						<LeafletMap city={fullOffer} offers={randomNearByOffers} className={'offer__map map'} />
+						<LeafletMap city={fullOffer.city} offers={randomNearByOffers} className={'offer__map map'} />
 					</section>
 					<NearbyOffersList nearbyOffers={randomNearByOffers} parentCSSClass='near-places' />
 				</main>

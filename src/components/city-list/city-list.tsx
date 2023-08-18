@@ -1,12 +1,11 @@
 import classNames from 'classnames';
 import { CITIES } from '../../const';
-import { selectCity } from '../../store/actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useActionCreators, useAppSelector } from '../../hooks';
+import { offersActions } from '../../store/slices/offers';
 
 function CityList(): React.JSX.Element {
+	const actions = useActionCreators(offersActions);
 	const selectedCity = useAppSelector((state) => state.OFFERS.selectedCity);
-	const dispatch = useAppDispatch();
-
 
 	return (
 		<ul className="locations__list tabs__list">
@@ -17,7 +16,7 @@ function CityList(): React.JSX.Element {
 							'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
 						href={`#${city.toLowerCase()}`}
 						onClick={() => {
-							dispatch(selectCity(city));
+							actions.selectCity(city);
 						}}
 					>
 						<span>{city}</span>

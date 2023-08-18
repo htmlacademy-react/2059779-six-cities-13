@@ -1,5 +1,3 @@
-import { faker } from '@faker-js/faker';
-
 const CITIES = [
 	'Paris',
 	'Cologne',
@@ -75,8 +73,6 @@ type TAuthorizationStatusValue = typeof AuthorizationStatus[TAuthorizationStatus
 
 export type { TAuthorizationStatusValue };
 
-const AUTH_STATUS = faker.datatype.boolean();
-
 const SortingMap = {
 	Popular: 'Popular',
 	LowToHigh: 'Price: low to high',
@@ -114,7 +110,6 @@ export {
 	MAX_NEARBY_OFFERS,
 	REVIEW_DATE_FORMATE,
 	REVIEW_DATE_ATTRIBUTE_FORMATE,
-	AUTH_STATUS,
 	SortingMap,
 	RequestStatus,
 	ActionName

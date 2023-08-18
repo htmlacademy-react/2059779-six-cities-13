@@ -1,19 +1,55 @@
+import { FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Header from '../components/header/header';
-import { AUTH_STATUS } from '../const';
+import { Link, Navigate } from 'react-router-dom';
+import { TLoginData } from '../types/user';
+import { useActionCreators, useAppSelector } from '../hooks';
+import { userActions } from '../store/slices/user';
+import { AuthorizationStatus } from '../const';
 
 function LoginPage(): React.JSX.Element {
+	const actions = useActionCreators(userActions);
+
+	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
+	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
+
+	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
+		evt.preventDefault();
+
+		const form = evt.currentTarget;
+
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData) as TLoginData;
+		actions.login(data);
+	};
+
 	return (
 		<div className="page page--gray page--login">
 			<Helmet>
 				<title>6 Cities — Login</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
+			{isAuthorized && <Navigate to='/' />}
+			<header className="header">
+				<div className="container">
+					<div className="header__wrapper">
+						<div className="header__left">
+							<Link className="header__logo-link" to="/">
+								<img
+									className="header__logo"
+									src="img/logo.svg"
+									alt="6 cities logo"
+									width={81}
+									height={41}
+								/>
+							</Link>
+						</div>
+					</div>
+				</div>
+			</header>
 			<main className="page__main page__main--login">
 				<div className="page__login-container container">
 					<section className="login">
 						<h1 className="login__title">Sign in</h1>
-						<form className="login__form form" action="#" method="post">
+						<form className="login__form form" action="#" method="post" onSubmit={handleSubmitForm}>
 							<div className="login__input-wrapper form__input-wrapper">
 								<label className="visually-hidden">E-mail</label>
 								<input
@@ -41,9 +77,9 @@ function LoginPage(): React.JSX.Element {
 					</section>
 					<section className="locations locations--login locations--current">
 						<div className="locations__item">
-							<a className="locations__item-link" href="#">
+							<Link className="locations__item-link" to="/#Amsterdam">
 								<span>Amsterdam</span>
-							</a>
+							</Link>
 						</div>
 					</section>
 				</div>

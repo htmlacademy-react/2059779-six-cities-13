@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
-import { AUTH_STATUS } from '../const';
 
 function Error404Page(): React.JSX.Element {
 	return (
@@ -10,7 +9,7 @@ function Error404Page(): React.JSX.Element {
 			<Helmet>
 				<title>6 Cities — Page Not Found</title>
 			</Helmet>
-			<Header authStatus={AUTH_STATUS} />
+			<Header />
 			<main className="page__main">
 				<section className="error404 container">
 					<h1 className="error404__title">Page Not Found</h1>

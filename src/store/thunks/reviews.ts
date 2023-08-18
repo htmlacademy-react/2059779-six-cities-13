@@ -3,10 +3,10 @@ import { TReview, TReviewData } from '../../types/review';
 import { TThunkAPI } from '../../types/state';
 import { APIRoute, ActionName } from '../../const';
 
-export const fetchReviews = createAsyncThunk<TReview, TReview['id'], TThunkAPI>(
+export const fetchReviews = createAsyncThunk<TReview[], TReview['id'], TThunkAPI>(
 	`${ActionName.Reviews}/fetchReviews`,
 	async (offerId, { extra: api }) => {
-		const { data } = await api.get<TReview>(`${APIRoute.Reviews}/${offerId}`);
+		const { data } = await api.get<TReview[]>(`${APIRoute.Reviews}/${offerId}`);
 
 		return data;
 	},

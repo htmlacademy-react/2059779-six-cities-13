@@ -40,9 +40,8 @@ const sorting = {
 	TopRated: (cityOffers: TOffer[]) => cityOffers.slice().sort(sortByRating)
 };
 
-function getMultipleRandomArrayElements(arr: [], num: number) {
-	const shuffled: TOffer[] = [...arr].sort(() => 0.5 - Math.random());
-
+function getMultipleRandomArrayElements<El>(arr: El[] | readonly El[], num: number) {
+	const shuffled: El[] = [...arr].sort(() => 0.5 - Math.random());
 	return shuffled.slice(0, num);
 }
 
