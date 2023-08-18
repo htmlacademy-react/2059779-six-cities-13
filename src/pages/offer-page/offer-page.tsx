@@ -9,6 +9,9 @@ import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
 import Error404Page from '../error-404-page';
 import Spinner from '../../components/spinner/spinner';
+import Gallery from '../../components/gallery/gallery';
+import FeaturesList from '../../components/features-list/features-list';
+import Host from '../../components/host/host';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../../utils';
 import { offerActions } from '../../store/slices/offer';
 import { reviewsActions } from '../../store/slices/reviews';
@@ -72,19 +75,7 @@ function OfferPage(): React.JSX.Element {
 						<title>{`6 Cities — ${title}`}</title>
 					</Helmet>
 					<section className="offer">
-						<div className="offer__gallery-container container">
-							<div className="offer__gallery">
-								{detailedImages.map((item) => (
-									<div key={item} className="offer__image-wrapper">
-										<img
-											className="offer__image"
-											src={item}
-											alt="Photo studio"
-										/>
-									</div>
-								))}
-							</div>
-						</div>
+						<Gallery images={detailedImages} />
 						<div className="offer__container container">
 							<div className="offer__wrapper">
 								{isPremium && <div className="offer__mark"><span>Premium</span></div>}
@@ -123,45 +114,8 @@ function OfferPage(): React.JSX.Element {
 									<b className="offer__price-value">€{price}</b>
 									<span className="offer__price-text">&nbsp;night</span>
 								</div>
-								<div className="offer__inside">
-									<h2 className="offer__inside-title">What&apos;s inside</h2>
-									<ul className="offer__inside-list">
-										{goods.map((good) => (
-											<li className="offer__inside-item" key={good}>{good}</li>
-										))}
-									</ul>
-								</div>
-								<div className="offer__host">
-									<h2 className="offer__host-title">Meet the host</h2>
-									<div className="offer__host-user user">
-										<div className={classNames(
-											'offer__avatar-wrapper', { 'offer__avatar-wrapper--pro': host.isPro }, 'user__avatar-wrapper'
-										)}
-										>
-											<img
-												className="offer__avatar user__avatar"
-												src={host.avatarUrl}
-												alt="Host avatar"
-												width={74}
-												height={74}
-											/>
-										</div>
-										<span className="offer__user-name">{host.name}</span>
-										{host.isPro && <span className="offer__user-status">Pro</span>}
-									</div>
-									<div className="offer__description">
-										<p className="offer__text">
-											{description}.
-											<br />
-											А ниже не совсем понимаю, как быть со вторым параграфом. В примере на сервере вообще одно короткое предложение.
-										</p>
-										<p className="offer__text">
-											An independent House, strategically located between Rembrand
-											Square and National Opera, but where the bustle of the city
-											comes to rest in this alley flowery and colorful.
-										</p>
-									</div>
-								</div>
+								<FeaturesList features={goods} />
+								<Host host={host} description={description} />
 								<section className="offer__reviews reviews">
 									<h2 className="reviews__title">
 										Reviews · <span className="reviews__amount">{reviews.length}</span>

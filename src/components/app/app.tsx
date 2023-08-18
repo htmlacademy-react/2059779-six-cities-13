@@ -29,7 +29,8 @@ const router = createBrowserRouter([
 	},
 	{
 		path: AppRoute.Favorites,
-		element: <PrivateRoute > <FavoritesPage /> </PrivateRoute>,
+		//Хз, как решить. Пропсом передаю не хочет. Свойство объекта не хочет. Видимо он ругается, что вариантом может быть Navigate, но какой у него тип я не нашёл. Или ему тернарный оператор не нравится.
+		element: <PrivateRoute> <FavoritesPage /> </PrivateRoute>,
 		loader: loadFavoritesPageData,
 	}
 ]);
