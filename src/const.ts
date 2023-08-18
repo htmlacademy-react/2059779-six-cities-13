@@ -96,6 +96,11 @@ const enum ActionName {
 	User = 'USER'
 }
 
+const FavoriteChangeRequest = {
+	Add: 1,
+	Remove: 0
+};
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -112,5 +117,6 @@ export {
 	REVIEW_DATE_ATTRIBUTE_FORMATE,
 	SortingMap,
 	RequestStatus,
-	ActionName
+	ActionName,
+	FavoriteChangeRequest
 };

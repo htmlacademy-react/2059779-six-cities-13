@@ -38,6 +38,7 @@ function OfferPage(): React.JSX.Element {
 
 		return () => {
 			actions.clear();
+			reviewActions.clear();
 		};
 
 	}, [offerId, actions, reviewActions]);

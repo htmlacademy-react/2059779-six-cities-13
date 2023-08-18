@@ -45,7 +45,10 @@ export const offerSlice = createSlice({
 	name: ActionName.Offer,
 	reducers: {
 		clear(state) {
+			state.offer = null;
+			state.offerStatus = RequestStatus.Idle;
 			state.nearByOffers = [];
+			state.nearByOffersStatus = RequestStatus.Idle;
 		}
 	}
 });

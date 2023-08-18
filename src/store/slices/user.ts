@@ -37,7 +37,8 @@ export const userSlice = createSlice({
 	name: ActionName.User,
 	reducers: {
 		clear(state) {
-			state.authorizationStatus = AuthorizationStatus.Unknown;
+			state.user = null;
+			state.authorizationStatus = AuthorizationStatus.NoAuth;
 		}
 	}
 });

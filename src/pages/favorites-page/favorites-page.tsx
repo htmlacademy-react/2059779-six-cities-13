@@ -1,15 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-import Header from '../components/header/header';
-import Footer from '../components/footer/footer';
-import FavoriteOfferCard from '../components/favorite-offer-card/favorite-offer-card';
-import { TOffer } from '../types/offer';
-import { getOffersByCity } from '../utils';
-import { useAppSelector } from '../hooks';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
+import FavoriteOfferCard from '../../components/favorite-offer-card/favorite-offer-card';
+import { TFullOffer } from '../../types/offer';
+import { getOffersByCity } from '../../utils';
+import { useAppSelector } from '../../hooks';
 
 function FavoritesPage(): React.JSX.Element {
-	const offers = useAppSelector((state) => state.OFFERS.offers);
+	const offers = useAppSelector((state) => state.Favorites.favorites);
 
-	const offersByCity: Record<string, TOffer[]> = getOffersByCity(offers);
+	const offersByCity: Record<string, TFullOffer[]> = getOffersByCity(offers);
 
 	return (
 		<div className="page">

@@ -35,6 +35,7 @@ export const offersSlice = createSlice({
 	reducers: {
 		clear(state) {
 			state.offers = [];
+			state.status = RequestStatus.Idle;
 		},
 		selectCity(state, action: PayloadAction<string>) {
 			state.selectedCity = action.payload;

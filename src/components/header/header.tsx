@@ -15,6 +15,7 @@ function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 	const handleLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
 		evt.preventDefault();
 		actions.logout();
+		actions.clear();
 
 		navigate(AppRoute.Main);
 	};
