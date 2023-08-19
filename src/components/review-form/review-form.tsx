@@ -1,17 +1,33 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { ChangeEvent } from 'react';
 import RatingForm from '../rating-form/rating-form';
+import { TReviewData } from '../../types/review';
+import { useActionCreators, useAppSelector } from '../../hooks';
+import { reviewsActions } from '../../store/slices/reviews';
 
 function ReviewForm(): React.JSX.Element {
 	const [comment, setComment] = useState('');
 	const isValid = comment.length >= 50 && comment.length < 300;
+	const actions = useActionCreators(reviewsActions);
+	const offerId = useAppSelector((state) => state.OFFER.offer?.id);
 
 	function handleTextChange({ target }: ChangeEvent<HTMLTextAreaElement>) {
 		setComment(target.value);
 	}
 
+	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
+		evt.preventDefault();
+
+		const form = evt.currentTarget;
+
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData) as TReviewData;
+		console.log(data);
+		actions.postReview({ data, offerId });
+	};
+
 	return (
-		<form className="reviews__form form" action="#" method="post">
+		<form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post">
 			<label className="reviews__label form__label" htmlFor="review">
 				Your review
 			</label>
@@ -19,7 +35,7 @@ function ReviewForm(): React.JSX.Element {
 			<textarea
 				className="reviews__textarea form__textarea"
 				id="review"
-				name="review"
+				name="comment"
 				placeholder="Tell how was your stay, what you like and what can be improved"
 				required
 				title='Your review must be between 50 and 300 characters.'
