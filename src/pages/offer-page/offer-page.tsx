@@ -32,6 +32,8 @@ function OfferPage(): React.JSX.Element {
 	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
 	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
 
+	const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
 	useEffect(() => {
 		if (offerId) {
 			actions.fetchOffer(offerId);
@@ -121,7 +123,7 @@ function OfferPage(): React.JSX.Element {
 										Reviews · <span className="reviews__amount">{reviews.length}</span>
 									</h2>
 									<ul className="reviews__list">
-										{reviews && reviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
+										{sortedReviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
 									</ul>
 									{isAuthorized && <ReviewForm />}
 								</section>
