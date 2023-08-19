@@ -16,7 +16,8 @@ const initialState: TInitialState = {
 export const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.
-			addCase(checkAuth.fulfilled, (state) => {
+			addCase(checkAuth.fulfilled, (state, action) => {
+				state.user = action.payload;
 				state.authorizationStatus = AuthorizationStatus.Auth;
 			}).
 			addCase(checkAuth.rejected, (state) => {
