@@ -2,15 +2,14 @@ import { FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
 import { TLoginData } from '../types/user';
-import { useActionCreators, useAppSelector } from '../hooks';
+import { useActionCreators } from '../hooks';
 import { userActions } from '../store/slices/user';
-import { AuthorizationStatus } from '../const';
+import { useAuth } from '../hooks/use-authorize';
 
 function LoginPage(): React.JSX.Element {
 	const actions = useActionCreators(userActions);
 
-	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
-	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
+	const isAuthorized = useAuth();
 
 	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();

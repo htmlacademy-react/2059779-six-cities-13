@@ -34,7 +34,8 @@ export const reviewsSlice = createSlice({
 			addCase(postReview.pending, (state) => {
 				state.postReviewStatus = RequestStatus.Pending;
 			}).
-			addCase(postReview.fulfilled, (state) => {
+			addCase(postReview.fulfilled, (state, action) => {
+				state.reviews.push(action.payload);
 				state.postReviewStatus = RequestStatus.Success;
 			});
 	},

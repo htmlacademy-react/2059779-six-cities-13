@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useActionCreators } from '../../hooks';
-import { AuthorizationStatus, AppRoute } from '../../const';
+import { AppRoute } from '../../const';
 import { userActions } from '../../store/slices/user';
+import { useAuth } from '../../hooks/use-authorize';
 
 type HeaderProps = {
 	authStatus: boolean;
@@ -54,8 +55,7 @@ function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 
 function Header(): React.JSX.Element {
 
-	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
-	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
+	const isAuthorized = useAuth();
 
 	return (
 		<header className="header">

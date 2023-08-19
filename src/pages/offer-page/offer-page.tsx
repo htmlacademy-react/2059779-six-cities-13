@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import classNames from 'classnames';
 import Header from '../../components/header/header';
-import Review from '../../components/review/review';
 import ReviewForm from '../../components/review-form/review-form';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
@@ -16,7 +15,7 @@ import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../../uti
 import { offerActions } from '../../store/slices/offer';
 import { reviewsActions } from '../../store/slices/reviews';
 import { useAppSelector, useActionCreators } from '../../hooks';
-import { MAX_OFFER_IMAGES, MAX_REVIEW_COUNT, MAX_NEARBY_OFFERS, RequestStatus, AuthorizationStatus } from '../../const';
+import { MAX_OFFER_IMAGES, MAX_NEARBY_OFFERS, RequestStatus } from '../../const';
 
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
@@ -28,9 +27,6 @@ function OfferPage(): React.JSX.Element {
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
-
-	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
-	const isAuthorized = Boolean(authStatus === AuthorizationStatus.Auth);
 
 	const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -118,15 +114,7 @@ function OfferPage(): React.JSX.Element {
 								</div>
 								<FeaturesList features={goods} />
 								<Host host={host} description={description} />
-								<section className="offer__reviews reviews">
-									<h2 className="reviews__title">
-										Reviews · <span className="reviews__amount">{reviews.length}</span>
-									</h2>
-									<ul className="reviews__list">
-										{sortedReviews.slice(0, MAX_REVIEW_COUNT).map((item) => <Review review={item} key={item.id} />)}
-									</ul>
-									{isAuthorized && <ReviewForm />}
-								</section>
+								<ReviewForm reviews={sortedReviews} />
 							</div>
 						</div>
 						<LeafletMap city={fullOffer.city} offers={randomNearByOffers} className={'offer__map map'} />

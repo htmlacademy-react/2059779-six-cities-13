@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ActionName, RequestStatus, FavoriteChangeRequest } from '../../const';
-import { TFullOffer } from '../../types/offer';
+import { TOffer } from '../../types/offer';
 import { fetchFavorites, changeFavorite } from '../thunks/favorites';
 
 type TInitialState = {
-	favorites: TFullOffer[];
-	count: number;
+	favorites: TOffer[];
 	favoritesStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: TInitialState = {
 	favorites: [],
-	count: 0,
 	favoritesStatus: RequestStatus.Idle
 };
 
@@ -32,11 +30,10 @@ export const favoritesSlice = createSlice({
 				state.favoritesStatus = RequestStatus.Success;
 				switch (action.payload.status) {
 					case FavoriteChangeRequest.Add:
-						state.favorites.push(action.payload.status);
-						state.count++;
+						state.favorites.push(action.payload.offer);
 						break;
 					case FavoriteChangeRequest.Remove:
-						state.favorites = state.favorites.filter(({ offerId }) => offerId !== action.payload.offerId);
+						state.favorites = state.favorites.filter(({ id }) => id !== action.payload.offer.id);
 
 				}
 			}).
@@ -53,7 +50,6 @@ export const favoritesSlice = createSlice({
 		clear(state) {
 			state.favorites = [];
 			state.favoritesStatus = RequestStatus.Idle;
-			state.count = 0;
 		}
 	}
 });
