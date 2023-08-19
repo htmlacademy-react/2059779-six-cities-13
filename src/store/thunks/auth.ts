@@ -5,7 +5,7 @@ import { APIRoute, ActionName } from '../../const';
 import { saveToken, dropToken } from '../../services/token';
 
 export const checkAuth = createAsyncThunk<TUser, undefined, TThunkAPI>(
-	`${ActionName.Offers}/checkAuth`,
+	`${ActionName.User}/checkAuth`,
 	async (_arg, { extra: api }) => {
 		const { data } = await api.get<TUser>(APIRoute.Login);
 
