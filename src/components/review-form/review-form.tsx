@@ -21,9 +21,9 @@ function ReviewForm(): React.JSX.Element {
 		const form = evt.currentTarget;
 
 		const formData = new FormData(form);
-		const data = Object.fromEntries(formData) as TReviewData;
-		console.log(data);
-		actions.postReview({ data, offerId });
+		const reviewData = Object.fromEntries(formData) as TReviewData;
+		reviewData.rating = Number(reviewData.rating);
+		actions.postReview({ reviewData, offerId });
 	};
 
 	return (
