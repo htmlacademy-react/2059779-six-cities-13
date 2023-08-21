@@ -1,17 +1,22 @@
+import { capitalizeFirstLetter } from '../../utils';
+
 type TFeaturesListProps = {
-	features: string[];
+	bedrooms: number;
+	maxAdults: number;
+	type: string;
 }
 
-function FeaturesList({ features }: TFeaturesListProps): React.JSX.Element {
+function FeaturesList({ bedrooms, maxAdults, type }: TFeaturesListProps): React.JSX.Element {
 	return (
-		<div className="offer__inside">
-			<h2 className="offer__inside-title">What&apos;s inside</h2>
-			<ul className="offer__inside-list">
-				{features.map((item) => (
-					<li className="offer__inside-item" key={item}>{item}</li>
-				))}
-			</ul>
-		</div>
+		<ul className="offer__features">
+			<li className="offer__feature offer__feature--entire">{capitalizeFirstLetter(type)}</li>
+			<li className="offer__feature offer__feature--bedrooms">
+				{bedrooms} Bedrooms
+			</li>
+			<li className="offer__feature offer__feature--adults">
+				Max {maxAdults} adults
+			</li>
+		</ul>
 	);
 }
 

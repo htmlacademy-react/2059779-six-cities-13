@@ -53,7 +53,7 @@ function MainPage(): React.JSX.Element {
 							handleMouseEnter={handleMouseEnter}
 							handleMouseLeave={handleMouseLeave}
 						/>
-						: (<EmptyOffers /> && !isLoading)}
+						: <EmptyOffers selectedCity={selectedCity} />}
 				</div>
 			</main>
 		</div>

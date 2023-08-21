@@ -1,21 +1,23 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import classNames from 'classnames';
 import Header from '../../components/header/header';
-import ReviewForm from '../../components/review-form/review-form';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
 import Error404Page from '../error-404-page';
 import Spinner from '../../components/spinner/spinner';
 import Gallery from '../../components/gallery/gallery';
-import FeaturesList from '../../components/features-list/features-list';
+import GoodsList from '../../components/goods-list/goods-list';
 import Host from '../../components/host/host';
+import FeaturesList from '../../components/features-list/features-list';
 import { capitalizeFirstLetter, getMultipleRandomArrayElements } from '../../utils';
 import { offerActions } from '../../store/slices/offer';
 import { reviewsActions } from '../../store/slices/reviews';
 import { useAppSelector, useActionCreators } from '../../hooks';
 import { MAX_OFFER_IMAGES, MAX_NEARBY_OFFERS, RequestStatus } from '../../const';
+import Price from '../../components/price/price';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
@@ -27,6 +29,8 @@ function OfferPage(): React.JSX.Element {
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
+	const priceParentClass = 'offer';
+	const favoriteButtonClass = 'offer';
 
 	const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -81,16 +85,7 @@ function OfferPage(): React.JSX.Element {
 									<h1 className="offer__name">
 										{capitalizeFirstLetter(title)}
 									</h1>
-									<button
-										className={classNames(
-											'offer__bookmark-button', { 'offer__bookmark-button--active': isFavorite }, 'button')}
-										type="button"
-									>
-										<svg className="offer__bookmark-icon" width={31} height={33}>
-											<use xlinkHref="#icon-bookmark" />
-										</svg>
-										<span className="visually-hidden">To bookmarks</span>
-									</button>
+									<FavoriteButton parentCSSClass={favoriteButtonClass} isFavorite={isFavorite} iconHeight={31} iconWidth={33} />
 								</div>
 								<div className="offer__rating rating">
 									<div className="offer__stars rating__stars">
@@ -99,22 +94,11 @@ function OfferPage(): React.JSX.Element {
 									</div>
 									<span className="offer__rating-value rating__value">{rating}</span>
 								</div>
-								<ul className="offer__features">
-									<li className="offer__feature offer__feature--entire">{capitalizeFirstLetter(type)}</li>
-									<li className="offer__feature offer__feature--bedrooms">
-										{bedrooms} Bedrooms
-									</li>
-									<li className="offer__feature offer__feature--adults">
-										Max {maxAdults} adults
-									</li>
-								</ul>
-								<div className="offer__price">
-									<b className="offer__price-value">€{price}</b>
-									<span className="offer__price-text">&nbsp;night</span>
-								</div>
-								<FeaturesList features={goods} />
+								<FeaturesList bedrooms={bedrooms} maxAdults={maxAdults} type={type} />
+								<Price price={price} parentCSSClass={priceParentClass} />
+								<GoodsList features={goods} />
 								<Host host={host} description={description} />
-								<ReviewForm reviews={sortedReviews} />
+								<ReviewsList reviews={sortedReviews} />
 							</div>
 						</div>
 						<LeafletMap city={fullOffer.city} offers={randomNearByOffers} className={'offer__map map'} />
