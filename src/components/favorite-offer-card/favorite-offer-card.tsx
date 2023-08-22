@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { TOffer } from '../../types/offer';
 import { capitalizeFirstLetter } from '../../utils';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type FavoriteOfferCardPropType = {
 	item: TOffer;
@@ -30,19 +31,13 @@ function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Eleme
 							/&nbsp;night
 						</span>
 					</div>
-					<button
-						className="place-card__bookmark-button place-card__bookmark-button--active button"
-						type="button"
-					>
-						<svg
-							className="place-card__bookmark-icon"
-							width={18}
-							height={19}
-						>
-							<use xlinkHref="#icon-bookmark" />
-						</svg>
-						<span className="visually-hidden">In bookmarks</span>
-					</button>
+					<FavoriteButton
+						parentCSSClass='place-card'
+						isFavorite={item.isFavorite}
+						offerId={item.id}
+						iconHeight={18}
+						iconWidth={19}
+					/>
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">

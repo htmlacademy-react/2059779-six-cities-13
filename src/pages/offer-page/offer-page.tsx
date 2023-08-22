@@ -18,6 +18,7 @@ import { useAppSelector, useActionCreators } from '../../hooks';
 import { MAX_OFFER_IMAGES, MAX_NEARBY_OFFERS, RequestStatus } from '../../const';
 import Price from '../../components/price/price';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
+import Rating from '../../components/rating/rating';
 
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
@@ -29,8 +30,7 @@ function OfferPage(): React.JSX.Element {
 	const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 	const isFailed = offerFetchingStatus === RequestStatus.Failed;
 	const isSuccess = offerFetchingStatus === RequestStatus.Success;
-	const priceParentClass = 'offer';
-	const favoriteButtonClass = 'offer';
+	const parentClass = 'offer';
 
 	const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -86,20 +86,18 @@ function OfferPage(): React.JSX.Element {
 										{capitalizeFirstLetter(title)}
 									</h1>
 									<FavoriteButton
-										parentCSSClass={favoriteButtonClass}
+										parentCSSClass={parentClass}
 										isFavorite={isFavorite}
 										offerId={id}
 										iconHeight={31}
 										iconWidth={33}
 									/>
 								</div>
-								<div className="offer__rating rating">
-									<div className="offer__stars rating__stars">
-										<span style={{ width: `${Math.round(rating) * 20}%` }} />
-										<span className="visually-hidden">Rating</span>
-									</div>
-									<span className="offer__rating-value rating__value">{rating}</span>
-								</div>
+								<Rating
+									parentCSSClass={parentClass}
+									rating={rating}
+									isLabeled
+								/>
 								<FeaturesList
 									bedrooms={bedrooms}
 									maxAdults={maxAdults}
@@ -107,7 +105,7 @@ function OfferPage(): React.JSX.Element {
 								/>
 								<Price
 									price={price}
-									parentCSSClass={priceParentClass}
+									parentCSSClass={parentClass}
 								/>
 								<GoodsList features={goods} />
 								<Host
