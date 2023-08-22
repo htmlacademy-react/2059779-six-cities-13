@@ -45,4 +45,12 @@ function getMultipleRandomArrayElements<El>(arr: El[] | readonly El[], num: numb
 	return shuffled.slice(0, num);
 }
 
-export { capitalizeFirstLetter, getOffersByCity, sorting, getMultipleRandomArrayElements };
+const pluralIntl = new Intl.PluralRules('en-US');
+
+export {
+	capitalizeFirstLetter,
+	getOffersByCity,
+	sorting,
+	getMultipleRandomArrayElements,
+	pluralIntl
+};

@@ -10,14 +10,9 @@ type THTMLReviewForm = HTMLFormElement & {
 }
 
 function ReviewForm(): React.JSX.Element {
-	const requestStatus = useAppSelector((state) => state.REVIEWS.reviewsStatus);
 	const actions = useActionCreators(reviewsActions);
 	const offerId = useAppSelector((state) => state.OFFER.offer?.id);
-	const [isDisabled, setDisabled] = useState(true );
-
-	if (requestStatus === RequestStatus.Pending) {
-		setDisabled(true);
-	}
+	const [isDisabled, setDisabled] = useState(true);
 
 	function handleInput(event: FormEvent<HTMLFormElement>) {
 		const form = event.currentTarget as THTMLReviewForm;
