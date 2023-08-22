@@ -25,7 +25,7 @@ export const fetchFavorites = createAsyncThunk<TOffer[], undefined, TThunkAPI>(
 );
 
 export const changeFavorite = createAsyncThunk<FavoriteChangeResponse, FavoritesChangeRequest, TThunkAPI>(
-	`${ActionName.NearByOffers}/fetchNearByOffers`,
+	`${ActionName.Favorites}/changeFavorite`,
 	async ({ offerId, status }, { extra: api }) => {
 		const response = await api.post<TOffer>(`${APIRoute.Favorites}/${offerId}/${status}`);
 		return { offer: response.data, status};

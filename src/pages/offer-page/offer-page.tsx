@@ -56,8 +56,10 @@ function OfferPage(): React.JSX.Element {
 		return <Error404Page />;
 	}
 
-	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults } = fullOffer;
+	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults, id } = fullOffer;
 
+	// console.log(nearbyOffers);
+	// debugger;
 	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);
 
 	let detailedImages: string[] = images;
@@ -85,7 +87,13 @@ function OfferPage(): React.JSX.Element {
 									<h1 className="offer__name">
 										{capitalizeFirstLetter(title)}
 									</h1>
-									<FavoriteButton parentCSSClass={favoriteButtonClass} isFavorite={isFavorite} iconHeight={31} iconWidth={33} />
+									<FavoriteButton
+										parentCSSClass={favoriteButtonClass}
+										isFavorite={isFavorite}
+										offerId={id}
+										iconHeight={31}
+										iconWidth={33}
+									/>
 								</div>
 								<div className="offer__rating rating">
 									<div className="offer__stars rating__stars">
@@ -94,21 +102,36 @@ function OfferPage(): React.JSX.Element {
 									</div>
 									<span className="offer__rating-value rating__value">{rating}</span>
 								</div>
-								<FeaturesList bedrooms={bedrooms} maxAdults={maxAdults} type={type} />
-								<Price price={price} parentCSSClass={priceParentClass} />
+								<FeaturesList
+									bedrooms={bedrooms}
+									maxAdults={maxAdults}
+									type={type}
+								/>
+								<Price
+									price={price}
+									parentCSSClass={priceParentClass}
+								/>
 								<GoodsList features={goods} />
-								<Host host={host} description={description} />
+								<Host
+									host={host}
+									description={description}
+								/>
 								<ReviewsList reviews={sortedReviews} />
 							</div>
 						</div>
-						<LeafletMap city={fullOffer.city} offers={randomNearByOffers} className={'offer__map map'} />
+						<LeafletMap
+							city={fullOffer.city}
+							offers={randomNearByOffers}
+							className={'offer__map map'}
+						/>
 					</section>
-					<NearbyOffersList nearbyOffers={randomNearByOffers} parentCSSClass='near-places' />
+					<NearbyOffersList
+						nearbyOffers={randomNearByOffers}
+						parentCSSClass='near-places'
+					/>
 				</main>
 			)}
-
 		</div>
-
 	);
 }
 

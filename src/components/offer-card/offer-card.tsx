@@ -45,8 +45,18 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 			</div>
 			<div className="place-card__info">
 				<div className="place-card__price-wrapper">
-					<Price price={price} parentCSSClass={priceParentClass} divider=' /' />
-					<FavoriteButton parentCSSClass={favoriteButtonClass} isFavorite={isFavorite} iconHeight={19} iconWidth={18} />
+					<Price
+						price={price}
+						parentCSSClass={priceParentClass}
+						divider=' /'
+					/>
+					<FavoriteButton
+						parentCSSClass={favoriteButtonClass}
+						isFavorite={isFavorite}
+						offerId={id}
+						iconHeight={19}
+						iconWidth={18}
+					/>
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
