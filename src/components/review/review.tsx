@@ -34,7 +34,7 @@ function Review({ review }: ReviewPropsType): React.JSX.Element {
 					rating={rating}
 				/>
 				<p className="reviews__text">
-					{comment}.
+					{comment}
 				</p>
 				<time className="reviews__time" dateTime={formattedAttributeDate}>
 					{formattedDate}
