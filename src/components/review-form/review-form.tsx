@@ -1,32 +1,41 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import RatingForm from '../rating-form/rating-form';
 import { useActionCreators, useAppSelector } from '../../hooks';
 import { reviewsActions } from '../../store/slices/reviews';
+import { RequestStatus } from '../../const';
 
+type THTMLReviewForm = HTMLFormElement & {
+	rating: RadioNodeList;
+	comment: HTMLTextAreaElement;
+}
 
 function ReviewForm(): React.JSX.Element {
+	const requestStatus = useAppSelector((state) => state.REVIEWS.reviewsStatus);
 	const actions = useActionCreators(reviewsActions);
 	const offerId = useAppSelector((state) => state.OFFER.offer?.id);
-	const [comment, setComment] = useState('');
-	const isValid = comment.length >= 50 && comment.length < 300;
+	const [isDisabled, setDisabled] = useState(true );
 
-	function handleTextChange({ target }: ChangeEvent<HTMLTextAreaElement>) {
-		setComment(target.value);
+	if (requestStatus === RequestStatus.Pending) {
+		setDisabled(true);
+	}
+
+	function handleInput(event: FormEvent<HTMLFormElement>) {
+		const form = event.currentTarget as THTMLReviewForm;
+		const review = form.comment.value;
+		const rating = form.rating.value;
+		setDisabled(review.length <= 50 || review.length > 300 || rating === '0');
 	}
 
 	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 
-		const form = evt.currentTarget;
-
+		const form = evt.currentTarget as THTMLReviewForm;
 		const formData = new FormData(form);
 		const reviewData = Object.fromEntries(formData) as TReviewData;
 		reviewData.rating = Number(reviewData.rating);
 		actions.postReview({ reviewData, offerId });
 
-		//Сделать неуправляемой формой. Без setComment.
 		form.reset();
-		setComment('');
 	};
 
 	return (
@@ -44,8 +53,8 @@ function ReviewForm(): React.JSX.Element {
 				title='Your review must be between 50 and 300 characters.'
 				minLength={50}
 				maxLength={300}
-				value={comment}
-				onChange={handleTextChange}
+				defaultValue=''
+				onChange={handleInput}
 			/>
 			<div className="reviews__button-wrapper">
 				<p className="reviews__help">
@@ -57,7 +66,7 @@ function ReviewForm(): React.JSX.Element {
 				<button
 					className="reviews__submit form__submit button"
 					type="submit"
-					disabled={!isValid}
+					disabled={isDisabled}
 				>
 					Submit
 				</button>
