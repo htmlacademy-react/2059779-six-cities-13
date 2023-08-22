@@ -119,6 +119,7 @@ function OfferPage(): React.JSX.Element {
 							city={fullOffer.city}
 							offers={randomNearByOffers}
 							className={'offer__map map'}
+							currentOffer={fullOffer}
 						/>
 					</section>
 					<NearbyOffersList
