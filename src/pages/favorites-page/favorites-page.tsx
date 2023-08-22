@@ -4,13 +4,14 @@ import { getOffersByCity } from '../../utils';
 import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import FavoriteOfferCard from '../../components/favorite-offer-card/favorite-offer-card';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty-page';
 import { Link } from 'react-router-dom';
+import OfferCard from '../../components/offer-card/offer-card';
 
 function FavoritesPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.Favorites.favorites);
 	const hasOffers = offers && offers.length > 0;
+	const parentClass = 'favorites';
 
 	const offersByCity: Record<string, TOffer[]> = getOffersByCity(offers);
 
@@ -37,7 +38,14 @@ function FavoritesPage(): React.JSX.Element {
 												</div>
 											</div>
 											<div className="favorites__places">
-												{housings.map((item) => <FavoriteOfferCard item={item} key={item.id} />)}
+												{housings.map((item) => (
+													<OfferCard
+														item={item}
+														parentCSSClass={parentClass}
+														imgHeight={110}
+														imgWidth={150}
+														key={item.id}
+													/>))}
 											</div>
 										</li>
 									))}

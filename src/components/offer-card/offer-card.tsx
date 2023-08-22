@@ -10,11 +10,13 @@ import Rating from '../rating/rating';
 type OfferCardPropType = {
 	item: TOffer;
 	parentCSSClass?: string;
+	imgHeight: number;
+	imgWidth: number;
 	onMouseEnter?: MouseEventHandler<HTMLElement>;
 	onMouseLeave?: MouseEventHandler<HTMLElement>;
 }
 
-function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, parentCSSClass, imgHeight, imgWidth, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
 
 	const parentClass = 'place-card';
 
@@ -22,7 +24,7 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 		'place-card'
 	);
 
-	const wrapperClass = classNames(parentCSSClass && `${parentCSSClass}__image-wrapper`,
+	const imageWrapperClass = classNames(parentCSSClass && `${parentCSSClass}__image-wrapper`,
 		'place-card__image-wrapper'
 	);
 
@@ -31,14 +33,14 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 	return (
 		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
 			{isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-			<div className={wrapperClass}>
-				<Link to={`offers/${id}`}>
+			<div className={imageWrapperClass}>
+				<Link to={`/offers/${id}`}>
 					<img
 						className="place-card__image"
 						src={previewImage}
 						alt="Place image"
-						width={260}
-						height={200}
+						width={imgWidth}
+						height={imgHeight}
 					/>
 				</Link>
 			</div>
@@ -62,7 +64,7 @@ function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCa
 					rating={rating}
 				/>
 				<h2 className="place-card__name">
-					<Link to={`offers/${id}`}>
+					<Link to={`/offers/${id}`}>
 						{capitalizeFirstLetter(title)}
 					</Link>
 				</h2>

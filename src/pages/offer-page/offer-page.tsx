@@ -123,7 +123,6 @@ function OfferPage(): React.JSX.Element {
 					</section>
 					<NearbyOffersList
 						nearbyOffers={randomNearByOffers}
-						parentCSSClass='near-places'
 					/>
 				</main>
 			)}
