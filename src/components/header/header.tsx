@@ -3,12 +3,14 @@ import { useAppSelector, useActionCreators } from '../../hooks';
 import { AppRoute } from '../../const';
 import { userActions } from '../../store/slices/user';
 import { useAuth } from '../../hooks/use-authorize';
+import { useEffect } from 'react';
+import { favoritesActions } from '../../store/slices/favorites';
 
-type HeaderProps = {
+type TUserMenuProps = {
 	authStatus: boolean;
 }
 
-function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
+function UserMenu({ authStatus }: TUserMenuProps): React.JSX.Element {
 	const userEmail = useAppSelector((state) => state.USER.user?.email);
 	const favoritesCount = useAppSelector((state) => state.Favorites.favoritesCount);
 	const actions = useActionCreators(userActions);
@@ -55,8 +57,14 @@ function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 }
 
 function Header(): React.JSX.Element {
-
 	const isAuthorized = useAuth();
+	const favoriteActions = useActionCreators(favoritesActions);
+
+	useEffect(() => {
+		if (isAuthorized) {
+			favoriteActions.fetchFavorites();
+		}
+	}, [isAuthorized, favoriteActions]);
 
 	return (
 		<header className="header">

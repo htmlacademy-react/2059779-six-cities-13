@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 		element: <LoginPage />
 	},
 	{
-		path: `${AppRoute.Offers}/:offerId`,
+		path: `${AppRoute.Offer}/:offerId`,
 		element: <OfferPage />,
 		errorElement: <Error404Page />,
 	},

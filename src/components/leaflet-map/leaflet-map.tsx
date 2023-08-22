@@ -29,6 +29,15 @@ function LeafletMap({ city, offers, selectedOfferId, className }: LeafletMapProp
 	const leafletMap = useMap(leafletMapRef, city);
 
 	useEffect(() => {
+		leafletMap?.setView(
+			{
+				lat: city.location.latitude,
+				lng: city.location.longitude,
+			},city.location.zoom,
+		);
+	}, [city, leafletMap]);
+
+	useEffect(() => {
 		if (leafletMap) {
 			const markerLayer = layerGroup().addTo(leafletMap);
 			offers.forEach((offer) => {
