@@ -12,7 +12,7 @@ function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Eleme
 		<article className="favorites__card place-card">
 			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className="favorites__image-wrapper place-card__image-wrapper">
-				<Link to={`../offer/${item.id}`}>
+				<Link to={`../offers/${item.id}`}>
 					<img
 						className="place-card__image"
 						src={item.previewImage}
@@ -51,7 +51,7 @@ function FavoriteOfferCard({ item }: FavoriteOfferCardPropType): React.JSX.Eleme
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<Link to={`../offer/${item.id}`}>{capitalizeFirstLetter(item.title)}</Link>
+					<Link to={`../offers/${item.id}`}>{capitalizeFirstLetter(item.title)}</Link>
 				</h2>
 				<p className="place-card__type">{capitalizeFirstLetter(item.type)}</p>
 			</div>

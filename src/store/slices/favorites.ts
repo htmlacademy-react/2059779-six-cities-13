@@ -6,11 +6,13 @@ import { fetchFavorites, changeFavorite } from '../thunks/favorites';
 type TInitialState = {
 	favorites: TOffer[];
 	favoritesStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
+	favoritesCount: number;
 }
 
 const initialState: TInitialState = {
 	favorites: [],
-	favoritesStatus: RequestStatus.Idle
+	favoritesStatus: RequestStatus.Idle,
+	favoritesCount: 0,
 };
 
 export const favoritesSlice = createSlice({
@@ -19,6 +21,7 @@ export const favoritesSlice = createSlice({
 			addCase(fetchFavorites.fulfilled, (state, action) => {
 				state.favorites = action.payload;
 				state.favoritesStatus = RequestStatus.Success;
+				state.favoritesCount = state.favorites.length;
 			}).
 			addCase(fetchFavorites.rejected, (state) => {
 				state.favoritesStatus = RequestStatus.Failed;
@@ -31,9 +34,11 @@ export const favoritesSlice = createSlice({
 				switch (action.payload.status) {
 					case FavoriteChangeRequest.Add:
 						state.favorites.push(action.payload.offer);
+						++state.favoritesCount;
 						break;
 					case FavoriteChangeRequest.Remove:
 						state.favorites = state.favorites.filter(({ id }) => id !== action.payload.offer.id);
+						--state.favoritesCount;
 
 				}
 			}).

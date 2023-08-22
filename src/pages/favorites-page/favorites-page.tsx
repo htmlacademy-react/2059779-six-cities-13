@@ -6,6 +6,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoriteOfferCard from '../../components/favorite-offer-card/favorite-offer-card';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty-page';
+import { Link } from 'react-router-dom';
 
 function FavoritesPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.Favorites.favorites);
@@ -30,9 +31,9 @@ function FavoritesPage(): React.JSX.Element {
 										<li key={city} className="favorites__locations-items">
 											<div className="favorites__locations locations locations--current">
 												<div className="locations__item">
-													<a className="locations__item-link" href="#">
+													<Link className="locations__item-link" to={`../#${city}`}>
 														<span>{city}</span>
-													</a>
+													</Link>
 												</div>
 											</div>
 											<div className="favorites__places">

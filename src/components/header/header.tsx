@@ -10,6 +10,7 @@ type HeaderProps = {
 
 function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 	const userEmail = useAppSelector((state) => state.USER.user?.email);
+	const favoritesCount = useAppSelector((state) => state.Favorites.favoritesCount);
 	const actions = useActionCreators(userActions);
 	const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ function UserMenu({ authStatus }: HeaderProps): React.JSX.Element {
 						<span className="header__user-name user__name">
 							{userEmail}
 						</span>
-						<span className="header__favorite-count">3</span>
+						<span className="header__favorite-count">{favoritesCount}</span>
 					</Link>
 				</li>
 				<li className="header__nav-item">

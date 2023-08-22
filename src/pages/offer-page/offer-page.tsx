@@ -58,8 +58,6 @@ function OfferPage(): React.JSX.Element {
 
 	const { goods, rating, host, description, price, images, title, isFavorite, isPremium, type, bedrooms, maxAdults, id } = fullOffer;
 
-	// console.log(nearbyOffers);
-	// debugger;
 	const randomNearByOffers = getMultipleRandomArrayElements(nearbyOffers, MAX_NEARBY_OFFERS);
 
 	let detailedImages: string[] = images;
