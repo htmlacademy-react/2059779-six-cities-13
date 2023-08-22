@@ -12,13 +12,13 @@ export const fetchReviews = createAsyncThunk<TReview[], TReview['id'], TThunkAPI
 	},
 );
 
-export const postReview = createAsyncThunk<TReview, {
+export const postReview = createAsyncThunk<TReviewData, {
 	reviewData: TReviewData;
 	offerId: TReview['id'];
 }, TThunkAPI>(
 	`${ActionName.Reviews}/postReview`,
 	async ({ reviewData, offerId }, { extra: api }) => {
-		const { data } = await api.post<TReview>(`${APIRoute.Reviews}/${offerId}`,
+		const { data } = await api.post<TReviewData>(`${APIRoute.Reviews}/${offerId}`,
 			reviewData
 		);
 

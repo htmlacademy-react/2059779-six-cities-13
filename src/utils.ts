@@ -1,11 +1,11 @@
-import { TOffer } from './types/offer';
+import { TFullOffer, TOffer } from './types/offer';
 
 function capitalizeFirstLetter(str: string) {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function getOffersByCity(offers: TOffer[]) {
-	const offersByCity: Record<string, TOffer[]> = {};
+function getOffersByCity<O extends TOffer | TFullOffer>(offers: O[]) {
+	const offersByCity: Record<string, O[]> = {};
 
 	for (const offer of offers) {
 		const city = offer.city.name;

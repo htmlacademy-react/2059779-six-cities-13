@@ -32,13 +32,6 @@ function RatingOption({ value, label, isChecked }: RatingOptionProps): React.JSX
 }
 
 function RatingForm(): React.JSX.Element {
-	//Пока не понятно, зачем здесь стейт.
-	//const [selectedValue, setSelectedValue] = useState(0);
-	// function handleRatingChange(evt: ChangeEvent<HTMLInputElement>) {
-	// 	if (setSelectedValue) {
-	// 		setSelectedValue(Number(evt.target.value));
-	// 	}
-	// }
 
 	return (
 		<div className="reviews__rating-form form__rating">

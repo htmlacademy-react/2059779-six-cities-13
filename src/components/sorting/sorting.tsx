@@ -2,7 +2,7 @@ import { KeyboardEvent, useState } from 'react';
 import { SortingMap } from '../../const';
 import classNames from 'classnames';
 
-type SortingType = keyof typeof SortingMap;
+export type SortingType = keyof typeof SortingMap;
 
 type SortingPros = {
 	currentSorting: SortingType;

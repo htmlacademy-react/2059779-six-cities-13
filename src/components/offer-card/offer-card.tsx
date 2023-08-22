@@ -3,75 +3,72 @@ import classNames from 'classnames';
 import { TOffer } from '../../types/offer';
 import { capitalizeFirstLetter } from '../../utils';
 import { MouseEventHandler } from 'react';
+import Price from '../price/price';
+import FavoriteButton from '../favorite-button/favorite-button';
+import Rating from '../rating/rating';
 
 type OfferCardPropType = {
 	item: TOffer;
 	parentCSSClass?: string;
+	imgHeight: number;
+	imgWidth: number;
 	onMouseEnter?: MouseEventHandler<HTMLElement>;
 	onMouseLeave?: MouseEventHandler<HTMLElement>;
 }
 
-function OfferCard({ item, parentCSSClass, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, parentCSSClass, imgHeight, imgWidth, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
 
-	const favoriteButtonClass = classNames('place-card__bookmark-button', {
-		'place-card__bookmark-button--active': item.isFavorite
-	}, 'button');
+	const parentClass = 'place-card';
 
-	//Ругается на тип, не понимаю
 	const articleClass = classNames(parentCSSClass && `${parentCSSClass}__card`,
 		'place-card'
 	);
 
-	const wrapperClass = classNames(parentCSSClass && `${parentCSSClass}__image-wrapper`,
+	const imageWrapperClass = classNames(parentCSSClass && `${parentCSSClass}__image-wrapper`,
 		'place-card__image-wrapper'
 	);
 
+	const { price, isPremium, isFavorite, title, rating, id, type, previewImage } = item;
+
 	return (
 		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-			{item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-			<div className={wrapperClass}>
-				<Link to={`offers/${item.id}`}>
+			{isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+			<div className={imageWrapperClass}>
+				<Link to={`/offers/${id}`}>
 					<img
 						className="place-card__image"
-						src={item.previewImage}
+						src={previewImage}
 						alt="Place image"
-						width={260}
-						height={200}
+						width={imgWidth}
+						height={imgHeight}
 					/>
 				</Link>
 			</div>
 			<div className="place-card__info">
 				<div className="place-card__price-wrapper">
-					<div className="place-card__price">
-						<b className="place-card__price-value">€{item.price}</b>
-						<span className="place-card__price-text">/&nbsp;night</span>
-					</div>
-					<button
-						className={favoriteButtonClass}
-						type="button"
-					>
-						<svg
-							className="place-card__bookmark-icon"
-							width={18}
-							height={19}
-						>
-							<use xlinkHref="#icon-bookmark" />
-						</svg>
-						<span className="visually-hidden">To bookmarks</span>
-					</button>
+					<Price
+						price={price}
+						parentCSSClass={parentClass}
+						divider=' /'
+					/>
+					<FavoriteButton
+						parentCSSClass={parentClass}
+						isFavorite={isFavorite}
+						offerId={id}
+						iconHeight={19}
+						iconWidth={18}
+					/>
 				</div>
-				<div className="place-card__rating rating">
-					<div className="place-card__stars rating__stars">
-						<span style={{ width: `${Math.round(item.rating) * 20}%`}} />
-						<span className="visually-hidden">Rating</span>
-					</div>
-				</div>
+				<Rating
+					parentCSSClass={parentClass}
+					rating={rating}
+				/>
 				<h2 className="place-card__name">
-					<Link to={`offers/${item.id}`}>
-						{capitalizeFirstLetter(item.title)}
+					<Link to={`/offers/${id}`}>
+						{capitalizeFirstLetter(title)}
 					</Link>
 				</h2>
-				<p className="place-card__type">{capitalizeFirstLetter(item.type)}</p>
+				<p className="place-card__type">{capitalizeFirstLetter(type)}</p>
 			</div>
 		</article>
 	);
