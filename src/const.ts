@@ -101,6 +101,8 @@ const FavoriteChangeRequest = {
 	Remove: 0
 };
 
+const PASSWORD_REGEXP = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9\\.]{1,}$/;
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -118,5 +120,6 @@ export {
 	SortingMap,
 	RequestStatus,
 	ActionName,
-	FavoriteChangeRequest
+	FavoriteChangeRequest,
+	PASSWORD_REGEXP
 };

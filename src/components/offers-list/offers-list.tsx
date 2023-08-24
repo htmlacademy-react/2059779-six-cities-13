@@ -5,7 +5,6 @@ import { pluralIntl, sorting } from '../../utils';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import { TOffer } from '../../types/offer';
 
-
 type OfferListProps = {
 	offersByCity: Record<string, TOffer[]>;
 	selectedCity: string;

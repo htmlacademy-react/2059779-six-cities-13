@@ -9,7 +9,6 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import Error404Page from '../../pages/error-404-page';
 import { loadMainPageData } from '../../pages/main-page/loader';
 import { loadFavoritesPageData } from '../../pages/favorites-page/loader';
-// import { loadOfferData } from '../../pages/offer-page/loader';
 
 const router = createBrowserRouter([
 	{

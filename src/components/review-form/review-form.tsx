@@ -1,8 +1,7 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import RatingForm from '../rating-form/rating-form';
 import { useActionCreators, useAppSelector } from '../../hooks';
 import { reviewsActions } from '../../store/slices/reviews';
-import { RequestStatus } from '../../const';
 
 type THTMLReviewForm = HTMLFormElement & {
 	rating: RadioNodeList;
@@ -10,35 +9,61 @@ type THTMLReviewForm = HTMLFormElement & {
 }
 
 function ReviewForm(): React.JSX.Element {
-	const actions = useActionCreators(reviewsActions);
-	const offerId = useAppSelector((state) => state.OFFER.offer?.id);
-	const [isDisabled, setDisabled] = useState(true);
+	const [isSubmitDisabled, setSubmitDisabled] = useState(true);
+	const [isFormDisabled, setFormDisabled] = useState(false);
+	const formRef = useRef<THTMLReviewForm>(null);
+	const {postReview} = useActionCreators(reviewsActions);
+	const offerId = useAppSelector((state) => state.OFFER.offer?.id) as string;
+
+	useEffect(() => () => formRef.current?.reset(), [offerId]);
 
 	function handleInput(event: FormEvent<HTMLFormElement>) {
 		const form = event.currentTarget as THTMLReviewForm;
 		const review = form.comment.value;
 		const rating = form.rating.value;
-		setDisabled(review.length <= 50 || review.length > 300 || rating === '0');
+		setSubmitDisabled(review.length <= 50 || review.length > 300 || rating === '0');
 	}
+
+	const handleSuccess = () => {
+		setFormDisabled(false);
+		formRef.current?.reset();
+	};
+
+	const handleError = () => {
+		setFormDisabled(false);
+		setSubmitDisabled(false);
+	};
 
 	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
+		setSubmitDisabled(true);
+		setFormDisabled(true);
 
 		const form = evt.currentTarget as THTMLReviewForm;
-		const formData = new FormData(form);
-		const reviewData = Object.fromEntries(formData) as TReviewData;
-		reviewData.rating = Number(reviewData.rating);
-		actions.postReview({ reviewData, offerId });
-
-		form.reset();
+		postReview({
+			reviewData: {
+				comment: form.comment.value,
+				rating: Number(form.rating.value),
+			},
+			offerId
+		})
+			.unwrap()
+			.then(handleSuccess, handleError);
 	};
 
 	return (
-		<form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post">
+		<form
+			onSubmit={handleSubmitForm}
+			onInput={handleInput}
+			className="reviews__form form"
+			action="#"
+			method="post"
+			ref={formRef}
+		>
 			<label className="reviews__label form__label" htmlFor="review">
 				Your review
 			</label>
-			<RatingForm />
+			<RatingForm disabled={isFormDisabled} />
 			<textarea
 				className="reviews__textarea form__textarea"
 				id="review"
@@ -47,9 +72,9 @@ function ReviewForm(): React.JSX.Element {
 				required
 				title='Your review must be between 50 and 300 characters.'
 				minLength={50}
-				maxLength={300}
+				maxLength={500}
 				defaultValue=''
-				onChange={handleInput}
+				disabled={isFormDisabled}
 			/>
 			<div className="reviews__button-wrapper">
 				<p className="reviews__help">
@@ -61,7 +86,7 @@ function ReviewForm(): React.JSX.Element {
 				<button
 					className="reviews__submit form__submit button"
 					type="submit"
-					disabled={isDisabled}
+					disabled={isSubmitDisabled}
 				>
 					Submit
 				</button>

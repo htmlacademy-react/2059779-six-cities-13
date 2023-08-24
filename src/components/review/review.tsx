@@ -25,7 +25,7 @@ function Review({ review }: ReviewPropsType): React.JSX.Element {
 						height={54}
 					/>
 				</div>
-				<span className="reviews__user-name">{user.name.split(' ')[0]}</span>
+				<span className="reviews__user-name">{user.name}</span>
 				{user.isPro && <small className="reviews__user-status">Pro</small>}
 			</div>
 			<div className="reviews__info">

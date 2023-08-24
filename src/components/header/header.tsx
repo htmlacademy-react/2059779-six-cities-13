@@ -5,6 +5,7 @@ import { userActions } from '../../store/slices/user';
 import { useAuth } from '../../hooks/use-authorize';
 import { useEffect } from 'react';
 import { favoritesActions } from '../../store/slices/favorites';
+import Logo from '../logo/logo';
 
 type TUserMenuProps = {
 	authStatus: boolean;
@@ -12,6 +13,7 @@ type TUserMenuProps = {
 
 function UserMenu({ authStatus }: TUserMenuProps): React.JSX.Element {
 	const userEmail = useAppSelector((state) => state.USER.user?.email);
+	const userAvatarURL = useAppSelector((state) => state.USER.user?.avatarUrl) as string;
 	const favoritesCount = useAppSelector((state) => state.Favorites.favoritesCount);
 	const actions = useActionCreators(userActions);
 	const navigate = useNavigate();
@@ -29,7 +31,15 @@ function UserMenu({ authStatus }: TUserMenuProps): React.JSX.Element {
 			<>
 				<li className="header__nav-item user">
 					<Link className="header__nav-link header__nav-link--profile" to="/favorites">
-						<div className="header__avatar-wrapper user__avatar-wrapper" />
+						<div
+							style={
+								{
+									backgroundImage: `url(${userAvatarURL})`,
+									borderRadius: '50%',
+								}
+							}
+							className="header__avatar-wrapper user__avatar-wrapper"
+						/>
 						<span className="header__user-name user__name">
 							{userEmail}
 						</span>
@@ -71,15 +81,7 @@ function Header(): React.JSX.Element {
 			<div className="container">
 				<div className="header__wrapper">
 					<div className="header__left">
-						<Link className="header__logo-link header__logo-link--active" to="/">
-							<img
-								className="header__logo"
-								src="img/logo.svg"
-								alt="6 cities logo"
-								width="{81}"
-								height="{41}"
-							/>
-						</Link>
+						<Logo />
 					</div>
 					<nav className="header__nav">
 						<ul className="header__nav-list">

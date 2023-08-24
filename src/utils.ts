@@ -45,6 +45,10 @@ function getMultipleRandomArrayElements<El>(arr: El[] | readonly El[], num: numb
 	return shuffled.slice(0, num);
 }
 
+function getRandomArrayElement<El>(arr: El[] | readonly El[]) {
+	return arr[Math.floor(Math.random() * arr.length)];
+}
+
 const pluralIntl = new Intl.PluralRules('en-US');
 
 export {
@@ -52,5 +56,6 @@ export {
 	getOffersByCity,
 	sorting,
 	getMultipleRandomArrayElements,
+	getRandomArrayElement,
 	pluralIntl
 };
