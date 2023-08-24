@@ -23,7 +23,7 @@ import Rating from '../../components/rating/rating';
 function OfferPage(): React.JSX.Element {
 	const { offerId } = useParams();
 	const actions = useActionCreators(offerActions);
-	const reviewActions = useActionCreators(reviewsActions);
+	const {fetchReviews, clear} = useActionCreators(reviewsActions);
 	const fullOffer = useAppSelector((state) => state.OFFER.offer);
 	const nearbyOffers = useAppSelector((state) => state.OFFER.nearByOffers);
 	const offerFetchingStatus = useAppSelector((state) => state.OFFER.offerStatus);
@@ -38,15 +38,15 @@ function OfferPage(): React.JSX.Element {
 		if (offerId) {
 			actions.fetchOffer(offerId);
 			actions.fetchNearByOffers(offerId);
-			reviewActions.fetchReviews(offerId);
+			fetchReviews(offerId);
 		}
 
 		return () => {
 			actions.clear();
-			reviewActions.clear();
+			clear();
 		};
 
-	}, [offerId, actions, reviewActions]);
+	}, [offerId, actions, fetchReviews, clear]);
 
 	if (fullOffer === null) {
 		return <Spinner />;

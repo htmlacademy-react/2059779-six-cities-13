@@ -15,13 +15,13 @@ function UserMenu({ authStatus }: TUserMenuProps): React.JSX.Element {
 	const userEmail = useAppSelector((state) => state.USER.user?.email);
 	const userAvatarURL = useAppSelector((state) => state.USER.user?.avatarUrl) as string;
 	const favoritesCount = useAppSelector((state) => state.Favorites.favoritesCount);
-	const actions = useActionCreators(userActions);
+	const {logout, clear} = useActionCreators(userActions);
 	const navigate = useNavigate();
 
 	const handleLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
 		evt.preventDefault();
-		actions.logout();
-		actions.clear();
+		logout();
+		clear();
 
 		navigate(AppRoute.Main);
 	};
@@ -68,13 +68,13 @@ function UserMenu({ authStatus }: TUserMenuProps): React.JSX.Element {
 
 function Header(): React.JSX.Element {
 	const isAuthorized = useAuth();
-	const favoriteActions = useActionCreators(favoritesActions);
+	const {fetchFavorites} = useActionCreators(favoritesActions);
 
 	useEffect(() => {
 		if (isAuthorized) {
-			favoriteActions.fetchFavorites();
+			fetchFavorites();
 		}
-	}, [isAuthorized, favoriteActions]);
+	}, [isAuthorized, fetchFavorites]);
 
 	return (
 		<header className="header">

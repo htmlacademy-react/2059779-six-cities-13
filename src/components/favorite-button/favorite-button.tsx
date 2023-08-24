@@ -16,7 +16,7 @@ type TFavoriteButtonProps = {
 
 function FavoriteButton({ parentCSSClass, isFavorite, offerId, iconWidth, iconHeight }: TFavoriteButtonProps): React.JSX.Element {
 	const [isBookmarked, setBookmark] = useState(isFavorite);
-	const actions = useActionCreators(favoritesActions);
+	const {changeFavorite} = useActionCreators(favoritesActions);
 	const status = isBookmarked ? FavoriteChangeRequest.Remove : FavoriteChangeRequest.Add;
 	const isAuthorized = useAuth();
 	const navigate = useNavigate();
@@ -27,7 +27,7 @@ function FavoriteButton({ parentCSSClass, isFavorite, offerId, iconWidth, iconHe
 	const handleButtonClick = () => {
 		if (isAuthorized) {
 			setBookmark((prevState) => !prevState);
-			actions.changeFavorite({ offerId, status });
+			changeFavorite({ offerId, status });
 		} else {
 			navigate(AppRoute.Login);
 		}
