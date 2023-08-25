@@ -1,7 +1,8 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useActionCreators } from '../../hooks';
 import { userActions } from '../../store/slices/user';
 import { PASSWORD_REGEXP } from '../../const';
+import { toast } from 'react-toastify';
 
 type THTMLLoginForm = HTMLFormElement & {
 	email: HTMLInputElement;
@@ -10,6 +11,7 @@ type THTMLLoginForm = HTMLFormElement & {
 
 function LoginForm() {
 	const { login } = useActionCreators(userActions);
+	const [iSPasswordError, setIsPasswordError] = useState(false);
 
 	const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
@@ -17,14 +19,20 @@ function LoginForm() {
 		const form = evt.currentTarget as THTMLLoginForm;
 
 		if (PASSWORD_REGEXP.test(form.password.value)) {
-			login({
+
+			toast.promise(login({
 				email: form.email.value,
 				password: form.password.value,
-			});
+			}).unwrap(),
+			{
+				error: <p>Failed</p>,
+				pending: <p>Loading...</p>,
+				success: <b>Hello!</b>
+			}
+			);
 		} else {
-			form.reportValidity();
+			setIsPasswordError(true);
 		}
-
 	};
 
 	return (
@@ -49,8 +57,14 @@ function LoginForm() {
 						name="password"
 						placeholder="Password"
 						required
-						title="Password must contain at least one number and letter."
 					/>
+					{iSPasswordError && (
+						<p style={{
+							marginBlock: '0 20px',
+							color: '#ff0000'
+						}}
+						>Password must contain at least one number and letter.
+						</p>)}
 				</div>
 				<button className="login__submit form__submit button" type="submit">
 					Sign in
