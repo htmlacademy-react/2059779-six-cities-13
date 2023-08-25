@@ -11,7 +11,6 @@ function Review({ review }: ReviewPropsType): React.JSX.Element {
 	const { user, rating, comment } = review;
 	const date = new Date(review.date);
 	const formattedDate = (new Intl.DateTimeFormat('en-US', REVIEW_DATE_FORMATE).format(date));
-	//Здесь получается обратный порядок. То есть сначала день, потом месяц и год. Есть решение разобрать строку и переставить всё, но выглядит как что-то слишком сложное для такой задачи.
 	const formattedAttributeDate = (new Intl.DateTimeFormat('en-US', REVIEW_DATE_ATTRIBUTE_FORMATE).format(date)).replace(/\//g, '-');
 	return (
 		<li className="reviews__item">

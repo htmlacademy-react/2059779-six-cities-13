@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-// type TLogoProps = {
-// 	extraClass?: string;
-// }
-
 const LOGO_WIDTH = '81';
 const LOGO_HEIGHT = '41';
 

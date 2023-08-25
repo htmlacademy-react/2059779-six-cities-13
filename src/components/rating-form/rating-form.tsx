@@ -1,5 +1,3 @@
-//import { ChangeEvent, useState } from 'react';
-
 type TRatingOptionProps = {
 	value: number;
 	label: string;
