@@ -39,9 +39,6 @@ function MainPage(): React.JSX.Element {
 						<OffersList
 							offersByCity={offersByCity}
 							selectedCity={selectedCity}
-							// currentOffer={id}
-							// handleMouseEnter={handleMouseEnter}
-							// handleMouseLeave={handleMouseLeave}
 						/>
 						: <EmptyOffers selectedCity={selectedCity} />}
 				</div>

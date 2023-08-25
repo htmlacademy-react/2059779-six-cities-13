@@ -8,8 +8,6 @@ type FavoritesChangeRequest = {
 	status: number;
 }
 
-
-//На самом деле ответ это полный оффер, но я опять не понимаю по типам
 type FavoriteChangeResponse = {
 	offer: TOffer;
 	status: number;
