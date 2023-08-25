@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useActionCreators } from '../../hooks';
 import { userActions } from '../../store/slices/user';
 import { PASSWORD_REGEXP } from '../../const';
+import { toast } from 'react-toastify';
 
 type THTMLLoginForm = HTMLFormElement & {
 	email: HTMLInputElement;
@@ -18,10 +19,17 @@ function LoginForm() {
 		const form = evt.currentTarget as THTMLLoginForm;
 
 		if (PASSWORD_REGEXP.test(form.password.value)) {
-			login({
+
+			toast.promise(login({
 				email: form.email.value,
 				password: form.password.value,
-			});
+			}).unwrap(),
+			{
+				error: <p>Failed</p>,
+				pending: <p>Loading...</p>,
+				success: <b>Hello!</b>
+			}
+			);
 		} else {
 			setIsPasswordError(true);
 		}
