@@ -18,7 +18,7 @@ type OfferCardPropType = {
 function OfferCard({ item, parentCSSClass, imgHeight, imgWidth }: OfferCardPropType): React.JSX.Element {
 	const { highlightOffer } = useActionCreators(offerActions);
 
-	const handleMouseEnter = (offerId: string) => {
+	const handleMouseEnter = (offerId: string): void => {
 		highlightOffer(offerId);
 	};
 
@@ -41,7 +41,7 @@ function OfferCard({ item, parentCSSClass, imgHeight, imgWidth }: OfferCardPropT
 	return (
 		<article
 			className={articleClass}
-			onMouseEnter={handleMouseEnter}
+			onMouseEnter={() => handleMouseEnter(id)}
 			onMouseLeave={handleMouseLeave}
 		>
 			{isPremium && <div className="place-card__mark"><span>Premium</span></div>}
