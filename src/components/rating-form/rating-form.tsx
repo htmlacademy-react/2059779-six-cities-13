@@ -1,12 +1,17 @@
 //import { ChangeEvent, useState } from 'react';
 
-type RatingOptionProps = {
+type TRatingOptionProps = {
 	value: number;
 	label: string;
 	isChecked?: boolean;
+	disabled?: boolean;
 }
 
-function RatingOption({ value, label, isChecked }: RatingOptionProps): React.JSX.Element {
+type TRatingFormProps = {
+	disabled?: boolean;
+}
+
+function RatingOption({ value, label, isChecked, disabled = false }: TRatingOptionProps): React.JSX.Element {
 	return (
 		<>
 			<input
@@ -16,14 +21,20 @@ function RatingOption({ value, label, isChecked }: RatingOptionProps): React.JSX
 				id={`${value}-stars`}
 				type="radio"
 				defaultChecked={isChecked}
+				disabled={disabled}
 			/>
 			<label
+				aria-label={label}
 				htmlFor={`${value}-stars`}
 				className="reviews__rating-label form__rating-label"
-				title="perfect"
+				title={label}
 			>
-				<svg className="form__star-image" width={37} height={33} role="img" aria-labelledby={`${value}-stars`}>
-					<title>{label}</title>
+				<svg
+					className="form__star-image"
+					width={37}
+					height={33}
+					aria-hidden
+				>
 					<use xlinkHref="#icon-star" />
 				</svg>
 			</label>
@@ -31,15 +42,15 @@ function RatingOption({ value, label, isChecked }: RatingOptionProps): React.JSX
 	);
 }
 
-function RatingForm(): React.JSX.Element {
+function RatingForm({ disabled = false }: TRatingFormProps): React.JSX.Element {
 
 	return (
 		<div className="reviews__rating-form form__rating">
-			<RatingOption value={5} label='Perfect' />
-			<RatingOption value={4} label='Good' />
-			<RatingOption value={3} label='Not bad' />
-			<RatingOption value={2} label='Badly' />
-			<RatingOption value={1} label='Terribly' isChecked />
+			<RatingOption value={5} label='perfect' disabled={disabled} />
+			<RatingOption value={4} label='good' disabled={disabled} />
+			<RatingOption value={3} label='not bad' disabled={disabled} />
+			<RatingOption value={2} label='badly' disabled={disabled} />
+			<RatingOption value={1} label='terribly' disabled={disabled} />
 		</div>
 	);
 }

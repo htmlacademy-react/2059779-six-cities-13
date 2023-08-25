@@ -32,7 +32,7 @@ const AppRoute = {
 	Main: '/',
 	Login: '/login',
 	Favorites: '/favorites',
-	Offers: '/offers',
+	Offer: '/offer',
 } as const;
 
 const APIRoute = {
@@ -101,6 +101,8 @@ const FavoriteChangeRequest = {
 	Remove: 0
 };
 
+const PASSWORD_REGEXP = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9\\.]{1,}$/;
+
 export {
 	CITIES,
 	OFFER_TYPES,
@@ -118,5 +120,6 @@ export {
 	SortingMap,
 	RequestStatus,
 	ActionName,
-	FavoriteChangeRequest
+	FavoriteChangeRequest,
+	PASSWORD_REGEXP
 };

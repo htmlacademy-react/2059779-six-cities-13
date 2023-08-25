@@ -1,14 +1,15 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
-import { TCity, TOffer } from '../../types/offer';
+import { TCity, TOffer, TFullOffer } from '../../types/offer';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../../hooks';
 
 type LeafletMapProps = {
 	city: TCity;
 	offers: TOffer[];
-	selectedOfferId?: string | null;
+	currentOffer?: TFullOffer;
 	className: string;
 };
 
@@ -24,13 +25,34 @@ const currentCustomIcon = new Icon({
 	iconAnchor: [14, 40],
 });
 
-function LeafletMap({ city, offers, selectedOfferId, className }: LeafletMapProps): React.JSX.Element {
+function LeafletMap({ city, offers, className, currentOffer }: LeafletMapProps): React.JSX.Element {
 	const leafletMapRef = useRef(null);
 	const leafletMap = useMap(leafletMapRef, city);
+	const selectedOfferId = useAppSelector((state) => state.OFFER.highlightedOffer);
+
+	useEffect(() => {
+		leafletMap?.setView(
+			{
+				lat: city.location.latitude,
+				lng: city.location.longitude,
+			},city.location.zoom,
+		);
+	}, [city, leafletMap]);
 
 	useEffect(() => {
 		if (leafletMap) {
 			const markerLayer = layerGroup().addTo(leafletMap);
+
+			if (currentOffer) {
+				const mainMarker = new Marker({
+					lat: currentOffer.location.latitude,
+					lng: currentOffer.location.longitude
+				});
+
+				mainMarker
+					.setIcon(currentCustomIcon).addTo(markerLayer);
+			}
+
 			offers.forEach((offer) => {
 				const marker = new Marker({
 					lat: offer.location.latitude,
@@ -50,7 +72,7 @@ function LeafletMap({ city, offers, selectedOfferId, className }: LeafletMapProp
 				leafletMap.removeLayer(markerLayer);
 			};
 		}
-	}, [leafletMap, offers, selectedOfferId]);
+	}, [leafletMap, offers, selectedOfferId, currentOffer]);
 
 	return (
 		<section ref={leafletMapRef} className={className} />

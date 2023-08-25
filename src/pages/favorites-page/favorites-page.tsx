@@ -7,6 +7,7 @@ import Footer from '../../components/footer/footer';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty-page';
 import { Link } from 'react-router-dom';
 import OfferCard from '../../components/offer-card/offer-card';
+import classNames from 'classnames';
 
 function FavoritesPage(): React.JSX.Element {
 	const offers = useAppSelector((state) => state.Favorites.favorites);
@@ -16,7 +17,7 @@ function FavoritesPage(): React.JSX.Element {
 	const offersByCity: Record<string, TOffer[]> = getOffersByCity(offers);
 
 	return (
-		<div className="page">
+		<div className={classNames('page', {'page--favorites-empty' : !hasOffers}) }>
 			<Helmet>
 				<title>6 Cities — Favorites</title>
 			</Helmet>

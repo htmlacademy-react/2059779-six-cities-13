@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RequestStatus, ActionName } from '../../const';
 import { TOffer, TFullOffer } from '../../types/offer';
 import { fetchNearByOffers, fetchOffer } from '../thunks/offers';
@@ -8,6 +8,7 @@ type TInitialState = {
 	offerStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
 	nearByOffers: TOffer[];
 	nearByOffersStatus: 'idle' | 'pending' | 'succeeded' | 'failed';
+	highlightedOffer?: string | null;
 }
 
 const initialState: TInitialState = {
@@ -15,6 +16,7 @@ const initialState: TInitialState = {
 	offerStatus: RequestStatus.Idle,
 	nearByOffers: [],
 	nearByOffersStatus: RequestStatus.Idle,
+	highlightedOffer: null,
 };
 
 export const offerSlice = createSlice({
@@ -49,6 +51,10 @@ export const offerSlice = createSlice({
 			state.offerStatus = RequestStatus.Idle;
 			state.nearByOffers = [];
 			state.nearByOffersStatus = RequestStatus.Idle;
+			state.highlightedOffer = null;
+		},
+		highlightOffer(state, action: PayloadAction<string | null>) {
+			state.highlightedOffer = action.payload;
 		}
 	}
 });

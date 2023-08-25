@@ -2,7 +2,9 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useActionCreators } from '../../hooks';
 import { favoritesActions } from '../../store/slices/favorites';
-import { FavoriteChangeRequest } from '../../const';
+import { AppRoute, FavoriteChangeRequest } from '../../const';
+import { useAuth } from '../../hooks/use-authorize';
+import { useNavigate } from 'react-router-dom';
 
 type TFavoriteButtonProps = {
 	parentCSSClass: string;
@@ -14,15 +16,21 @@ type TFavoriteButtonProps = {
 
 function FavoriteButton({ parentCSSClass, isFavorite, offerId, iconWidth, iconHeight }: TFavoriteButtonProps): React.JSX.Element {
 	const [isBookmarked, setBookmark] = useState(isFavorite);
-	const actions = useActionCreators(favoritesActions);
+	const {changeFavorite} = useActionCreators(favoritesActions);
 	const status = isBookmarked ? FavoriteChangeRequest.Remove : FavoriteChangeRequest.Add;
+	const isAuthorized = useAuth();
+	const navigate = useNavigate();
 
 	const buttonClass = classNames(isBookmarked && `${parentCSSClass}__bookmark-button--active`, `${parentCSSClass}__bookmark-button button`);
 	const svgClass = `${parentCSSClass}__bookmark-icon`;
 
 	const handleButtonClick = () => {
-		setBookmark((prevState) => !prevState);
-		actions.changeFavorite({offerId, status});
+		if (isAuthorized) {
+			setBookmark((prevState) => !prevState);
+			changeFavorite({ offerId, status });
+		} else {
+			navigate(AppRoute.Login);
+		}
 	};
 
 	return (

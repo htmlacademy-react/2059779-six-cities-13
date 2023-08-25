@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useAuth } from '../../hooks/use-authorize';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+import Spinner from '../spinner/spinner';
 
 type PrivateRouteProps = {
 	children: React.JSX.Element;
@@ -8,12 +9,17 @@ type PrivateRouteProps = {
 
 function PrivateRoute(props: PrivateRouteProps): React.JSX.Element {
 	const { children } = props;
+	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
-	const isAuthorized = useAuth();
+	if (authStatus === AuthorizationStatus.Unknown) {
+		return (<Spinner />);
+	}
 
-	return (
-		isAuthorized ? children	: <Navigate to={AppRoute.Login} />
-	);
+	if (authStatus === AuthorizationStatus.Auth) {
+		return children;
+	} else {
+		return <Navigate to={AppRoute.Login} />;
+	}
 }
 
 export default PrivateRoute;

@@ -4,7 +4,7 @@ import { useActionCreators, useAppSelector } from '../../hooks';
 import { offersActions } from '../../store/slices/offers';
 
 function CityList(): React.JSX.Element {
-	const actions = useActionCreators(offersActions);
+	const {selectCity} = useActionCreators(offersActions);
 	const selectedCity = useAppSelector((state) => state.OFFERS.selectedCity);
 
 	return (
@@ -16,7 +16,7 @@ function CityList(): React.JSX.Element {
 							'locations__item-link tabs__item', { 'tabs__item--active': city === selectedCity })}
 						href={`#${city.toLowerCase()}`}
 						onClick={() => {
-							actions.selectCity(city);
+							selectCity(city);
 						}}
 					>
 						<span>{city}</span>

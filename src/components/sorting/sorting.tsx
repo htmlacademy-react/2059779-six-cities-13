@@ -29,7 +29,6 @@ function Sorting({ currentSorting, onChange }: SortingPros): React.JSX.Element {
 
 	function handleSortingItemClick(type: SortingType) {
 		onChange(type);
-		setIsOpened(false);
 	}
 
 	return (
