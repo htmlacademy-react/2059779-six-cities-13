@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import classNames from 'classnames';
 import Header from '../../components/header/header';
@@ -15,17 +14,8 @@ function MainPage(): React.JSX.Element {
 	const offersByCity = getOffersByCity(offers);
 	const selectedCity = useAppSelector((state) => state.OFFERS.selectedCity);
 	const offersFetchingStatus = useAppSelector((state) => state.OFFERS.status);
-	const [id, setId] = useState<null | string>(null);
 	const isLoading = offersFetchingStatus === RequestStatus.Pending;
 	const hasOffers = offersByCity[selectedCity] && offersByCity[selectedCity].length > 0;
-
-	function handleMouseEnter(offerId: string): void {
-		setId(offerId);
-	}
-
-	function handleMouseLeave(): void {
-		setId(null);
-	}
 
 	return (
 		<div className="page page--gray page--main">
@@ -49,9 +39,9 @@ function MainPage(): React.JSX.Element {
 						<OffersList
 							offersByCity={offersByCity}
 							selectedCity={selectedCity}
-							currentOffer={id}
-							handleMouseEnter={handleMouseEnter}
-							handleMouseLeave={handleMouseLeave}
+							// currentOffer={id}
+							// handleMouseEnter={handleMouseEnter}
+							// handleMouseLeave={handleMouseLeave}
 						/>
 						: <EmptyOffers selectedCity={selectedCity} />}
 				</div>

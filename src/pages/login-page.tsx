@@ -12,9 +12,9 @@ function LoginPage(): React.JSX.Element {
 	const isAuthorized = useAuth();
 	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
-	// if (authStatus === AuthorizationStatus.Unknown) {
-	// 	return <Spinner />;
-	// }
+	if (authStatus === AuthorizationStatus.Unknown) {
+		return <Spinner />;
+	}
 
 	if (isAuthorized) {
 		return <Navigate to='/' />;

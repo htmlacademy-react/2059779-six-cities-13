@@ -11,8 +11,6 @@ function PrivateRoute(props: PrivateRouteProps): React.JSX.Element {
 	const { children } = props;
 	const authStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
-	//const isAuthorized = useAuth();
-
 	if (authStatus === AuthorizationStatus.Unknown) {
 		return (<Spinner />);
 	}

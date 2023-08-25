@@ -4,12 +4,12 @@ import useMap from '../../hooks/use-map';
 import { TCity, TOffer, TFullOffer } from '../../types/offer';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../../hooks';
 
 type LeafletMapProps = {
 	city: TCity;
 	offers: TOffer[];
 	currentOffer?: TFullOffer;
-	selectedOfferId?: string | null;
 	className: string;
 };
 
@@ -25,9 +25,10 @@ const currentCustomIcon = new Icon({
 	iconAnchor: [14, 40],
 });
 
-function LeafletMap({ city, offers, selectedOfferId, className, currentOffer }: LeafletMapProps): React.JSX.Element {
+function LeafletMap({ city, offers, className, currentOffer }: LeafletMapProps): React.JSX.Element {
 	const leafletMapRef = useRef(null);
 	const leafletMap = useMap(leafletMapRef, city);
+	const selectedOfferId = useAppSelector((state) => state.OFFER.highlightedOffer);
 
 	useEffect(() => {
 		leafletMap?.setView(

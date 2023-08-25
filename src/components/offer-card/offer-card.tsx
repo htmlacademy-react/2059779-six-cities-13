@@ -2,21 +2,29 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { TOffer } from '../../types/offer';
 import { capitalizeFirstLetter } from '../../utils';
-import { MouseEventHandler } from 'react';
 import Price from '../price/price';
 import FavoriteButton from '../favorite-button/favorite-button';
 import Rating from '../rating/rating';
+import { useActionCreators } from '../../hooks';
+import { offerActions } from '../../store/slices/offer';
 
 type OfferCardPropType = {
 	item: TOffer;
 	parentCSSClass?: string;
 	imgHeight: number;
 	imgWidth: number;
-	onMouseEnter?: MouseEventHandler<HTMLElement>;
-	onMouseLeave?: MouseEventHandler<HTMLElement>;
 }
 
-function OfferCard({ item, parentCSSClass, imgHeight, imgWidth, onMouseEnter, onMouseLeave }: OfferCardPropType): React.JSX.Element {
+function OfferCard({ item, parentCSSClass, imgHeight, imgWidth }: OfferCardPropType): React.JSX.Element {
+	const { highlightOffer } = useActionCreators(offerActions);
+
+	const handleMouseEnter = (offerId: string) => {
+		highlightOffer(offerId);
+	};
+
+	const handleMouseLeave = (): void => {
+		highlightOffer(null);
+	};
 
 	const parentClass = 'place-card';
 
@@ -31,14 +39,18 @@ function OfferCard({ item, parentCSSClass, imgHeight, imgWidth, onMouseEnter, on
 	const { price, isPremium, isFavorite, title, rating, id, type, previewImage } = item;
 
 	return (
-		<article className={articleClass} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+		<article
+			className={articleClass}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			{isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 			<div className={imageWrapperClass}>
 				<Link to={`/offer/${id}`}>
 					<img
 						className="place-card__image"
 						src={previewImage}
-						alt="Place image"
+						alt={title}
 						width={imgWidth}
 						height={imgHeight}
 					/>

@@ -8,7 +8,6 @@ import LoginPage from '../../pages/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import Error404Page from '../../pages/error-404-page';
 import { loadMainPageData } from '../../pages/main-page/loader';
-import { loadFavoritesPageData } from '../../pages/favorites-page/loader';
 
 const router = createBrowserRouter([
 	{
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
 				<FavoritesPage />
 			</PrivateRoute>
 		),
-		loader: loadFavoritesPageData,
 	}
 ]);
 

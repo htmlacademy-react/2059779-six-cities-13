@@ -8,12 +8,9 @@ import { TOffer } from '../../types/offer';
 type OfferListProps = {
 	offersByCity: Record<string, TOffer[]>;
 	selectedCity: string;
-	currentOffer: string | null;
-	handleMouseEnter: (offerId: string) => void;
-	handleMouseLeave: () => void;
 }
 
-function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter, handleMouseLeave }: OfferListProps): React.JSX.Element {
+function OffersList({ offersByCity, selectedCity }: OfferListProps): React.JSX.Element {
 	const [currentSorting, setCurrentSorting] = useState<SortingType>('Popular');
 	const parentClass = 'cities';
 	const imgHeight = 200;
@@ -42,8 +39,7 @@ function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter
 							parentCSSClass={parentClass}
 							imgHeight={imgHeight}
 							imgWidth={imgWidth}
-							onMouseEnter={() => handleMouseEnter(offer.id)}
-							onMouseLeave={handleMouseLeave} key={offer.id}
+							key={offer.id}
 						/>
 					))}
 				</div>
@@ -52,7 +48,6 @@ function OffersList({ offersByCity, selectedCity, currentOffer, handleMouseEnter
 				<LeafletMap
 					city={offersByCity[selectedCity][0].city}
 					offers={offersByCity[selectedCity]}
-					selectedOfferId={currentOffer}
 					className={'cities__map map'}
 				/>
 			</div>
