@@ -5,25 +5,23 @@ import { capitalizeFirstLetter } from '../../utils';
 import Price from '../price/price';
 import FavoriteButton from '../favorite-button/favorite-button';
 import Rating from '../rating/rating';
-import { useActionCreators } from '../../hooks';
-import { offerActions } from '../../store/slices/offer';
 
 type OfferCardPropType = {
 	item: TOffer;
 	parentCSSClass?: string;
 	imgHeight: number;
 	imgWidth: number;
+	highlightOffer?: (id: TOffer['id'] | null) => void;
 }
 
-function OfferCard({ item, parentCSSClass, imgHeight, imgWidth }: OfferCardPropType): React.JSX.Element {
-	const { highlightOffer } = useActionCreators(offerActions);
+function OfferCard({ item, parentCSSClass, imgHeight, imgWidth, highlightOffer }: OfferCardPropType): React.JSX.Element {
 
 	const handleMouseEnter = (offerId: string): void => {
-		highlightOffer(offerId);
+		highlightOffer?.(offerId);
 	};
 
 	const handleMouseLeave = (): void => {
-		highlightOffer(null);
+		highlightOffer?.(null);
 	};
 
 	const parentClass = 'place-card';

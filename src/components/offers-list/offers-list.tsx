@@ -4,6 +4,8 @@ import Sorting, { SortingType } from '../sorting/sorting';
 import { pluralIntl, sorting } from '../../utils';
 import LeafletMap from '../../components/leaflet-map/leaflet-map';
 import { TOffer } from '../../types/offer';
+import { useActionCreators } from '../../hooks';
+import { offerActions } from '../../store/slices/offer';
 
 type OfferListProps = {
 	offersByCity: Record<string, TOffer[]>;
@@ -12,6 +14,7 @@ type OfferListProps = {
 
 function OffersList({ offersByCity, selectedCity }: OfferListProps): React.JSX.Element {
 	const [currentSorting, setCurrentSorting] = useState<SortingType>('Popular');
+	const { highlightOffer } = useActionCreators(offerActions);
 	const parentClass = 'cities';
 	const imgHeight = 200;
 	const imgWidth = 260;
@@ -40,6 +43,7 @@ function OffersList({ offersByCity, selectedCity }: OfferListProps): React.JSX.E
 							imgHeight={imgHeight}
 							imgWidth={imgWidth}
 							key={offer.id}
+							highlightOffer={highlightOffer}
 						/>
 					))}
 				</div>
